@@ -12,13 +12,7 @@ const AgendaStats = ({ agenda }: any) => {
   const agendaId = agenda.id;
   const numOfLikes = agenda.likes;
 
-  const { data: user, error: userError } = useUserServer();
-
-  const likesList = user.likes_list;
-
-  const [likes, setLikes] = useState<string[]>(
-    likesList === undefined ? [] : [...likesList]
-  );
+  const [likes, setLikes] = useState<string[]>([]);
   const [numLikes, setNumLikes] = useState<number>(numOfLikes);
 
   const { mutate: updateLike, isPending } = useUpdateLikesServer(
@@ -34,10 +28,6 @@ const AgendaStats = ({ agenda }: any) => {
   //   user_id: z.string(),
   // });
 
-  if (userError) {
-    router.replace(DEFAULT_LOGIN_PROBLEM_REDIRECT);
-  }
-
   //! user.id 가 없으면 누를 수 없는 그림으로 변경
   return (
     <div className='flex justify-between items-center z-20'>
@@ -51,15 +41,7 @@ const AgendaStats = ({ agenda }: any) => {
           alt='liked'
           width={25}
           height={25}
-          onClick={() =>
-            user.id &&
-            updateLike({
-              agenda_id: agenda.id,
-              new_likes_list: [],
-              user_id: user.id,
-              plus_check: true,
-            })
-          }
+          onClick={() => {}}
           className='cursor-pointer'
         />
         <p className='small-medium lg:base-medium'>{numLikes}</p>

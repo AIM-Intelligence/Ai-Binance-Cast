@@ -9,11 +9,11 @@ const DetailAgendaStats = ({ agenda }: any) => {
   const agendaId = agenda.id;
   const numOfLikes = agenda.likes;
 
-  const { data: user, error: userError } = useUserServer();
-  const likesList = user.likes_list;
+  
+ 
 
   const [likes, setLikes] = useState<string[]>(
-    likesList === null ? [] : [...likesList]
+   []
   );
   const [numLikes, setNumLikes] = useState<number>(numOfLikes);
 
@@ -44,12 +44,7 @@ const DetailAgendaStats = ({ agenda }: any) => {
           width={25}
           height={25}
           onClick={() =>
-            updateLike({
-              agenda_id: agenda.id,
-              new_likes_list: [],
-              user_id: user.id,
-              plus_check: true,
-            })
+          {}
           }
           className='cursor-pointer'
         />

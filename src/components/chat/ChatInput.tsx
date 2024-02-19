@@ -55,7 +55,7 @@ const ChatInput = (
           autoFocus
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder='상대 AI 대변인의 주장을 반박해주세요.'
+          placeholder='상대 AI spokespeople 의 주장을 반박해주세요.'
           className='peer disabled:opacity-50 resize-none block w-full border-0 bg-zinc-100 py-1.5 text-gray-900 focus:ring-0 text-sm sm:leading-6'
         />
 

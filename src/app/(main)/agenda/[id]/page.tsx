@@ -99,19 +99,21 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
             </Link>
 
             <div className='flex-center gap-4'>
-             <AgendaDetailCardMenu detailContent={agendaDetail.content_detail}/>
+              <AgendaDetailCardMenu
+                detailContent={agendaDetail.content_detail}
+              />
             </div>
           </div>
 
           <hr className='border w-full border-dark-4/80' />
 
-          <div className='flex  flex-col flex-1 w-full lg:base-regular'>
-            <ul className='mt-2 my-6 ml-4 list-disc [&>li]:mt-2 flex flex-col justify-around flex-1'>
+          <div className='flex  flex-col  flex-1 w-full lg:base-regular'>
+            <ul className='mt-2 my-6 ml-4 list-disc [&>li]:mt-2 flex flex-col  flex-wrap justify-around flex-1'>
               {agendaDetail.content.map((content: string, index: string) => (
                 <li key={`${content}${index}`}>{content}</li>
               ))}
             </ul>
-            <ul className='flex gap-1 mt-2'>
+            <ul className='flex flex-wrap gap-1 mt-2'>
               {agendaDetail.tags.map((tag: string, index: string) => (
                 <li
                   key={`${tag}${index}`}
@@ -129,7 +131,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
         </div>
       </div>
 
-      <div className='grid grid-cols-2  w-full gap-10 '>
+      <div className='grid grid-cols-1 sm:grid-cols-2  w-full gap-10 '>
         <AgendaAgreeAccordion
           disagreeClicked={disagreeClicked}
           setAgreeClicked={setAgreeClicked}

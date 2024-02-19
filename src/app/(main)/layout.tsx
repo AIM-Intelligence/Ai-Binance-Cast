@@ -18,14 +18,14 @@ export default async function MainLayout({
   const queryClient = new QueryClient();
 
   await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ['user'],
-      queryFn: getUserServer,
-    }),
-    queryClient.prefetchQuery({
-      queryKey: ['agendas'],
-      queryFn: getTotalAgendasServer,
-    }),
+    // queryClient.prefetchQuery({
+    //   queryKey: ['user'],
+    //   queryFn: getUserServer,
+    // }),
+    // queryClient.prefetchQuery({
+    //   queryKey: ['agendas'],
+    //   queryFn: getTotalAgendasServer,
+    // }),
   ]);
 
   // await queryClient.prefetchQuery({
@@ -43,7 +43,9 @@ export default async function MainLayout({
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Topbar />
         <LeftSidebar />
-        <section className='flex flex-1'>{children}</section>
+        <section className='flex flex-1 h-full max-sm:pb-32'>
+          {children}
+        </section>
         <Bottombar />
       </HydrationBoundary>
     </section>

@@ -38,7 +38,7 @@ export default function Home() {
               className='dark:invert-white'
             />
             <h2 className='h3-bold md:h2-bold text-left w-full'>
-              상정된 안건 (Home Feed)
+              Standing Agenda 
             </h2>
           </div>
 
