@@ -2,17 +2,21 @@
 import useUpdateLikesServer from '@/hooks/useAgendas/useUpdateLikes';
 import useUserServer from '@/hooks/useUser/useUserServer';
 import { checkIsLiked } from '@/utils';
-import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { use, useState } from 'react';
+
+import { useState } from 'react';
 
 const AgendaStats = ({ agenda }: any) => {
-  const router = useRouter();
   const agendaId = agenda.id;
   const numOfLikes = agenda.likes;
 
-  const [likes, setLikes] = useState<string[]>([]);
+  const { data: user, error: userError } = useUserServer();
+
+  const likesList = user?.likes_list;
+
+  const [likes, setLikes] = useState<string[]>(
+    likesList === null || likesList === undefined ? [] : [...likesList]
+  );
   const [numLikes, setNumLikes] = useState<number>(numOfLikes);
 
   const { mutate: updateLike, isPending } = useUpdateLikesServer(
@@ -21,12 +25,6 @@ const AgendaStats = ({ agenda }: any) => {
     setLikes,
     setNumLikes
   );
-
-  // export const updateLikeschema = z.object({
-  //   agenda_id: z.string(),
-  //   new_likes_list: z.string(),
-  //   user_id: z.string(),
-  // });
 
   //! user.id 가 없으면 누를 수 없는 그림으로 변경
   return (
@@ -41,7 +39,15 @@ const AgendaStats = ({ agenda }: any) => {
           alt='liked'
           width={25}
           height={25}
-          onClick={() => {}}
+          onClick={() =>
+            user?.id &&
+            updateLike({
+              agenda_id: agenda.id,
+              new_likes_list: [],
+              user_id: user.id,
+              plus_check: true,
+            })
+          }
           className='cursor-pointer'
         />
         <p className='small-medium lg:base-medium'>{numLikes}</p>

@@ -11,68 +11,68 @@ export type Database = {
     Tables: {
       agenda: {
         Row: {
-          agree_comment: string | null
-          agree_words: number | null
+          agree_comment: string
+          agree_words: number
           banner_url: string | null
           content: string[]
           content_detail: string | null
           created_at: string
-          creator: string
-          disagree_comment: string | null
-          disagree_words: number | null
+          creator: string | null
+          disagree_comment: string
+          disagree_words: number
           id: string
           image_url: string
-          likes: number | null
-          participants: number | null
+          likes: number
+          participants: number
           participants_id: string[] | null
-          subject: string
-          tags: string[]
+          subject: string | null
+          tags: string[] | null
           title: string
-          views: number | null
+          views: number
         }
         Insert: {
-          agree_comment?: string | null
-          agree_words?: number | null
+          agree_comment?: string
+          agree_words?: number
           banner_url?: string | null
           content: string[]
           content_detail?: string | null
           created_at?: string
-          creator: string
-          disagree_comment?: string | null
-          disagree_words?: number | null
+          creator?: string | null
+          disagree_comment?: string
+          disagree_words?: number
           id?: string
           image_url: string
-          likes?: number | null
-          participants?: number | null
+          likes?: number
+          participants?: number
           participants_id?: string[] | null
-          subject: string
-          tags: string[]
+          subject?: string | null
+          tags?: string[] | null
           title: string
-          views?: number | null
+          views?: number
         }
         Update: {
-          agree_comment?: string | null
-          agree_words?: number | null
+          agree_comment?: string
+          agree_words?: number
           banner_url?: string | null
           content?: string[]
           content_detail?: string | null
           created_at?: string
-          creator?: string
-          disagree_comment?: string | null
-          disagree_words?: number | null
+          creator?: string | null
+          disagree_comment?: string
+          disagree_words?: number
           id?: string
           image_url?: string
-          likes?: number | null
-          participants?: number | null
+          likes?: number
+          participants?: number
           participants_id?: string[] | null
-          subject?: string
-          tags?: string[]
+          subject?: string | null
+          tags?: string[] | null
           title?: string
-          views?: number | null
+          views?: number
         }
         Relationships: [
           {
-            foreignKeyName: "agenda_owner_fkey"
+            foreignKeyName: "public_agenda_creator_fkey"
             columns: ["creator"]
             isOneToOne: false
             referencedRelation: "profiles"

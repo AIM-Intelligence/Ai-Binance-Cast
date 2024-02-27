@@ -3,7 +3,7 @@ import Image from 'next/image';
 const MyOpinion = () => {
   return (
     <main className='flex flex-1'>
-      <div className='home-container'>
+      <div className='common-container'>
         <div className='home-agendas'>
           <div className='flex gap-4 w-full max-w-5xl'>
             <Image

@@ -51,16 +51,14 @@ export function AgendaDetailContentModal() {
     <Drawer open={isModalOpen}>
       <DrawerContent className='bg-white dark:bg-black'>
         <DrawerHeader className='text-left'>
-          <DrawerTitle>Edit profile</DrawerTitle>
-          <DrawerDescription>
-            
-          </DrawerDescription>
+          <DrawerTitle>자세한 내용</DrawerTitle>
+          <DrawerDescription>{detailContent}</DrawerDescription>
         </DrawerHeader>
         <ProfileForm className='px-4' />
         <DrawerFooter className='pt-2'>
-          <DrawerClose asChild>
+          {/* <DrawerClose asChild>
             <Button variant='outline'>Cancel</Button>
-          </DrawerClose>
+          </DrawerClose> */}
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
@@ -68,5 +66,5 @@ export function AgendaDetailContentModal() {
 }
 
 function ProfileForm({ className }: React.ComponentProps<'form'>) {
-  return <form className={cn('grid items-start gap-4', className)}></form>;
+  return <div className={cn('grid items-start gap-4', className)}></div>;
 }

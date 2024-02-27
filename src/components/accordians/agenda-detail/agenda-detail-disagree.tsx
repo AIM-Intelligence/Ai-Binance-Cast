@@ -68,7 +68,7 @@ export function AgendaDisagreeAccordion({
               <ChatHeader comment={agendaDetail.disagree_comment} />
             </AccordionTrigger>
             <AccordionContent>
-              <div className='flex flex-col h-100 text-black'>
+              <div className='flex flex-col text-black'>
                 <ChatMessages className='px-2 py-3 flex-1' />
                 <ChatInput
                   className='px-4'

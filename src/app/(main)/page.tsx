@@ -1,33 +1,15 @@
 'use client';
-import AgendaCard from '@/components/cards/agenda-card';
+
+import AgendaCardList from '@/components/list/agenda-card-list';
 import Loader from '@/components/shared/Loader';
-import useTotalAgendasServer from '@/hooks/useAgendas/useTotalAgenda';
+
 import Image from 'next/image';
 import { Suspense } from 'react';
 
 export default function Home() {
-  const {
-    isFetching,
-    data: agendas,
-    error: agendaError,
-  } = useTotalAgendasServer();
-
-  if (isFetching || agendaError) {
-    return <Loader />;
-  }
-
-  if (agendas.error === 1) {
-    return <div>안건을 불러올 수 없습니다.</div>;
-  } else if (agendas.error === 2) {
-    return <div>안건을 불러오는 데 문제가 발생했습니다.</div>;
-  }
-  if (agendas.length < 1) {
-    return <div>안건이 없습니다.</div>;
-  }
-
   return (
     <main className='flex flex-1'>
-      <div className='home-container'>
+      <div className='common-container'>
         <div className='home-agendas'>
           <div className='flex gap-2 w-full max-w-5xl'>
             <Image
@@ -38,15 +20,13 @@ export default function Home() {
               className='dark:invert-white'
             />
             <h2 className='h3-bold md:h2-bold text-left w-full'>
-              Standing Agenda 
+              상정된 안건
             </h2>
           </div>
 
-          <ul className='flex flex-col flex-1 gap-9 w-full '>
-            {agendas.map((agenda: any) => (
-              <AgendaCard agenda={agenda} key={agenda.id} />
-            ))}
-          </ul>
+          <Suspense fallback={<Loader />}>
+            <AgendaCardList />
+          </Suspense>
         </div>
       </div>
 

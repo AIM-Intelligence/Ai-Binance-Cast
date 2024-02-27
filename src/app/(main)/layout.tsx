@@ -9,6 +9,8 @@ import {
 } from '@tanstack/react-query';
 import { getUserServer } from '../../../server/actions/auth-actions/read/user';
 import { getTotalAgendasServer } from '../../../server/actions/agenda-actions/read/total-agendas';
+import { Suspense } from 'react';
+import { Loader } from '@/components/shared';
 
 export default async function MainLayout({
   children,
@@ -17,17 +19,18 @@ export default async function MainLayout({
 }) {
   const queryClient = new QueryClient();
 
+  // ! 로그인시 웹 진입 속도를 빠르게 하기 위해 await 는 user 쪽 데이터만 적용한다.
   await Promise.all([
-    // queryClient.prefetchQuery({
-    //   queryKey: ['user'],
-    //   queryFn: getUserServer,
-    // }),
-    // queryClient.prefetchQuery({
-    //   queryKey: ['agendas'],
-    //   queryFn: getTotalAgendasServer,
-    // }),
+    queryClient.prefetchQuery({
+      queryKey: ['user'],
+      queryFn: getUserServer,
+    }),
   ]);
 
+  queryClient.prefetchQuery({
+    queryKey: ['agendas'],
+    queryFn: getTotalAgendasServer,
+  });
   // await queryClient.prefetchQuery({
   //   queryKey: ['user'],
   //   queryFn: getUserServer,
@@ -39,13 +42,13 @@ export default async function MainLayout({
   // });
 
   return (
-    <section className='w-full h-screen md:flex '>
+    <section className='w-full md:flex'>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Topbar />
+        
+          <Topbar />
+       
         <LeftSidebar />
-        <section className='flex flex-1 h-full max-sm:pb-32'>
-          {children}
-        </section>
+        <section className='flex flex-1'>{children}</section>
         <Bottombar />
       </HydrationBoundary>
     </section>

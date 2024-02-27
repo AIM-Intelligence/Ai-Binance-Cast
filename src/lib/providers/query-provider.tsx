@@ -16,10 +16,6 @@ export default function QueryProvider({
           queries: {
             // With SSR, we usually want to set some default staleTime
             // above 0 to avoid refetching immediately on the client
-
-            //staleTime: 4 * 1000,
-            //refetchInterval: 4 * 1000,
-
             // whenever you fetch a data and then is will go into cache.
             // But you do not start staleTime to Infinity? so every time that you go into the page will do the refetch
 

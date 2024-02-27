@@ -39,7 +39,7 @@ export function AgendaAgreeAccordion({
     <Accordion type='single' collapsible className='w-full'>
       <AccordionItem value='item-1'>
         <div className='bg-white border border-gray-200 rounded-md overflow-hidden'>
-          <div className='w-full h-full flex flex-col '>
+          <div className='flex flex-col '>
             <AccordionTrigger
               disabled={disagreeClicked || isPending}
               onClick={() => {
@@ -68,7 +68,7 @@ export function AgendaAgreeAccordion({
               <ChatHeader comment={agendaDetail.agree_comment} />
             </AccordionTrigger>
             <AccordionContent>
-              <div className='flex flex-col h-100 text-black'>
+              <div className='flex flex-col text-black '>
                 <ChatMessages className='px-2 py-3 flex-1' />
                 <ChatInput
                   className='px-4'

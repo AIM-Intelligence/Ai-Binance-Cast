@@ -1,11 +1,10 @@
-import { MessagesProvider } from '@/app/context/messages';
-import Chat from '@/components/chat/Chat';
+'use client';
 import Image from 'next/image';
 
 const People = () => {
   return (
     <main className='flex flex-1'>
-      <div className='home-container'>
+      <div className='common-container'>
         <div className='home-agendas'>
           <div className='flex gap-4 w-full max-w-5xl'>
             <Image
@@ -15,9 +14,7 @@ const People = () => {
               alt='edit'
               className='dark:invert-white'
             />
-            <h2 className='h3-bold md:h2-bold text-left w-full'>
-              Chat Market
-            </h2>
+            <h2 className='h3-bold md:h2-bold text-left w-full'>Chat Market</h2>
           </div>
 
           <ul className='flex flex-col flex-1 gap-9 w-full '>
@@ -30,18 +27,7 @@ const People = () => {
 
       <div className='home-creators border-l-2'>
         <h3 className='h3-bold text-black dark:text-light-1'>Top AI Chat</h3>
-        {/* {isUserLoading && !creators ? (
-          <Loader />
-        ) : (
-          <ul className="grid 2xl:grid-cols-2 gap-6">
-            {creators?.documents.map((creator) => (
-              <li key={creator?.$id}>
-                <UserCard user={creator} />
-              </li>
-            ))}
-          </ul>
-        )} */}
-
+      
         {/* <MessagesProvider>
         <Chat />
       </MessagesProvider> */}

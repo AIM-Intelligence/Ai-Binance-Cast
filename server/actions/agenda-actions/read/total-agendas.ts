@@ -11,17 +11,16 @@ export const getTotalAgendasServer = async () => {
     .from('agenda')
     .select(`*, creator(id, email, image_url, display_name)`);
 
-    if (error) {
-      if (error.code === 'PGRST116') {
-        return { error: 1 };
-      }
-      return { error: 2 };
+  if (error) {
+    if (error.code === 'PGRST116') {
+      return { error: 1 };
     }
+    return { error: 2 };
+  }
 
-   
-
-  
   if (agendas) return agendas;
 
   return null;
 };
+
+

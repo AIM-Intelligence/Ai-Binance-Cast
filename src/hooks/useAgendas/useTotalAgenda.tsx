@@ -16,6 +16,8 @@ const useTotalAgendasServer = (): {
         throw error;
       }
     },
+    staleTime: Infinity,
+    // refetchInterval: 4 * 1000,
   });
 };
 

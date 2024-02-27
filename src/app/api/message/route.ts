@@ -61,10 +61,10 @@ export async function POST(req: Request) {
           }
           try {
             const json = JSON.parse(data);
-            // console.log('25252', json);
+            
             const text = json.answer || '';
 
-            // console.log('25252', text);
+           
             if (counter < 2 && (text.match(/\n/) || []).length) {
               // this is a prefix character (i.e., "\n\n"), do nothing
               return;
@@ -93,8 +93,6 @@ export async function POST(req: Request) {
   });
 
   //return stream;
-
-  console.log();
 
   return new Response(stream);
 }

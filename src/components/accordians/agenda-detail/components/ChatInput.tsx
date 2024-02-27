@@ -73,8 +73,8 @@ const ChatInput = (
           onChange={(e) => setInput(e.target.value)}
           placeholder={
             isPending || isPendingParent
-              ? '상대측 AI spokespeople 이 생각 후 말하는 시간입니다...'
-              : '이제 상대 AI spokespeople 의 주장을 논리적으로 반박해주세요.'
+              ? '상대측 AI 대변인이 생각 후 말하는 시간입니다...'
+              : '이제 상대 AI 대변인의 주장을 논리적으로 반박해주세요.'
           }
           className='peer disabled:opacity-50 placeholder:text-gray-500 resize-none block w-full border-0 bg-zinc-100 py-1.5 text-gray-900 focus:ring-0 text-sm sm:leading-6'
         />

@@ -6,7 +6,7 @@ import { Message } from '@/validation/message';
 const defaultValue = [
   {
     id: nanoid(),
-    text: '안녕하세요. 저는 상대편의 AI spokespeople 입니다.',
+    text: '안녕하세요. 저는 상대편의 AI 대변인입니다.',
     isUserMessage: false,
   },
 ];

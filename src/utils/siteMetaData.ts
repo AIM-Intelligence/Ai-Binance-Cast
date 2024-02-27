@@ -1,15 +1,15 @@
 // please update required information
 const siteMetadata = {
-  title: 'AI Spokesperson ',
+  title: 'AI 대변인',
   author: 'AIM Intelligence',
-  headerTitle: 'AI Spokesperson 생성 및 대화',
+  headerTitle: 'AI 대변인 생성 및 대화',
   description:
-    'AI 대변인과 대화를 통해 나와 같거나 다른 생각을 가진 사람들을 알아보세요.',
+    '사람들의 의견을 학습한 AI 대변인과 대화하세요. AIM의 차별화된 보안 솔루션이 대변인에 걸맞는 품격있는 대화를 보장합니다.',
   language: 'ko-kr',
   theme: 'system', // system, dark or light
-  siteUrl: '', // your website URL
-  siteLogo: '/logo1.png',
-  socialBanner: '', // add social banner in the public folder (home page capture image)
+  siteUrl: 'https://ai-spokesman.vercel.app', // your website URL
+  siteLogo: '/logo1-black.svg',
+  socialBanner: '/logo1-black.svg', // add social banner in the public folder (home page capture image)
   // email: '',
 
   locale: 'ko-KR',

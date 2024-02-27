@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.scrollbar-w-2::-webkit-scrollbar {
+/* .scrollbar-w-2::-webkit-scrollbar {
   width: 0.25rem;
   height: 0.25rem;
 }
@@ -23,8 +21,7 @@
 
 .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
   border-radius: 0.25rem;
-}
-
+} */
 
 @layer base {
   * {
@@ -32,7 +29,7 @@
   }
 
   body {
-    @apply bg-light-1 dark:bg-dark-1 text-black dark:text-white min-h-screen overflow-y-clip font-inter;
+    @apply bg-light-1 dark:bg-dark-1 text-black dark:text-white h-lvh overflow-hidden font-inter;
   }
 }
 
@@ -103,6 +100,14 @@
     @apply flex justify-center items-center;
   }
 
+  .flex-col-center {
+    @apply flex flex-col justify-center items-center gap-10 h-full;
+  }
+
+  .isfetching-flex {
+    @apply flex flex-1 h-lvh items-center justify-center;
+  }
+
   .flex-between {
     @apply flex justify-between items-center;
   }
@@ -117,14 +122,15 @@
     border-radius: 2px;
   }
 
+  /* Light mode */
   .custom-scrollbar::-webkit-scrollbar-track {
-    --bg-opacity: 1;
-    background-color: #f7fafc;
+    --bg-opacity: 0;
+    background-color: #f7fafc; /* Light mode background color */
     background-color: rgba(247, 250, 252, var(--bg-opacity));
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    --bg-opacity: 0.5;
+    --bg-opacity: 0.7;
     background-color: rgb(235, 71, 62);
     background-color: rgba(235, 71, 62, var(--bg-opacity));
     border-radius: 0.25rem;
@@ -134,35 +140,9 @@
     background: rgb(235, 71, 62);
   }
 
-  .common-container {
-    @apply flex flex-col flex-1 items-center gap-10 py-10 px-5 md:px-8 lg:p-14 custom-scrollbar overflow-y-scroll;
-  }
-
-  /* All Users */
-  .user-container {
-    @apply max-w-5xl flex flex-col items-start w-full gap-6 md:gap-9;
-  }
-
-  .user-grid {
-    @apply w-full grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 max-w-5xl;
-  }
-
-  /* Explore */
-  .explore-container {
-    @apply flex flex-col flex-1 items-center overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
-  }
-
-  .explore-inner_container {
-    @apply max-w-5xl flex flex-col items-center w-full gap-6 md:gap-9;
-  }
-
-  .explore-search {
-    @apply h-12 bg-light-4 dark:bg-dark-4 border-none  placeholder:text-light-4 focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
-  }
-
   /* Home */
-  .home-container {
-    @apply flex flex-col flex-1 items-center gap-10 py-10 px-5 md:px-8 lg:p-14 custom-scrollbar overflow-y-scroll;
+  .common-container {
+    @apply flex flex-col flex-1 items-center gap-10 py-10 px-5 md:px-8 lg:p-14 h-lvh max-sm:pb-40 custom-scrollbar overflow-y-auto;
   }
 
   .home-agendas {
@@ -173,9 +153,13 @@
     @apply hidden xl:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10;
   }
 
+  /* Explore */
+  .explore-container {
+    @apply flex flex-col flex-1  items-center justify-center min-h-lvh bg-black custom-scrollbar overflow-y-auto max-sm:pb-40;
+  }
   /* agenda Details */
   .agenda_details-container {
-    @apply flex flex-col flex-1 gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar items-center;
+    @apply flex flex-col flex-1 items-center h-lvh gap-10 py-10 px-5 md:p-14 custom-scrollbar overflow-y-auto max-sm:pb-40;
   }
 
   .agenda_details-card {
@@ -196,7 +180,7 @@
 
   /* Profile */
   .profile-container {
-    @apply flex flex-col items-center flex-1 gap-10 overflow-y-auto py-10 px-5 md:p-14 custom-scrollbar;
+    @apply flex flex-col flex-1 items-center  gap-10 py-10  px-5 md:p-14 h-lvh overflow-y-auto custom-scrollbar max-sm:pb-40;
   }
 
   .profile-inner_container {
@@ -205,16 +189,6 @@
 
   .profile-tab {
     @apply flex-center gap-3 py-4 w-48 bg-light-1 dark:bg-dark-2  transition flex-1 xl:flex-initial;
-  }
-
-  /* Saved */
-  .saved-container {
-    @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
-  }
-
-  /* Bottom bar */
-  .bottom-bar {
-    @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-light-2 dark:bg-dark-2 px-3 py-2 md:hidden;
   }
 
   /* File uploader */
@@ -230,22 +204,9 @@
     @apply flex-center flex-col p-7 h-80 lg:h-[612px];
   }
 
-  /* Grid agenda List */
-  .grid-container {
-    @apply w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-7 max-w-5xl;
-  }
-
-  .grid-agenda_link {
-    @apply flex rounded-[24px] border border-light-4 dark:border-dark-4 overflow-hidden cursor-pointer w-full h-full;
-  }
-
-  .grid-agenda_user {
-    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-light-3 dark:from-dark-3 to-transparent rounded-b-[24px] gap-2;
-  }
-
   /* Left sidebar */
   .leftsidebar {
-    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-light-2 dark:bg-dark-2;
+    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] h-lvh bg-light-2 dark:bg-dark-2;
   }
 
   .leftsidebar-link {
@@ -264,6 +225,11 @@
   /* Topbar */
   .topbar {
     @apply sticky top-0 z-50 md:hidden bg-light-2 dark:bg-dark-2 w-full;
+  }
+
+  /* Bottom bar */
+  .bottom-bar {
+    @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-light-2 dark:bg-dark-2 px-3 py-2 md:hidden;
   }
 
   /* User card */

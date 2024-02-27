@@ -1,11 +1,17 @@
+'use client';
+import { Button, buttonVariants } from '@/components/ui';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function NotFound() {
+  const router = useRouter();
   return (
-    <div>
-      <h2>Not Found</h2>
-      <p>존재하지 않은 페이지 입니다.</p>
-      <Link href='/'>Return Home</Link>
-    </div>
+    <main className='flex-col-center'>
+      <h2>존재하지 않은 페이지 입니다.</h2>
+
+      <Button variant='outline' onClick={() => router.refresh()}>
+        새로고침
+      </Button>
+    </main>
   );
 }

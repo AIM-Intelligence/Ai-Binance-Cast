@@ -28,8 +28,11 @@ import { cn } from '@/utils';
 
 const MakeAgendaForm = () => {
   const router = useRouter();
-  
-  
+  const { data: user, error: userError } = useUserServer();
+
+  if (userError) {
+    router.replace(DEFAULT_LOGIN_PROBLEM_REDIRECT);
+  }
 
   const form = useForm<z.infer<typeof makeAgendaSchema>>({
     resolver: zodResolver(makeAgendaSchema),

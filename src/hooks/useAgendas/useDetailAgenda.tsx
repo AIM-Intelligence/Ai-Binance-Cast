@@ -15,6 +15,7 @@ const useDetailAgendasServer = (
         throw error;
       }
     },
+    staleTime: 4 * 1000,
   });
 };
 

@@ -2,12 +2,12 @@ export const sidebarLinks = [
   {
     imgURL: '/icons/bank.svg',
     route: '/',
-    label: 'Standing Agenda',
+    label: '상정된 안건',
   },
   {
     imgURL: '/icons/spokesman.svg',
     route: '/explore',
-    label: 'What is this?',
+    label: 'AI 대변인이란',
   },
   {
     imgURL: '/icons/shop.svg',
@@ -17,17 +17,17 @@ export const sidebarLinks = [
   {
     imgURL: '/icons/users.svg',
     route: '/ai-spokesperson',
-    label: 'AI Spokespeople',
+    label: 'AI 대변인들',
   },
   {
     imgURL: '/icons/customer-care.svg',
     route: '/requested-agenda',
-    label: 'Submitted Agenda',
+    label: '제출된 안건',
   },
   {
     imgURL: '/icons/write.svg',
     route: '/make-agenda',
-    label: 'Request Agenda',
+    label: '안건 신청하기',
   },
 ];
 
@@ -35,7 +35,7 @@ export const bottombarLinks = [
   {
     imgURL: '/icons/bank.svg',
     route: '/',
-    label: 'Standing Agenda',
+    label: '상정된 안건',
   },
   {
     imgURL: '/icons/shop.svg',
@@ -45,16 +45,16 @@ export const bottombarLinks = [
   {
     imgURL: '/icons/users.svg',
     route: '/ai-spokesperson',
-    label: 'AI Spokespeople',
+    label: 'AI 대변인들',
   },
   {
     imgURL: '/icons/customer-care.svg',
     route: '/requested-agenda',
-    label: 'Submitted Agenda',
+    label: '제출된 안건',
   },
   {
     imgURL: '/icons/write.svg',
     route: '/make-agenda',
-    label: 'Request Agenda',
+    label: '안건 신청하기',
   },
 ];

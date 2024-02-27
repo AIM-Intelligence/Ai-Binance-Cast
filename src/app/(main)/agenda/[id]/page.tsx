@@ -1,7 +1,7 @@
 'use client';
 import Loader from '@/components/shared/Loader';
 import { Button } from '@/components/ui/button';
-import { multiFormatDateString } from '@/utils';
+import { cn, multiFormatDateString } from '@/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useRouter } from 'next/navigation';
@@ -34,13 +34,17 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
     error: agendaError,
   } = useDetailAgendasServer(id);
 
-  if (isFetching || agendaError) {
-    return <Loader />;
+  if (isFetching) {
+    return (
+      <div className='isfetching-flex'>
+        <Loader />
+      </div>
+    );
   }
   // TODO: 배포 환경에서 코드가 잘 동작하는지 확인하기
   if (agendaDetail.error === 1) {
     return <div>안건을 불러올 수 없습니다.</div>;
-  } else if (agendaDetail.error === 2) {
+  } else if (agendaDetail.error === 2 || agendaError) {
     return <div>안건을 불러오는 데 문제가 발생했습니다.</div>;
   }
 
@@ -50,7 +54,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className='agenda_details-container'>
-      <div className='hidden md:flex max-w-5xl w-full'>
+      <div className='hidden max-w-5xl md:flex w-full '>
         <Button
           onClick={() => router.push('/')}
           variant='ghost'
@@ -107,8 +111,8 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
 
           <hr className='border w-full border-dark-4/80' />
 
-          <div className='flex  flex-col  flex-1 w-full lg:base-regular'>
-            <ul className='mt-2 my-6 ml-4 list-disc [&>li]:mt-2 flex flex-col  flex-wrap justify-around flex-1'>
+          <div className='flex  flex-col flex-wrap  flex-1 w-full lg:base-regular'>
+            <ul className='mt-2 my-6 ml-4 list-disc [&>li]:mt-2 flex flex-col justify-around flex-1'>
               {agendaDetail.content.map((content: string, index: string) => (
                 <li key={`${content}${index}`}>{content}</li>
               ))}
@@ -131,13 +135,12 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
         </div>
       </div>
 
-      <div className='grid grid-cols-1 sm:grid-cols-2  w-full gap-10 '>
+      <div className='max-w-5xl grid grid-cols-1 sm:grid-cols-2 w-full gap-10 '>
         <AgendaAgreeAccordion
           disagreeClicked={disagreeClicked}
           setAgreeClicked={setAgreeClicked}
           agendaDetail={agendaDetail}
         />
-
         <AgendaDisagreeAccordion
           setDisagreeClicked={setDisagreeClicked}
           agreeClicked={agreeClicked}

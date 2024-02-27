@@ -40,6 +40,7 @@ const useUserClient = () => {
 
       return null;
     },
+    staleTime: Infinity,
   });
 };
 
