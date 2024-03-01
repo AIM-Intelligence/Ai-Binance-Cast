@@ -31,6 +31,7 @@ export default async function MainLayout({
     queryKey: ['agendas'],
     queryFn: getTotalAgendasServer,
   });
+
   // await queryClient.prefetchQuery({
   //   queryKey: ['user'],
   //   queryFn: getUserServer,

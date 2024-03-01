@@ -7,9 +7,9 @@ import { ModalProvider } from '@/lib/providers/modal-provider';
 import siteMetadata from '@/utils/siteMetaData';
 import { ThirdwebProvider } from '@/lib/thirdweb/thirdweb';
 import { client } from '@/lib/thirdweb/client-side';
+import { ClerkProvider } from '@clerk/nextjs'
 
 
-import { metamaskConfig, walletConnectConfig } from 'thirdweb/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -70,6 +70,7 @@ export default function RootLayout({
               logoUrl: 'https://path/to/logo.png',
             }}
           >
+            <ClerkProvider>
             <ThemeProvider
               attribute='class'
               defaultTheme='system'
@@ -79,6 +80,7 @@ export default function RootLayout({
               <ModalProvider />
               {children}
             </ThemeProvider>
+            </ClerkProvider>
           </ThirdwebProvider>
         </QueryProvider>
       </body>

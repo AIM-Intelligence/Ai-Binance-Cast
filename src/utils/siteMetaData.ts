@@ -8,8 +8,8 @@ const siteMetadata = {
   language: 'ko-kr',
   theme: 'system', // system, dark or light
   siteUrl: 'https://ai-spokesman.vercel.app', // your website URL
-  siteLogo: '/logo1-black.svg',
-  socialBanner: '/logo1-black.svg', // add social banner in the public folder (home page capture image)
+  siteLogo: '/abcLogo.png',
+  socialBanner: '/abcLogo.png', // add social banner in the public folder (home page capture image)
   // email: '',
 
   locale: 'ko-KR',

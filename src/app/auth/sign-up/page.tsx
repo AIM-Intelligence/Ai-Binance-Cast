@@ -17,14 +17,14 @@ export default function AuthenticationPage() {
     <div className='mx-auto flex w-full flex-col justify-center sm:w-[350px] text-center -mt-28'>
       <Link href='/'>
         <Image
-          src='/logo2-white.svg'
+          src='/abcLogo.png.svg'
           alt='logo'
           width={300}
           height={100}
           className='hidden dark:flex'
         />
         <Image
-          src='/logo2-black.svg'
+          src='/abcLogo.png'
           alt='logo'
           width={300}
           height={100}
@@ -61,13 +61,11 @@ export default function AuthenticationPage() {
       {/* check this for suspense :  https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
 
       <div className='space-y-4'>
+        <Suspense fallback={<Loader />}>
+          <Social />
+        </Suspense>
 
-
-      <Suspense fallback={<Loader />}>
-        <Social />
-      </Suspense>
-
-      <Gohome />
+        <Gohome />
       </div>
     </div>
   );

@@ -76,7 +76,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
 
         <div className='agenda_details-info'>
           <div className='flex-between w-full'>
-            <Link
+            {/* <Link
               href={`/profile/${agendaDetail.creator.id}`}
               className='flex items-center gap-3'
             >
@@ -100,7 +100,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
                   </p>
                 </div>
               </div>
-            </Link>
+            </Link> */}
 
             <div className='flex-center gap-4'>
               <AgendaDetailCardMenu

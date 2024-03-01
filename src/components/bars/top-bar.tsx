@@ -23,6 +23,7 @@ import { ModeToggle } from './components/theme-toggle';
 
 const Topbar = () => {
   const { isFetching, data: user, error } = useUserServer();
+
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
@@ -59,14 +60,14 @@ const Topbar = () => {
       <div className='flex-between px-5'>
         <Link href='/' className='flex gap-3 items-center'>
           <Image
-            src='/logo1-white.svg'
+            src='/abcLogo.png'
             alt='logo'
             width={60}
             height={60}
             className='text-black hidden dark:flex'
           />
           <Image
-            src='/logo1-black.svg'
+            src='/abcLogo.png'
             alt='logo'
             width={60}
             height={60}
