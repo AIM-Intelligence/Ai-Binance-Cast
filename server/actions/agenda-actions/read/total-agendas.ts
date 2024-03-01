@@ -9,7 +9,10 @@ export const getTotalAgendasServer = async () => {
 
   const { data: agendas, error } = await supabase
     .from('agenda')
-    .select(`*, creator(id, email, image_url, display_name)`);
+    .select(`*`);
+    //.select(`*, creator(id, email, image_url, display_name)`);
+
+    console.log(error)
 
   if (error) {
     if (error.code === 'PGRST116') {

@@ -44,9 +44,8 @@ export default async function MainLayout({
   return (
     <section className='w-full md:flex'>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        
-          <Topbar />
-       
+        <Topbar />
+
         <LeftSidebar />
         <section className='flex flex-1'>{children}</section>
         <Bottombar />

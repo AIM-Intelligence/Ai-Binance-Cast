@@ -10,7 +10,7 @@ const AgendaCard = ({ agenda }: any) => {
   return (
     <div className='agenda-card'>
       <div className='flex-between'>
-        <Link
+        {/* <Link
           href={`/profile/${agenda.creator.id}`}
           className='flex items-center gap-3'
         >
@@ -32,7 +32,7 @@ const AgendaCard = ({ agenda }: any) => {
               {multiFormatDateString(agenda.created_at)}
             </p>
           </div>
-        </Link>
+        </Link> */}
        
         <AgendaCardMenu />
       </div>

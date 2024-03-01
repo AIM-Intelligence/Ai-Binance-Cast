@@ -31,7 +31,7 @@ export default function Home() {
       </div>
 
       <div className='home-creators border-l-2'>
-        <h3 className='h3-bold text-black dark:text-light-1'>Top Agendass</h3>
+        <h3 className='h3-bold text-black dark:text-light-1'>Top Agendas</h3>
         {/* {isUserLoading && !creators ? (
           <Loader />
         ) : (

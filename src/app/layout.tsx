@@ -5,6 +5,11 @@ import { ThemeProvider } from '@/lib/providers/theme-provider';
 import QueryProvider from '@/lib/providers/query-provider';
 import { ModalProvider } from '@/lib/providers/modal-provider';
 import siteMetadata from '@/utils/siteMetaData';
+import { ThirdwebProvider } from '@/lib/thirdweb/thirdweb';
+import { client } from '@/lib/thirdweb/client-side';
+
+
+import { metamaskConfig, walletConnectConfig } from 'thirdweb/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -55,15 +60,26 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body className={inter.className}>
         <QueryProvider>
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='system'
-            enableSystem
-            disableTransitionOnChange
+          <ThirdwebProvider
+            client={client}
+           
+            dappMetadata={{
+              name: 'My App',
+              url: 'https://my-website.com',
+              description: 'Some description of my app',
+              logoUrl: 'https://path/to/logo.png',
+            }}
           >
-            <ModalProvider />
-            {children}
-          </ThemeProvider>
+            <ThemeProvider
+              attribute='class'
+              defaultTheme='system'
+              enableSystem
+              disableTransitionOnChange
+            >
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </ThirdwebProvider>
         </QueryProvider>
       </body>
     </html>

@@ -14,6 +14,7 @@ import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
 import useUserServer from '@/hooks/useUser/useUserServer';
 import { ModeToggle } from './components/theme-toggle';
 import { Loader } from '../shared';
+import { ConnectButton} from '@/lib/thirdweb/thirdweb' 
 
 const LeftSidebar = () => {
   const { isFetching, data: user } = useUserServer();
@@ -85,13 +86,16 @@ const LeftSidebar = () => {
             </div>
           </Link>
         ) : (
-          <div className='flex items-center'>
-            <Button
-              onClick={() => router.push('/auth/sign-up')}
-              className='border-2 border-black w-full'
-            >
-              로그인
-            </Button>
+          <div className='flex flex-col items-center'>
+           <ConnectButton />
+
+           {/* <TransactionButton
+      transaction={transaction}
+      onSuccess={handleSuccess}
+      onError={handleError}
+    >
+      Confirm Transaction
+    </TransactionButton> */}
           </div>
         )}
 
