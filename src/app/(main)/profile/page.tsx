@@ -17,21 +17,6 @@ interface StabBlockProps {
   label: string;
 }
 
-enum Type {
-  Collections = 'collections',
-  Purchase = 'purchase',
-}
-const _navItems = [
-  {
-    name: 'My Data Collections',
-    key: Type.Collections,
-  },
-  {
-    name: 'My Purchases',
-    key: Type.Purchase,
-  },
-];
-
 
 
 const StatBlock = ({ value, label }: StabBlockProps) => (
@@ -44,7 +29,9 @@ const StatBlock = ({ value, label }: StabBlockProps) => (
 );
 
 const Profile = () => {
+ 
   const { user: user_address } = useUser();
+  console.log('user_address', user_address?.web3Wallets[0].web3Wallet)
 
 
   const { isFetching, data: user, error } = useUserClient();
@@ -68,7 +55,7 @@ const Profile = () => {
       <div className='profile-inner_container'>
         <div className='flex xl:flex-row flex-col max-xl:items-center flex-1 gap-7'>
           <Image
-            src={user[0]?.image_url || '/icons/profile-placeholder.svg'}
+            src={user && user[0]?.image_url || '/icons/profile-placeholder.svg'}
             alt='profile'
             width={50}
             height={50}
@@ -77,29 +64,29 @@ const Profile = () => {
           <div className='flex flex-col flex-1 justify-between md:mt-2'>
             <div className='flex flex-col w-full'>
               <h1 className='text-center xl:text-left h3-bold md:h1-semibold w-full'>
-                {user[0]?.display_name}
+                {user && user[0]?.display_name}
               </h1>
               <p className='small-regular md:body-medium text-light-3 text-center xl:text-left'>
-                {user[0]?.address}
+                {user && user[0]?.address}
               </p>
             </div>
 
             <div className='flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20'>
-              <StatBlock value={user[0].age ? user.age : '-'} label='나이' />
+              <StatBlock value={user && user[0].age ? user.age : '-'} label='나이' />
               <StatBlock
-                value={user[0].gender ? user.gender : '-'}
+                value={user && user[0].gender ? user.gender : '-'}
                 label='성별'
               />
               <StatBlock
-                value={user[0].point ? user.point : '-'}
+                value={user && user[0].point ? user.point : '-'}
                 label='포인트'
               />
               <StatBlock
-                value={user[0].token ? user.token : '-'}
+                value={user && user[0].token ? user.token : '-'}
                 label='토큰'
               />
               <StatBlock
-                value={user[0].coupon ? user.coupon : '-'}
+                value={user && user[0].coupon ? user.coupon : '-'}
                 label='쿠폰'
               />
             </div>
@@ -149,7 +136,8 @@ const Profile = () => {
         </Link>
       </div>
 
-     
+     {/* <ProfileList self={realAddress === address}
+          realAddress={realAddress} /> */}
     </main>
   );
 };

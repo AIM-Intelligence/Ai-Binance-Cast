@@ -14,7 +14,7 @@ const AgendaStats = ({ agenda }: any) => {
   const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet
   const { data: user, error: userError } = useUserClient();
 
-  const likesList = user[0]?.likes_list;
+  const likesList = user && user[0]?.likes_list;
 
   
 
@@ -44,7 +44,7 @@ const AgendaStats = ({ agenda }: any) => {
           width={25}
           height={25}
           onClick={() =>
-            user[0]?.address &&
+            user && user[0]?.address &&
             updateLike({
               agenda_id: agenda.id,
               new_likes_list: [],

@@ -81,7 +81,7 @@ const Topbar = () => {
         <div className='flex gap-4'>
           <ModeToggle />
 
-          {user[0]?.id ? (
+          { user && user[0]?.id ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Link href='/profile' className='flex-center gap-3'>

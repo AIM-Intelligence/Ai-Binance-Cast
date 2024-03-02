@@ -3,12 +3,17 @@ import { MessagesContext } from '@/app/context/messages';
 import { cn } from '@/utils';
 import { HTMLAttributes, useContext } from 'react';
 import MarkdownLite from './MarkdownLite';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui';
 
 interface ChatMessageProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ChatMessages = ({ className, ...props }: ChatMessageProps) => {
-  const { messages } = useContext(MessagesContext);
+  const { messages, isGreenfield, setIsGreenfield  } = useContext(MessagesContext);
   const inverseMessages = [...messages].reverse();
+  
+
+  console.log(isGreenfield);
 
   return (
     <>
@@ -18,6 +23,18 @@ const ChatMessages = ({ className, ...props }: ChatMessageProps) => {
           <p className='relative inline-flex rounded-full h-3 w-3 bg-rose-500'></p>
         </span>
         <p className='font-medium'>AIM Secrity Filter Activating</p>
+        <div className='flex flex-col items-center justify-center  space-x-2 gap-2'>
+        <Switch
+          checked={isGreenfield}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsGreenfield(!isGreenfield);
+          }}
+          id='greenfield'
+          className={cn('border border-black', isGreenfield && "bg-green-500 border-green-500")  }
+        />
+        <Label htmlFor='greenfield'>Greenfield</Label>
+      </div>
       </div>
 
       <div

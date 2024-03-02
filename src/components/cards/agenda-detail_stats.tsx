@@ -12,7 +12,7 @@ const DetailAgendaStats = ({ agenda }: any) => {
   const { isSignedIn, user: user_address } = useUser();
   const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet;
   const { data: user, error: userError } = useUserClient();
-  const likesList = user[0]?.likes_list;
+  const likesList = user && user[0]?.likes_list;
 
   const [likes, setLikes] = useState<string[]>(
     likesList === null || likesList === undefined ? [] : [...likesList]
