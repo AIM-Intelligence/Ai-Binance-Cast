@@ -12,7 +12,6 @@ const useUpdateLikesServer = (
 ): { mutate: any; isPending: any } => {
   return useMutation({
     mutationFn: async (newLikePayLoad: likePayload) => {
-     
       try {
         const result = await updateAgendaLikesServer(newLikePayLoad);
         return result;

@@ -17,12 +17,15 @@ import { Button } from '../ui/button';
 import { createClientBrowser } from '@/lib/supabase/browser';
 import { redirect, useRouter } from 'next/navigation';
 import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
-import useUserServer from '@/hooks/useUser/useUserServer';
+import useUserClient from '@/hooks/useUser/useUserServer';
 import { Loader } from '../shared';
 import { ModeToggle } from './components/theme-toggle';
+import { useUser } from '@clerk/nextjs';
 
 const Topbar = () => {
-  const { isFetching, data: user, error } = useUserServer();
+  const { isSignedIn, user : user_address } = useUser();
+  const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet
+  const { isFetching, data: user, error } = useUserClient();
 
   const router = useRouter();
 
@@ -78,14 +81,14 @@ const Topbar = () => {
         <div className='flex gap-4'>
           <ModeToggle />
 
-          {user?.id ? (
+          {user[0]?.id ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Link href='/profile' className='flex-center gap-3'>
                   <Image
                     src={
-                      user.image_url
-                        ? user.image_url
+                      user[0].image_url
+                        ? user[0].image_url
                         : '/icons/profile-placeholder.svg'
                     }
                     alt='profile'

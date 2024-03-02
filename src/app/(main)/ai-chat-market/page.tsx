@@ -17,6 +17,7 @@ const People = () => {
     // const { data, error } = await supabase.from('your_table').select();
 
     // TODO #3: Handle the response
+    
   };
 
   return (

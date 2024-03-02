@@ -1,47 +1,29 @@
-//! Avoid using spoofing if possible due to security issues.
-'use client';
-import { createClientBrowser } from '@/lib/supabase/browser';
 import { useQuery } from '@tanstack/react-query';
-import { redirect } from 'next/navigation';
 
-// const initUser = {
-//   age: 0,
-//   coin: 0,
-//   coupon: '',
-//   created_at: '',
-//   display_name: '',
-//   email: '',
-//   gender: '',
-//   id: '',
-//   image_url: '',
-//   phone_number: '',
-//   token: 0,
-// };
-
-const useUserClient = () => {
+const useUserClient1 = (): {
+  isFetching: any;
+  data: any | null;
+  error: any;
+} => {
   return useQuery({
-    queryKey: ['user'],
+    queryKey: ['user_data'],
     queryFn: async () => {
-      const supabase = createClientBrowser();
-      const { data, error } = await supabase.auth.getSession();
-
-      if (error) return redirect('/');
-
-      if (data.session?.user) {
-        // fetch user info profile
-        const { data: user } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', data.session.user.id)
-          .single();
-
-        return user;
-      }
-
-      return null;
+      // const supabaseAccessToken = await getToken({ template: 'supabase' });
+      // //console.log('supabaseAccessToken', getToken({ template: 'supabase' }))
+      // const supabase = await supabaseClient(supabaseAccessToken);
+      // const new_address = '0x61327612EC4aFD93e370eC0599f933bB08020A54';
+      // const { data: user_data, error } = await supabase.rpc(
+      //   'get_create_profile',
+      //   {
+      //     new_address,
+      //   }
+      // );
+      // if (error) console.error(error);
+      // else console.log('user_data', user_data);
+      // return user_data;
     },
-    staleTime: Infinity,
+    staleTime: 4 * 1000,
   });
 };
 
-export default useUserClient;
+export default useUserClient1;

@@ -22,7 +22,7 @@ export default async function MainLayout({
   // ! 로그인시 웹 진입 속도를 빠르게 하기 위해 await 는 user 쪽 데이터만 적용한다.
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: ['user'],
+      queryKey: ['user_data'],
       queryFn: getUserServer,
     }),
   ]);
@@ -32,21 +32,10 @@ export default async function MainLayout({
     queryFn: getTotalAgendasServer,
   });
 
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['user'],
-  //   queryFn: getUserServer,
-  // });
-
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['agendas'],
-  //   queryFn: getTotalAgendasServer,
-  // });
-
   return (
     <section className='w-full md:flex'>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Topbar />
-
         <LeftSidebar />
         <section className='flex flex-1'>{children}</section>
         <Bottombar />

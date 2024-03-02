@@ -10,6 +10,10 @@ const nextConfig = {
         hostname: 'fhifmdvolxqfufqlrprk.supabase.co',
         protocol: 'https',
       },
+      {
+        hostname: 'img.clerk.com',
+        protocol: 'https',
+      },
     ],
   },
   webpack: (config) => {

@@ -55,11 +55,11 @@ const Profile = ({ params }: { params: { id: string } }) => {
           />
           <div className='flex flex-col flex-1 justify-between md:mt-2'>
             <div className='flex flex-col w-full'>
-              <h1 className='text-center xl:text-left h3-bold md:h1-semibold w-full'>
-                {other_user.display_name}
-              </h1>
+              {/* <h1 className='text-center xl:text-left h3-bold md:h1-semibold w-full'>
+                {other_user.address}
+              </h1> */}
               <p className='small-regular md:body-medium text-light-3 text-center xl:text-left'>
-                {other_user.email}
+                {other_user.address}
               </p>
             </div>
 

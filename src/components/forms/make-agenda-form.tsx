@@ -22,13 +22,16 @@ import { Textarea } from '@/components/ui/textarea';
 
 import { makeAgendaServer } from '../../../server/actions/agenda-actions/create/agenda';
 import { useAction } from 'next-safe-action/hooks';
-import useUserServer from '@/hooks/useUser/useUserServer';
+import useUserClient from '@/hooks/useUser/useUserServer';
 import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
 import { cn } from '@/utils';
+import { useUser } from '@clerk/nextjs';
 
 const MakeAgendaForm = () => {
   const router = useRouter();
-  const { data: user, error: userError } = useUserServer();
+  const { isSignedIn, user: user_address } = useUser();
+  const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet;
+  const { data: user, error: userError } = useUserClient();
 
   if (userError) {
     router.replace(DEFAULT_LOGIN_PROBLEM_REDIRECT);

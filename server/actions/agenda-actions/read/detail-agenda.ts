@@ -9,8 +9,7 @@ export const getDetailAgendaServer = async (id: string) => {
 
   const { data: agenda, error } = await supabase
     .from('agenda')
-    //.select(`*, creator(id, email, image_url, display_name)`)
-    .select(`*`)
+    .select(`*, creator(id, address, image_url, display_name)`)
     .eq('id', id)
     .single();
 

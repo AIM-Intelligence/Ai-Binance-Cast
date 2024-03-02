@@ -13,6 +13,7 @@ import { useAction } from 'next-safe-action/hooks';
 import { updateAgendaViewsServer } from '../../../../../server/actions/agenda-actions/update/views-agenda';
 import DetailAgendaStats from '../../../../components/cards/agenda-detail_stats';
 import AgendaDetailCardMenu from '@/components/menu/agenda-detail-card-menu';
+import shortenAddress from '@/utils/shortenAddress';
 
 const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
@@ -76,7 +77,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
 
         <div className='agenda_details-info'>
           <div className='flex-between w-full'>
-            {/* <Link
+            <Link
               href={`/profile/${agendaDetail.creator.id}`}
               className='flex items-center gap-3'
             >
@@ -92,15 +93,15 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
               />
               <div className='flex gap-1 flex-col'>
                 <p className='base-medium lg:body-bold'>
-                  {agendaDetail.creator.display_name}
+                  {shortenAddress(agendaDetail.creator.address)}
                 </p>
-                <div className='flex-center gap-2 text-light-3'>
+                <div className='flex-start gap-2 text-light-3'>
                   <p className='subtle-semibold lg:small-regular '>
                     {multiFormatDateString(agendaDetail.created_at)}
                   </p>
                 </div>
               </div>
-            </Link> */}
+            </Link>
 
             <div className='flex-center gap-4'>
               <AgendaDetailCardMenu

@@ -8,6 +8,12 @@ import siteMetadata from '@/utils/siteMetaData';
 import { ThirdwebProvider } from '@/lib/thirdweb/thirdweb';
 import { client } from '@/lib/thirdweb/client-side';
 import { ClerkProvider } from '@clerk/nextjs'
+import {
+  
+  metamaskConfig,
+  coinbaseConfig,
+  walletConnectConfig,
+} from "thirdweb/react";
 
 
 
@@ -62,7 +68,6 @@ export default function RootLayout({
         <QueryProvider>
           <ThirdwebProvider
             client={client}
-           
             dappMetadata={{
               name: 'My App',
               url: 'https://my-website.com',

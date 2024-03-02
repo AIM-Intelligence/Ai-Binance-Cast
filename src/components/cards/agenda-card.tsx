@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import AgendaStats from './agenda-card-stats';
 import AgendaCardMenu from '../menu/agenda-card-menu';
+import shortenAddress from '@/utils/shortenAddress';
 
 const AgendaCard = ({ agenda }: any) => {
   if (!agenda) return null;
@@ -10,7 +11,7 @@ const AgendaCard = ({ agenda }: any) => {
   return (
     <div className='agenda-card'>
       <div className='flex-between'>
-        {/* <Link
+        <Link
           href={`/profile/${agenda.creator.id}`}
           className='flex items-center gap-3'
         >
@@ -26,13 +27,13 @@ const AgendaCard = ({ agenda }: any) => {
 
           <div className='flex flex-col'>
             <p className='base-medium lg:body-bold text-black dark:text-light-1'>
-              {agenda.creator.display_name}
+              {shortenAddress(agenda.creator.address)}
             </p>
             <p className='subtle-semibold lg:small-regular text-dark-2 dark:text-light-2'>
               {multiFormatDateString(agenda.created_at)}
             </p>
           </div>
-        </Link> */}
+        </Link>
        
         <AgendaCardMenu />
       </div>

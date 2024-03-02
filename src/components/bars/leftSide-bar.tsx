@@ -2,56 +2,36 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter, redirect } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
-  ClerkProvider,
-  SignInButton,
   SignedIn,
   SignedOut,
   UserButton,
   useUser,
+  SignInWithMetamaskButton,
+  useClerk,
+  useAuth,
 } from '@clerk/nextjs';
 import { Button } from '../ui/button';
-import { createClientBrowser, supabaseClient } from '@/lib/supabase/browser';
+
 import { sidebarLinks } from '@/constants/bar';
 import { NavLink } from '@/types';
 
-import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
-import useUserServer from '@/hooks/useUser/useUserServer';
 import { ModeToggle } from './components/theme-toggle';
 import { Loader } from '../shared';
-import { useAuth } from '@clerk/nextjs';
-import { Loader2 } from 'lucide-react';
-import { SignInWithMetamaskButton, useClerk } from '@clerk/nextjs';
+import { ConnectButton } from '@/lib/thirdweb/thirdweb';
+
 import shortenAddress from '@/utils/shortenAddress';
 
 const LeftSidebar = () => {
-  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const { isLoaded, userId } = useAuth();
   const { signOut } = useClerk();
 
   const { isSignedIn, user } = useUser();
-  
-  console.log(isSignedIn);
-  console.log(user?.primaryWeb3Wallet!.web3Wallet);
+
 
   const pathname = usePathname();
   const router = useRouter();
- 
-  const loginData = async () => {
-    // TODO #1: Replace with your JWT template name
-    const supabaseAccessToken = await getToken({ template: 'supabase' });
- 
-    const supabase = await supabaseClient(supabaseAccessToken);
-    
-    // TODO #2: Replace with your database table name
-    
-    const { data, error } = await supabase.from('your_table').select();
- 
-    // TODO #3: Handle the response
-  };
-
-
-
 
   return (
     <nav className='leftsidebar'>
@@ -77,9 +57,12 @@ const LeftSidebar = () => {
           <div>
             <Loader />
           </div>
-        ) : userId ? (
+        ) : isSignedIn ? (
           <SignedIn>
-            <div className='flex items-center gap-2 '>
+            <Button
+              onClick={() => router.push('/profile')}
+              className='flex items-center justify-start gap-2 '
+            >
               <UserButton
                 afterSignOutUrl='/'
                 appearance={{
@@ -89,7 +72,7 @@ const LeftSidebar = () => {
                 }}
               />
               <p>{shortenAddress(user?.primaryWeb3Wallet!.web3Wallet)}</p>
-            </div>
+            </Button>
           </SignedIn>
         ) : (
           <SignedOut>
@@ -101,14 +84,6 @@ const LeftSidebar = () => {
                 Sign in
               </Button>
             </SignInWithMetamaskButton>
-            {/* <SignInButton>
-              <Button
-                variant='outline'
-                className='border border-black hover:bg-slate-500'
-              >
-                Sign in
-              </Button>
-            </SignInButton> */}
           </SignedOut>
         )}
 

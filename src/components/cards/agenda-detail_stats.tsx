@@ -1,16 +1,18 @@
 'use client';
 import useUpdateLikesServer from '@/hooks/useAgendas/useUpdateLikes';
-import useUserServer from '@/hooks/useUser/useUserServer';
+import useUserClient from '@/hooks/useUser/useUserServer';
 import { checkIsLiked } from '@/utils';
+import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import { useState } from 'react';
 
 const DetailAgendaStats = ({ agenda }: any) => {
   const agendaId = agenda.id;
   const numOfLikes = agenda.likes;
-
-  const { data: user, error: userError } = useUserServer();
-  const likesList = user?.likes_list;
+  const { isSignedIn, user: user_address } = useUser();
+  const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet;
+  const { data: user, error: userError } = useUserClient();
+  const likesList = user[0]?.likes_list;
 
   const [likes, setLikes] = useState<string[]>(
     likesList === null || likesList === undefined ? [] : [...likesList]
@@ -47,7 +49,7 @@ const DetailAgendaStats = ({ agenda }: any) => {
             updateLike({
               agenda_id: agenda.id,
               new_likes_list: [],
-              user_id: user?.id,
+              user_id: user[0]?.id,
               plus_check: true,
             })
           }
