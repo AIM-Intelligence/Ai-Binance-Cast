@@ -14,6 +14,7 @@ import { updateAgendaViewsServer } from '../../../../../server/actions/agenda-ac
 import DetailAgendaStats from '../../../../components/cards/agenda-detail_stats';
 import AgendaDetailCardMenu from '@/components/menu/agenda-detail-card-menu';
 import shortenAddress from '@/utils/shortenAddress';
+import { useAccount } from 'wagmi';
 
 const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
@@ -24,6 +25,9 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const [disagreeClicked, setDisagreeClicked] = useState(false);
 
   const { execute } = useAction(updateAgendaViewsServer);
+
+  const { address, connector } = useAccount();
+  console.log('connector', connector);
 
   useEffect(() => {
     execute({ agenda_id: params.id });

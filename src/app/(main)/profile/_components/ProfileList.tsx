@@ -1,6 +1,10 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react';
 import { Box, Button, Flex } from '@totejs/uikit';
+import { useRouter, useSearchParams } from 'next/navigation';
+import styled from '@emotion/styled';
+import { NavBar } from './NavBar';
+import { DCELLAR_URL } from '@/env';
 
 enum Type {
   Collections = 'collections',
@@ -18,17 +22,17 @@ const _navItems = [
 ];
 
 interface IProfileList {
-  realAddress: string;
+  realAddress: string | undefined;
   self: boolean;
 }
 
 
 
 const ProfileList = (props: IProfileList) => {
-  const [p] = useSearchParams();
-  const tab = p.getAll('tab')[0];
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab');
 
-  const navigator = useNavigate();
+  const router = useRouter();
   const { realAddress, self } = props;
 
   const [navItems, setNavItems] = useState(_navItems);
@@ -46,7 +50,7 @@ const ProfileList = (props: IProfileList) => {
 
   const currentTab = tab ? tab : Type.Collections;
   const handleTabChange = useCallback((tab: any) => {
-    navigator(`/profile?tab=${tab}`);
+    router.push(`/profile?tab=${tab}`);
   }, []);
 
   const [showButton, setShowButton] = useState(false);
@@ -90,3 +94,17 @@ const ProfileList = (props: IProfileList) => {
 };
 
 export default ProfileList;
+
+
+const Container = styled.div`
+  margin-top: 30px;
+  width: 1123px;
+`;
+
+const NavCon = styled(Flex)``;
+const MyButton = styled(Button)`
+  width: 200px;
+  height: 40px;
+  border-radius: 8px;
+`;
+

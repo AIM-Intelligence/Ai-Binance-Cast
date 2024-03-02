@@ -46,6 +46,7 @@ const DetailAgendaStats = ({ agenda }: any) => {
           width={25}
           height={25}
           onClick={() =>
+            user && 
             updateLike({
               agenda_id: agenda.id,
               new_likes_list: [],

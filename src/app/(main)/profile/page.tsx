@@ -1,8 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 import Loader from '@/components/shared/Loader';
 import { Button } from '@/components/ui/button';
@@ -11,13 +10,15 @@ import useUserClient from '@/hooks/useUser/useUserServer';
 import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
 import { useAuth, useUser } from '@clerk/nextjs';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import ProfileList from './_components/ProfileList';
+import { useMemo } from 'react';
+import Web3 from 'web3';
+import { useAccount } from 'wagmi';
 
 interface StabBlockProps {
   value: string | number;
   label: string;
 }
-
-
 
 const StatBlock = ({ value, label }: StabBlockProps) => (
   <div className='flex-center gap-2'>
@@ -29,12 +30,25 @@ const StatBlock = ({ value, label }: StabBlockProps) => (
 );
 
 const Profile = () => {
- 
-  const { user: user_address } = useUser();
-  console.log('user_address', user_address?.web3Wallets[0].web3Wallet)
-
-
+  // const { user: user_address } = useUser();
+  // console.log('user_address', user_address?.web3Wallets[0].web3Wallet)
+  // const otherAddress = user_address?.web3Wallets[0].web3Wallet
   const { isFetching, data: user, error } = useUserClient();
+
+  const otherAddress = user && user[0]?.address;
+
+  const { address, connector } = useAccount();
+
+  const provider = connector?.getProvider();
+  console.log('provider', provider);
+
+  console.log('connector', connector);
+
+  const realAddress = useMemo(() => {
+    return otherAddress && Web3.utils.isAddress(otherAddress)
+      ? otherAddress
+      : address;
+  }, [address, otherAddress]);
 
   const searchParams = useSearchParams();
 
@@ -55,7 +69,9 @@ const Profile = () => {
       <div className='profile-inner_container'>
         <div className='flex xl:flex-row flex-col max-xl:items-center flex-1 gap-7'>
           <Image
-            src={user && user[0]?.image_url || '/icons/profile-placeholder.svg'}
+            src={
+              (user && user[0]?.image_url) || '/icons/profile-placeholder.svg'
+            }
             alt='profile'
             width={50}
             height={50}
@@ -72,7 +88,10 @@ const Profile = () => {
             </div>
 
             <div className='flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20'>
-              <StatBlock value={user && user[0].age ? user.age : '-'} label='나이' />
+              <StatBlock
+                value={user && user[0].age ? user.age : '-'}
+                label='나이'
+              />
               <StatBlock
                 value={user && user[0].gender ? user.gender : '-'}
                 label='성별'
@@ -136,8 +155,7 @@ const Profile = () => {
         </Link>
       </div>
 
-     {/* <ProfileList self={realAddress === address}
-          realAddress={realAddress} /> */}
+      {/* <ProfileList self={true} realAddress={realAddress} /> */}
     </main>
   );
 };
