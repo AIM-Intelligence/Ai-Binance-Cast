@@ -6,7 +6,7 @@ import { Message } from '@/validation/message';
 const defaultValue = [
   {
     id: nanoid(),
-    text: '안녕하세요. 저는 상대편의 AI 대변인입니다.',
+    text: 'hello. I am the AI spokesperson for the other side.',
     isUserMessage: false,
   },
 ];
@@ -14,25 +14,30 @@ const defaultValue = [
 export const MessagesContext = createContext<{
   messages: Message[];
   isMessageUpdating: boolean;
+  isGreenfield: boolean;
   addMessage: (message: Message) => void;
   removeMessage: (id: string) => void;
   removeAllMessages: () => void;
   updateMessage: (id: string, updateFn: (prevText: string) => string) => void;
 
   setIsMessageUpdating: (isUpdating: boolean) => void;
+  setIsGreenfield: (isGreenfield: boolean) => void;
 }>({
   messages: [],
   isMessageUpdating: false,
+  isGreenfield: false,
   addMessage: () => {},
   removeMessage: () => {},
   removeAllMessages: () => {},
   updateMessage: () => {},
   setIsMessageUpdating: () => {},
+  setIsGreenfield: () => {},
 });
 
 export function MessagesProvider({ children }: { children: React.ReactNode }) {
   const [messages, setMessages] = useState(defaultValue);
   const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false);
+  const [isGreenfield, setIsGreenfield] = useState<boolean>(false);
 
   const addMessage = (message: Message) => {
     setMessages((prev) => [...prev, message]);
@@ -65,11 +70,13 @@ export function MessagesProvider({ children }: { children: React.ReactNode }) {
       value={{
         messages,
         isMessageUpdating,
+        isGreenfield,
         addMessage,
         removeMessage,
         removeAllMessages,
         updateMessage,
         setIsMessageUpdating,
+        setIsGreenfield,
       }}
     >
       {children}

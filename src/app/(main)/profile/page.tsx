@@ -10,11 +10,29 @@ import { Button } from '@/components/ui/button';
 import useUserClient from '@/hooks/useUser/useUserServer';
 import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
 import { useAuth, useUser } from '@clerk/nextjs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface StabBlockProps {
   value: string | number;
   label: string;
 }
+
+enum Type {
+  Collections = 'collections',
+  Purchase = 'purchase',
+}
+const _navItems = [
+  {
+    name: 'My Data Collections',
+    key: Type.Collections,
+  },
+  {
+    name: 'My Purchases',
+    key: Type.Purchase,
+  },
+];
+
+
 
 const StatBlock = ({ value, label }: StabBlockProps) => (
   <div className='flex-center gap-2'>
@@ -26,12 +44,9 @@ const StatBlock = ({ value, label }: StabBlockProps) => (
 );
 
 const Profile = () => {
- 
-  
-  const { isSignedIn, user : user_address } = useUser();
-  const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet
+  const { user: user_address } = useUser();
 
-  
+
   const { isFetching, data: user, error } = useUserClient();
 
   const searchParams = useSearchParams();
@@ -40,12 +55,6 @@ const Profile = () => {
 
   const search = searchParams.get('/');
 
- 
-
-  // if (userError) {
-  //   router.replace(DEFAULT_LOGIN_PROBLEM_REDIRECT);
-  // }
-
   if (isFetching) {
     return (
       <div className='isfetching-flex'>
@@ -53,16 +62,6 @@ const Profile = () => {
       </div>
     );
   }
-
-  // if (!user) {
-  //   return (
-  //     <Link href='/auth/sign-up'>
-  //       <Button variant='outline'>Sign in</Button>
-  //     </Link>
-  //   );
-  // }
-
-  // if (user.error) return <AlertError message={user.error} />;
 
   return (
     <main className='profile-container'>
@@ -87,10 +86,22 @@ const Profile = () => {
 
             <div className='flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20'>
               <StatBlock value={user[0].age ? user.age : '-'} label='나이' />
-              <StatBlock value={user[0].gender ? user.gender : '-'} label='성별' />
-              <StatBlock value={user[0].point ? user.point : '-'} label='포인트' />
-              <StatBlock value={user[0].token ? user.token : '-'} label='토큰' />
-              <StatBlock value={user[0].coupon ? user.coupon : '-'} label='쿠폰' />
+              <StatBlock
+                value={user[0].gender ? user.gender : '-'}
+                label='성별'
+              />
+              <StatBlock
+                value={user[0].point ? user.point : '-'}
+                label='포인트'
+              />
+              <StatBlock
+                value={user[0].token ? user.token : '-'}
+                label='토큰'
+              />
+              <StatBlock
+                value={user[0].coupon ? user.coupon : '-'}
+                label='쿠폰'
+              />
             </div>
 
             <p className='small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm'>
@@ -119,13 +130,13 @@ const Profile = () => {
 
       <div className='flex max-w-5xl w-full'>
         <Link
-          href={`#`}
+          href={`/profile/`}
           className={`profile-tab rounded-l-lg ${
             search === `#` && '!bg-dark-3'
           }`}
         >
           <Image src={'/icons/posts.svg'} alt='posts' width={20} height={20} />
-          My Posts
+          My Data Collections
         </Link>
         <Link
           href={`#`}
@@ -134,9 +145,11 @@ const Profile = () => {
           }`}
         >
           <Image src={'/icons/like.svg'} alt='like' width={20} height={20} />
-          Liked Posts
+          My Purchases
         </Link>
       </div>
+
+     
     </main>
   );
 };

@@ -2,7 +2,7 @@ export const sidebarLinks = [
   {
     imgURL: '/icons/bank.svg',
     route: '/',
-    label: '상정된 안건',
+    label: 'Hoom Feed',
   },
   {
     imgURL: '/icons/spokesman.svg',

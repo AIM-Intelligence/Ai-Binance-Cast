@@ -7,15 +7,13 @@ import { ModalProvider } from '@/lib/providers/modal-provider';
 import siteMetadata from '@/utils/siteMetaData';
 import { ThirdwebProvider } from '@/lib/thirdweb/thirdweb';
 import { client } from '@/lib/thirdweb/client-side';
-import { ClerkProvider } from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs';
 import {
-  
   metamaskConfig,
   coinbaseConfig,
   walletConnectConfig,
-} from "thirdweb/react";
-
-
+} from 'thirdweb/react';
+import WagmiProviderSet from '@/lib/providers/wagmi-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -65,29 +63,31 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={inter.className}>
-        <QueryProvider>
-          <ThirdwebProvider
-            client={client}
-            dappMetadata={{
-              name: 'My App',
-              url: 'https://my-website.com',
-              description: 'Some description of my app',
-              logoUrl: 'https://path/to/logo.png',
-            }}
-          >
-            <ClerkProvider>
-            <ThemeProvider
-              attribute='class'
-              defaultTheme='system'
-              enableSystem
-              disableTransitionOnChange
+        <WagmiProviderSet>
+          <QueryProvider>
+            <ThirdwebProvider
+              client={client}
+              dappMetadata={{
+                name: 'My App',
+                url: 'https://my-website.com',
+                description: 'Some description of my app',
+                logoUrl: 'https://path/to/logo.png',
+              }}
             >
-              <ModalProvider />
-              {children}
-            </ThemeProvider>
-            </ClerkProvider>
-          </ThirdwebProvider>
-        </QueryProvider>
+              <ClerkProvider>
+                <ThemeProvider
+                  attribute='class'
+                  defaultTheme='system'
+                  enableSystem
+                  disableTransitionOnChange
+                >
+                  <ModalProvider />
+                  {children}
+                </ThemeProvider>
+              </ClerkProvider>
+            </ThirdwebProvider>
+          </QueryProvider>
+        </WagmiProviderSet>
       </body>
     </html>
   );
