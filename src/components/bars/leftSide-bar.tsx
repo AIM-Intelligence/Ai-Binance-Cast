@@ -64,7 +64,7 @@ const LeftSidebar = () => {
               className='flex items-center justify-start gap-2 '
             >
               <UserButton
-                afterSignOutUrl='/'
+               
                 appearance={{
                   elements: {
                     avatarBox: 'h-[48px] w-[48px]',

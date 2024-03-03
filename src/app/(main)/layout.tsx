@@ -11,6 +11,7 @@ import { getUserServer } from '../../../server/actions/auth-actions/read/user';
 import { getTotalAgendasServer } from '../../../server/actions/agenda-actions/read/total-agendas';
 import { Suspense } from 'react';
 import { Loader } from '@/components/shared';
+import { auth } from '@clerk/nextjs/server'
 
 export default async function MainLayout({
   children,
