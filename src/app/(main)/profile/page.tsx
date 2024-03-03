@@ -10,7 +10,7 @@ import useUserClient from '@/hooks/useUser/useUserServer';
 import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
 import { useAuth, useUser } from '@clerk/nextjs';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import ProfileList from './_components/ProfileList';
+
 import { useMemo } from 'react';
 import Web3 from 'web3';
 import { useAccount } from 'wagmi';
@@ -155,7 +155,7 @@ const Profile = () => {
         </Link>
       </div>
 
-      {/* <ProfileList self={true} realAddress={realAddress} /> */}
+     
     </main>
   );
 };
