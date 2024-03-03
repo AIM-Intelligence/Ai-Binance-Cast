@@ -29,7 +29,6 @@ const LeftSidebar = () => {
 
   const { isSignedIn, user } = useUser();
 
-
   const pathname = usePathname();
   const router = useRouter();
 
@@ -64,7 +63,6 @@ const LeftSidebar = () => {
               className='flex items-center justify-start gap-2 '
             >
               <UserButton
-               
                 appearance={{
                   elements: {
                     avatarBox: 'h-[48px] w-[48px]',
