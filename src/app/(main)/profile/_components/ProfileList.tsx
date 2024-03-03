@@ -1,6 +1,6 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react';
-import { Box, Button, Flex } from '@totejs/uikit';
+
 import { useRouter, useSearchParams } from 'next/navigation';
 import styled from '@emotion/styled';
 import { NavBar } from './NavBar';
@@ -8,6 +8,8 @@ import { DCELLAR_URL } from '@/env';
 import CollectionList from './CollectionList';
 import PurchaseList from './PurchaseList';
 import OtherListedList from './OtherListedList';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui';
 
 enum Type {
   Collections = 'collections',
@@ -60,26 +62,27 @@ const ProfileList = (props: IProfileList) => {
 
   return (
     <Container>
-      <NavCon alignItems={'center'}>
+      <div className='flex justify-center items-center'>
         <NavBar
           active={currentTab}
           onChange={handleTabChange}
           items={navItems}
         />
         {self && showButton && (
-          <MyButton
+          <Button
             onClick={() => {
               window.open(`${DCELLAR_URL}`);
             }}
+            className='ml-[6px] w-[200px] h-[40px] rounded-md'
             size={'sm'}
-            style={{ marginLeft: '6px' }}
+            
           >
             Upload Data in DCellar
-          </MyButton>
+          </Button>
         )}
-      </NavCon>
+      </div>
 
-      <Box h={20} />
+      <Card className='h-20' />
       {self ? (
         currentTab === Type.Collections ? (
           <CollectionList setShowButton={setShowButton}></CollectionList>
@@ -87,11 +90,12 @@ const ProfileList = (props: IProfileList) => {
           <PurchaseList></PurchaseList>
         )
       ) : (
-        <OtherListedList
+        <div></div>
+      )}
+      <OtherListedList
           realAddress={realAddress!}
           self={self}
         ></OtherListedList>
-      )}
     </Container>
   );
 };
@@ -104,10 +108,5 @@ const Container = styled.div`
   width: 1123px;
 `;
 
-const NavCon = styled(Flex)``;
-const MyButton = styled(Button)`
-  width: 200px;
-  height: 40px;
-  border-radius: 8px;
-`;
+
 

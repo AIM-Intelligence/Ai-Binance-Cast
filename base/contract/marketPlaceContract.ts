@@ -19,12 +19,12 @@ export const MarketPlaceContract = (sign = true) => {
         : (window.ethereum as any),
     );
   } else {
-    const gfProvider = new Web3.providers.HttpProvider(BSC_RPC_URL);
+    const gfProvider = new Web3.providers.HttpProvider('https://data-seed-prebsc-1-s1.binance.org:8545');
     web3 = new Web3(gfProvider);
   }
   const contractInstance = new web3.eth.Contract(
     ABI as AbiItem[],
-    MARKETPLACE_CONTRACT_ADDRESS,
+    '0x31198b59CE7403c29124d919f6735fb040Ef7fD1',
   );
   return contractInstance;
 };

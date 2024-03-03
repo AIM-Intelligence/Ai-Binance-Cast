@@ -3,9 +3,10 @@ import { useAccount } from 'wagmi';
 import { useStatus } from '@/hooks/custom/useStatus'; 
 import { useModal } from '@/hooks/custom/useModal'; 
 import { OwnActionCom } from './OwnActionCom';
-import styled from '@emotion/styled';
-import { Button, Flex } from '@totejs/uikit';
+
+
 import { useWalletModal } from '@/hooks/custom/useWalletModal'; 
+import { Button } from '@/components/ui';
 
 interface IActionCom {
   data: {
@@ -26,7 +27,7 @@ export const ActionCom = (obj: IActionCom) => {
 
   const modalData = useModal();
   return (
-    <ButtonCon gap={6}>
+    <div className='flex items-center justify-center gap-6' >
       {status == 1 && (
         <Button
           size={'sm'}
@@ -61,7 +62,7 @@ export const ActionCom = (obj: IActionCom) => {
           Buy
         </Button>
       )}
-    </ButtonCon>
+    </div>
   );
 };
-const ButtonCon = styled(Flex)``;
+

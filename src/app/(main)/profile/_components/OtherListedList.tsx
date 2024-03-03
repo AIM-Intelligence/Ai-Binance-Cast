@@ -1,6 +1,6 @@
 'use client'
 import styled from '@emotion/styled';
-import { Flex, Table } from '@totejs/uikit';
+
 import { usePagination } from '@/hooks/custom/usePagination'; 
 import { useRouter } from 'next/navigation';
 import {
@@ -38,6 +38,9 @@ const OtherListedList = (props: IOtherListedList) => {
 
   const { list, loading, total } = useUserListed(realAddress, page, pageSize);
 
+  console.log('list', list)
+  console.log('total', total)
+
   const columns = [
     {
       header: 'Data',
@@ -45,10 +48,9 @@ const OtherListedList = (props: IOtherListedList) => {
         const { name, url, type, id, groupName, ownerAddress } = data;
 
         return (
-          <ImgContainer
-            alignItems={'center'}
-            justifyContent={'flex-start'}
-            gap={6}
+          <div
+          className='flex items-center justify-center gap-6  cursor-pointer'
+           
             onClick={() => {
               router.push(
                 `/resource?gid=${id}&gn=${groupName}&address=${ownerAddress}&tab=dataList&from=otherAddress`,
@@ -62,7 +64,7 @@ const OtherListedList = (props: IOtherListedList) => {
                 style={{ width: '10px', height: '10px' }}
               ></CollectionLogo>
             )}
-          </ImgContainer>
+          </div>
         );
       },
     },
@@ -107,7 +109,7 @@ const OtherListedList = (props: IOtherListedList) => {
   ];
   return (
     <Container>
-      <Table
+      {/* <Table
         headerContent={`Latest ${Math.min(
           pageSize,
           list.length,
@@ -123,7 +125,7 @@ const OtherListedList = (props: IOtherListedList) => {
         data={list}
         loading={loading}
         hoverBg={'#14151A'}
-      />
+      /> */}
     </Container>
   );
 };
@@ -134,10 +136,7 @@ const Container = styled.div`
   width: 1123px;
 `;
 
-const ImgContainer = styled(Flex)`
-  cursor: pointer;
-  color: ${(props: any) => props.theme.colors.scene.primary.normal};
-`;
+
 
 const ImgCon = styled.img`
   width: 40px;

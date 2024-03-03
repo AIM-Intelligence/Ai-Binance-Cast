@@ -2,7 +2,7 @@
 import Web3 from 'web3';
 import ABI from './ERC721NonTransferable_abi.json';
 import { AbiItem } from 'web3-utils';
-import { BSC_RPC_URL, ERC721_TRANSFER_CONTRACT_ADDRESS } from '../../env';
+import { BSC_RPC_URL, ERC721_TRANSFER_CONTRACT_ADDRESS } from '@/env';
 
 const cache: any = {};
 export const OwnBuyContract = (sign = true) => {

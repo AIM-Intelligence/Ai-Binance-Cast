@@ -1,6 +1,6 @@
 'use client'
 import styled from '@emotion/styled';
-import { Button, Flex, Table } from '@totejs/uikit';
+
 import { usePagination } from '@/hooks/custom/usePagination'; 
 import { useAccount, useSwitchNetwork } from 'wagmi';
 import { GF_CHAIN_ID } from '@/env'; 
@@ -20,6 +20,7 @@ import { BN } from 'bn.js';
 import { useGlobal } from '@/hooks/custom/useGlobal'; 
 import CollNoData from './CollNoData';
 import { Dispatch, useMemo } from 'react';
+import { Button } from '@/components/ui';
 
 const PriceCon = (props: { groupId: string }) => {
   const { groupId } = props;
@@ -73,10 +74,10 @@ const CollectionList = (props: ICollectionList) => {
           bucket_info: { bucket_name },
         } = data;
         return (
-          <ImgContainer
-            alignItems={'center'}
-            justifyContent={'flex-start'}
-            gap={6}
+          <div
+          className='flex items-center justify-center gap-6 cursor-pointer'
+           
+           
             onClick={() => {
               const {
                 groupId,
@@ -103,7 +104,7 @@ const CollectionList = (props: ICollectionList) => {
           >
             <ImgCon src={defaultImg(bucket_name, 40)}></ImgCon>
             {trimLongStr(bucket_name, 15)}
-          </ImgContainer>
+          </div>
         );
       },
     },
@@ -200,7 +201,7 @@ const CollectionList = (props: ICollectionList) => {
   ];
   return (
     <Container>
-      <Table
+      {/* <Table
         headerContent={`Latest ${Math.min(
           pageSize,
           list.length,
@@ -217,7 +218,7 @@ const CollectionList = (props: ICollectionList) => {
         loading={loading}
         hoverBg={'#14151A'}
         customComponent={showNoData && <CollNoData></CollNoData>}
-      />
+      /> */}
     </Container>
   );
 };
@@ -228,10 +229,7 @@ const Container = styled.div`
   width: 1123px;
 `;
 
-const ImgContainer = styled(Flex)`
-  cursor: pointer;
-  color: ${(props: any) => props.theme.colors.scene.primary.normal};
-`;
+
 
 const ImgCon = styled.img`
   width: 40px;

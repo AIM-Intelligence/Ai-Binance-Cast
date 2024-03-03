@@ -1,23 +1,22 @@
-'use client'
+'use client';
 import styled from '@emotion/styled';
-import { Flex, Table } from '@totejs/uikit';
-import { usePagination } from '@/hooks/custom/usePagination'; 
+
+import { usePagination } from '@/hooks/custom/usePagination';
 import { useAccount } from 'wagmi';
 import {
   defaultImg,
   divide10Exp,
   formatDateUTC,
   trimLongStr,
-} from '@/utils/web3'
-import { useUserPurchased } from '@/hooks/custom/useUserPurchased'; 
+} from '@/utils/web3';
+import { useUserPurchased } from '@/hooks/custom/useUserPurchased';
 import BN from 'bn.js';
-import { useSalesVolume } from '@/hooks/custom/useSalesVolume'; 
+import { useSalesVolume } from '@/hooks/custom/useSalesVolume';
 import { OwnActionCom } from './OwnActionCom';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { CollectionLogo } from '@/components/svgIcon/CollectionLogo'; 
-import { useGlobal } from '@/hooks/custom/useGlobal'; 
+import { CollectionLogo } from '@/components/svgIcon/CollectionLogo';
+import { useGlobal } from '@/hooks/custom/useGlobal';
 import Link from 'next/link';
-
 
 const TotalVol = (props: any) => {
   const { groupId } = props;
@@ -46,10 +45,8 @@ const PurchaseList = () => {
       cell: (data: any) => {
         const { id, groupName, ownerAddress, url, type, oid, name } = data;
         return (
-          <ImgContainer
-            alignItems={'center'}
-            justifyContent={'flex-start'}
-            gap={6}
+          <div
+            className='flex items-center justify-center gap-6'
             onClick={() => {
               let from = '';
               if (breadInfo) {
@@ -69,11 +66,11 @@ const PurchaseList = () => {
               const _from = from ? `&from=${from}` : '';
               if (groupName) {
                 router.push(
-                  `/resource?gid=${id}&gn=${groupName}&address=${ownerAddress}&type=collection&tab=dataList${_from}`,
+                  `/resource?gid=${id}&gn=${groupName}&address=${ownerAddress}&type=collection&tab=dataList${_from}`
                 );
               } else {
                 router.push(
-                  `/resource?oid=${oid}&address=${ownerAddress}&type=collection&tab=dataList${_from}`,
+                  `/resource?oid=${oid}&address=${ownerAddress}&type=collection&tab=dataList${_from}`
                 );
               }
             }}
@@ -85,7 +82,7 @@ const PurchaseList = () => {
                 style={{ width: '10px', height: '10px' }}
               ></CollectionLogo>
             )}
-          </ImgContainer>
+          </div>
         );
       },
     },
@@ -148,7 +145,7 @@ const PurchaseList = () => {
   ];
   return (
     <Container>
-      <Table
+      {/* <Table
         headerContent={`Latest ${Math.min(
           pageSize,
           list.length,
@@ -164,7 +161,7 @@ const PurchaseList = () => {
         data={list}
         loading={loading}
         hoverBg={'#14151A'}
-      />
+      /> */}
     </Container>
   );
 };
@@ -173,11 +170,6 @@ export default PurchaseList;
 
 const Container = styled.div`
   width: 1123px;
-`;
-
-const ImgContainer = styled(Flex)`
-  cursor: pointer;
-  color: ${(props: any) => props.theme.colors.scene.primary.normal};
 `;
 
 const ImgCon = styled.img`

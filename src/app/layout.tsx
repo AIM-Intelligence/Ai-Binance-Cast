@@ -74,7 +74,7 @@ export default function RootLayout({
                 logoUrl: 'https://path/to/logo.png',
               }}
             >
-              <ClerkProvider>
+              <ClerkProvider telemetry={false}>
                 <ThemeProvider
                   attribute='class'
                   defaultTheme='system'

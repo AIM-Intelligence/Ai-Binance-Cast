@@ -155,7 +155,7 @@ const Profile = () => {
         </Link>
       </div>
 
-      <ProfileList self={true} realAddress={realAddress} />
+      {/* <ProfileList self={true} realAddress={realAddress} /> */}
     </main>
   );
 };

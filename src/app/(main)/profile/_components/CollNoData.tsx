@@ -1,18 +1,19 @@
 'use client'
 import styled from '@emotion/styled';
 import NoDataLogo from '../../images/no_data_logo.png';
-import { Button, Flex } from '@totejs/uikit';
+
 import { DCELLAR_URL } from '@/env'; 
+import { Button } from '@/components/ui';
 const CollNoData = () => {
   return (
-    <Container alignItems={'center'} justifyContent={'center'}>
-      <Content gap={20} flexDirection={'column'} alignItems={'center'}>
+    <div className='flex items-center justify-center w-[1100px] h-[596px] px-[4px] py-[20px]' >
+      <div className='flex flex-col items-center justify-center gap-20'>
         {/* <img src={NoDataLogo} alt="" /> */}
         <Title>
           You don’t have any data on Greenfield Testnet. Upload your data on
           DCellar first.👏
         </Title>
-        <MyButton
+        <Button
           onClick={() => {
             window.open(`${DCELLAR_URL}`);
           }}
@@ -20,27 +21,17 @@ const CollNoData = () => {
           style={{ marginLeft: '6px' }}
         >
           Upload Data in DCellar
-        </MyButton>
-      </Content>
-    </Container>
+        </Button>
+      </div>
+    </div>
   );
 };
 
 export default CollNoData;
 
-const Container = styled(Flex)`
-  width: 1100px;
-  height: 596px;
 
-  padding: 4px 20px;
-`;
 
-const Content = styled(Flex)`
-  img {
-    width: 120px;
-    height: 120px;
-  }
-`;
+
 
 const Title = styled.div`
   width: 320px;
@@ -49,8 +40,4 @@ const Title = styled.div`
   text-align: center;
 `;
 
-const MyButton = styled(Button)`
-  width: 200px;
-  height: 40px;
-  border-radius: 8px;
-`;
+

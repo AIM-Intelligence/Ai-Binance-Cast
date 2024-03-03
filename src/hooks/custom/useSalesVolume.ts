@@ -1,3 +1,4 @@
+'use client'
 // import { useCallback, useState, useEffect } from 'react';
 // import { useGetChainProviders } from './useGetChainProviders';
 

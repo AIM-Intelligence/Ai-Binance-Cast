@@ -1,5 +1,5 @@
 'use client'
-import { StateModalVariantType } from '@totejs/uikit';
+
 import React from 'react';
 
 export const initialState: any = {
@@ -37,7 +37,7 @@ export interface ModalState {
     delistData: object;
     openResult: boolean;
     result: {
-      variant: StateModalVariantType;
+      variant: any;
       description: string;
     };
     callBack: () => void;

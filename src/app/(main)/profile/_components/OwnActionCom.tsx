@@ -7,7 +7,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { parseGroupName } from '@/utils/web3'; 
 import styled from '@emotion/styled';
-import { Flex } from '@totejs/uikit';
+
 import { useGlobal } from '@/hooks/custom/useGlobal'; 
 
 interface IOwnActionCom {
@@ -61,7 +61,7 @@ export const OwnActionCom = (obj: IOwnActionCom) => {
   }, []);
 
   return (
-    <ActionCon gap={10}>
+    <div className='flex gap-10' >
       {type === 'Data' && (
         <DownloadIcon
           color={'#AEB4BC'}
@@ -111,8 +111,8 @@ export const OwnActionCom = (obj: IOwnActionCom) => {
           }
         }}
       />
-    </ActionCon>
+    </div>
   );
 };
 
-const ActionCon = styled(Flex)``;
+

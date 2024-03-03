@@ -1,3 +1,4 @@
+'use client'
 // import { useCallback, useState, useEffect } from 'react';
 // import { useGetChainProviders } from './useGetChainProviders';
 
@@ -13,6 +14,8 @@ export const useUserPurchased = (page: number, pageSize = 10) => {
   const [total, setTotal] = useState(0);
 
   const { address } = useAccount();
+
+  console.log('address', address);
 
   useEffect(() => {
     setLoading(true);

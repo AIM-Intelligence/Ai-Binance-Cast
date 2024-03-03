@@ -6,7 +6,10 @@ export const getSingleton = function () {
   let client: Client | null;
   return function () {
     if (!client) {
-      client = Client.create(GF_RPC_URL, String(GF_CHAIN_ID));
+      client = Client.create(
+        'https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org',
+        String(5600)
+      );
     }
     return client;
   };
@@ -19,7 +22,7 @@ export const client = getClient();
 export const getSps = async () => {
   const sps = await client.sp.getStorageProviders();
   const finalSps = (sps ?? []).filter(
-    (v: any) => v?.description?.moniker !== 'QATest',
+    (v: any) => v?.description?.moniker !== 'QATest'
   );
 
   return finalSps;
@@ -48,7 +51,7 @@ export const getRandomSp = async () => {
     (v: any) =>
       v?.description?.moniker !== 'QATest' &&
       (v.endpoint.indexOf('bnbchain.org') > 0 ||
-        v.endpoint.indexOf('nodereal.io') > 0),
+        v.endpoint.indexOf('nodereal.io') > 0)
   );
   return finalSps[Math.floor(Math.random() * finalSps.length)].endpoint;
 };
@@ -73,7 +76,7 @@ export const getBucketFileList = async ({ bucketName }: any) => {
     bucketName,
     endpoint,
   });
-  
+
   forEach(fileList.body?.GfSpListObjectsByBucketNameResponse);
   return fileList;
 };
@@ -96,7 +99,7 @@ export const CreateGroup = async (params: MsgCreateGroup) => {
 export const putObjectPolicy = async (
   bucketName: string,
   ObjectName: string,
-  srcMsg: any,
+  srcMsg: any
 ) => {
   return await client.object.putObjectPolicy(bucketName, ObjectName, srcMsg);
 };
@@ -107,7 +110,7 @@ export const putBucketPolicy = async (bucketName: string, srcMsg: any) => {
 
 export const getGroupInfoByName = async (
   groupName: string,
-  groupOwner: string,
+  groupOwner: string
 ) => {
   try {
     return await client.group.headGroup(groupName, groupOwner);
@@ -118,7 +121,7 @@ export const getGroupInfoByName = async (
 
 export const checkGroupExistByName = async (
   groupName: string,
-  groupOwner: string,
+  groupOwner: string
 ) => {
   const o = await getGroupInfoByName(groupName, groupOwner);
   return Object.keys(o).length;
@@ -132,7 +135,7 @@ export const checkGroupExistById = async (tokenId: string) => {
 export const checkAddressInGroup = async (
   groupName: string,
   groupOwner: string,
-  member: string,
+  member: string
 ) => {
   try {
     return await client.group.headGroupMember(groupName, groupOwner, member);
@@ -155,7 +158,7 @@ export const getObjectInfo = async (objectId: string) => {
 
 export const getObjectInfoByName = async (
   bucketName: string,
-  objectName: string,
+  objectName: string
 ) => {
   return await client.object.headObject(bucketName, objectName);
 };
@@ -163,7 +166,7 @@ export const getObjectInfoByName = async (
 export const updateGroupInfo = async (
   address: string,
   groupName: string,
-  extra: string,
+  extra: string
 ) => {
   return await client.group.updateGroupExtra({
     operator: address,
@@ -176,13 +179,13 @@ export const updateGroupInfo = async (
 export const mirrorGroup = async (
   groupName: string,
   id: string,
-  operator: string,
+  operator: string
 ) => {
   return await client.crosschain.mirrorGroup({
     groupName,
     id,
     operator,
-    destChainId: BSC_CHAIN_ID,
+    destChainId: 97,
   });
 };
 

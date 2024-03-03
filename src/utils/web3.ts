@@ -1,10 +1,9 @@
-'use client'
+'use client';
 import { format } from 'date-fns';
 import ReactDOM from 'react-dom';
 import BN from 'bn.js';
 import Identicon from 'identicon.js';
 import sha265 from 'sha256';
-import { toast } from '@totejs/uikit';
 
 import { AxiosResponse } from 'axios';
 import { IReturnOffChainAuthKeyPairAndUpload } from '@bnb-chain/greenfield-js-sdk';
@@ -17,7 +16,7 @@ export const trimLongStr = (
   str: string,
   maxLength = 14,
   headLen = 4,
-  footLen = 8,
+  footLen = 8
 ) => {
   if (!str) {
     return '';
@@ -38,7 +37,7 @@ export const formatDateUTC = (date: number | string) => {
   const utcDate = new Date(date);
   utcDate.setUTCHours(utcDate.getUTCHours());
   //const zonedTime = utcToZonedTime(numDate, 'UTC');
-  return format(utcDate, formatStr);;
+  return format(utcDate, formatStr);
 };
 
 export const batchUpdate = (fn: () => void) => {
@@ -179,9 +178,7 @@ export const contentTypeToExtension = (contentType = '', fileName?: string) => {
 
 export const directlyDownload = (url: string) => {
   if (!url) {
-    toast.error({
-      description: 'Download url not existed. Please check.',
-    });
+    console.log('no url');
   }
   const link = document.createElement('a');
   link.href = url;
@@ -202,7 +199,7 @@ export const truncateFileName = (fileName: string) => {
   }
   return `${fileNameWithoutExtension.slice(
     0,
-    truncatedFileNameLength,
+    truncatedFileNameLength
   )}...${fileNameWithoutExtension.slice(-4)}${fileExtension}`;
 };
 
@@ -223,7 +220,7 @@ export const viewFileByAxiosResponse = (result: AxiosResponse) => {
 
 export const saveFileByAxiosResponse = (
   result: AxiosResponse,
-  objectName: string,
+  objectName: string
 ) => {
   try {
     const { data, headers: resultHeaders } = result;
@@ -239,7 +236,7 @@ export const saveFileByAxiosResponse = (
 };
 
 export const checkSpOffChainDataAvailable = (
-  spOffChainData: IReturnOffChainAuthKeyPairAndUpload,
+  spOffChainData: IReturnOffChainAuthKeyPairAndUpload
 ) => {
   const curTime = getUtcZeroTimestamp();
 
