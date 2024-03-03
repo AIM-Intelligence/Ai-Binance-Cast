@@ -1,14 +1,11 @@
 'use client';
 
-//import { WagmiConfig, Chain, configureChains, createClient } from 'wagmi';
 import { createConfig, Chain, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 import { defineChain } from 'viem';
 import { configureChains } from '@wagmi/core';
 import { bscTestnet } from '@wagmi/core/chains';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { InjectedConnector } from 'wagmi/connectors/injected';
-import * as env from '@/env';
 import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
 // const gfChain1: Chain = {
 //   id: env.GF_CHAIN_ID,
