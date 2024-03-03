@@ -5,6 +5,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import styled from '@emotion/styled';
 import { NavBar } from './NavBar';
 import { DCELLAR_URL } from '@/env';
+import CollectionList from './CollectionList';
+import PurchaseList from './PurchaseList';
+import OtherListedList from './OtherListedList';
 
 enum Type {
   Collections = 'collections',
@@ -85,7 +88,7 @@ const ProfileList = (props: IProfileList) => {
         )
       ) : (
         <OtherListedList
-          realAddress={realAddress}
+          realAddress={realAddress!}
           self={self}
         ></OtherListedList>
       )}

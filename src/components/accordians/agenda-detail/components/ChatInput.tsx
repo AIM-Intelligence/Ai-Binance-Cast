@@ -9,7 +9,7 @@ import { z } from 'zod';
 import { nanoid } from 'nanoid';
 import { CornerDownLeft, Loader2 } from 'lucide-react';
 import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
-import { MessagesContext } from '@/app/context/messages';
+import { MessagesContext } from '@/context/messages';
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 

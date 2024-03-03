@@ -1,4 +1,5 @@
-import { format, utcToZonedTime } from 'date-fns-tz';
+'use client'
+import { format } from 'date-fns';
 import ReactDOM from 'react-dom';
 import BN from 'bn.js';
 import Identicon from 'identicon.js';
@@ -34,8 +35,10 @@ const formatStr = 'MMM-dd-yyyy';
 
 export const formatDateUTC = (date: number | string) => {
   const numDate = Number(date);
-  const zonedTime = utcToZonedTime(numDate, 'UTC');
-  return format(zonedTime, formatStr, { timeZone: 'UTC' });
+  const utcDate = new Date(date);
+  utcDate.setUTCHours(utcDate.getUTCHours());
+  //const zonedTime = utcToZonedTime(numDate, 'UTC');
+  return format(utcDate, formatStr);;
 };
 
 export const batchUpdate = (fn: () => void) => {

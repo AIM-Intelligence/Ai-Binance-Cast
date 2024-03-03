@@ -10,7 +10,7 @@ import {
 import ChatHeader from './components/ChatHeader';
 import ChatInput from './components/ChatInput';
 import ChatMessages from './components/ChatMessages';
-import { MessagesContext } from '@/app/context/messages';
+import { MessagesContext } from '@/context/messages';
 import { MessagePayload } from '@/validation/message';
 import { z } from 'zod';
 import { nanoid } from 'nanoid';
@@ -40,8 +40,6 @@ export function AgendaAgreeAccordion({
     // Your logic goes here
     console.log('Button clicked!', messages);
   }
-
-
 
   return (
     <Accordion type='single' collapsible className='w-full'>
@@ -85,7 +83,12 @@ export function AgendaAgreeAccordion({
                   comment={agendaDetail.agree_comment}
                   subject={agendaDetail.subject}
                 />
-                <Button className='w-full border border-dark-1 mt-5 bg-[#F6D658] hover:opacity-70' onClick={SubmitSave}>Submit & Save</Button>
+                <Button
+                  className='w-full border border-dark-1 mt-5 bg-[#F6D658] hover:opacity-70'
+                  onClick={SubmitSave}
+                >
+                  Submit & Save
+                </Button>
               </div>
             </AccordionContent>
           </div>

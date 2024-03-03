@@ -1,4 +1,5 @@
-import { toast } from '@totejs/uikit';
+'use client'
+
 import { ConnectorNotFoundError } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
@@ -28,7 +29,5 @@ export function handleWalletError(err: any, args: any, context: unknown) {
   const message = err.cause?.message ?? err.message;
   const description = text || ErrorMsgMap[code] || message;
 
-  toast.error({
-    description,
-  });
+ 
 }

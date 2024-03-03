@@ -10,7 +10,7 @@ import {
 import ChatHeader from './ChatHeader';
 import ChatInput from './ChatInput';
 import ChatMessages from './ChatMessages';
-import { MessagesContext } from '@/app/context/messages';
+import { MessagesContext } from '@/context/messages';
 import { MessagePayload } from '@/validation/message';
 import { z } from 'zod';
 import { nanoid } from 'nanoid';

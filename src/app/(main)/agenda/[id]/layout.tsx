@@ -1,4 +1,4 @@
-import { MessagesProvider } from '@/app/context/messages';
+import { MessagesProvider } from '@/context/messages';
 
 export default function CardLayout({
   children,

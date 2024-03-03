@@ -3,7 +3,7 @@
 //import { WagmiConfig, Chain, configureChains, createClient } from 'wagmi';
 import { createConfig, Chain, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
-import { createPublicClient, defineChain, http } from 'viem';
+import { defineChain } from 'viem';
 import { configureChains } from '@wagmi/core';
 import { bscTestnet } from '@wagmi/core/chains';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
@@ -30,7 +30,7 @@ import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
 // };
 
 const gfChain = defineChain({
-  id: env.GF_CHAIN_ID,
+  id: 5600,
   name: 'Greenfield Testnet',
   network: 'greenfield',
   nativeCurrency: {
@@ -39,12 +39,12 @@ const gfChain = defineChain({
     symbol: 'tBNB',
   },
   rpcUrls: {
-    default: { http: [env.GF_RPC_URL] },
-    public: { http: [env.GF_RPC_URL] },
+    default: { http: ['https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org'] },
+    public: { http: ['https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org'] },
   },
   blockExplorers: {
-    etherscan: { name: 'Greenfieldscan', url: env.GF_EXPLORER_URL! },
-    default: { name: 'Greenfieldscan', url: env.GF_EXPLORER_URL! },
+    etherscan: { name: 'Greenfieldscan', url: 'https://greenfieldscan.com/' },
+    default: { name: 'Greenfieldscan', url: 'https://greenfieldscan.com/' },
   },
   testnet: true,
 });

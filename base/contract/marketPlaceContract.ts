@@ -2,7 +2,7 @@
 import Web3 from 'web3';
 import ABI from './marketplace_abi.json';
 import { AbiItem } from 'web3-utils';
-import { BSC_RPC_URL, MARKETPLACE_CONTRACT_ADDRESS } from '../../env';
+import { BSC_RPC_URL, MARKETPLACE_CONTRACT_ADDRESS } from '@/env'
 
 export const MarketPlaceContract = (sign = true) => {
   // const gfProvider = new Web3.providers.HttpProvider(BSC_RPC_URL);
@@ -15,7 +15,7 @@ export const MarketPlaceContract = (sign = true) => {
   if (sign) {
     web3 = new Web3(
       isTrustWallet === 'injected'
-        ? (window.trustWallet as any)
+        ? (window.ethereum as any)
         : (window.ethereum as any),
     );
   } else {

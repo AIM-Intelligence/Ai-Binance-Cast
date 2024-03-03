@@ -40,9 +40,9 @@ const Profile = () => {
   const { address, connector } = useAccount();
 
   const provider = connector?.getProvider();
-  console.log('provider', provider);
+  // console.log('provider', provider);
 
-  console.log('connector', connector);
+  // console.log('connector', connector);
 
   const realAddress = useMemo(() => {
     return otherAddress && Web3.utils.isAddress(otherAddress)
@@ -155,7 +155,7 @@ const Profile = () => {
         </Link>
       </div>
 
-      {/* <ProfileList self={true} realAddress={realAddress} /> */}
+      <ProfileList self={true} realAddress={realAddress} />
     </main>
   );
 };

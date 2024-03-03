@@ -1,4 +1,4 @@
-import { MessagesContext } from '@/app/context/messages';
+import { MessagesContext } from '@/context/messages';
 import { Message, MessagePayload } from '@/validation/message';
 import { useMutation } from '@tanstack/react-query';
 import { nanoid } from 'nanoid';

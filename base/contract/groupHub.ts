@@ -14,7 +14,7 @@ export const GroupHubContract = (sign = true) => {
   if (sign) {
     web3 = new Web3(
       isTrustWallet === 'injected'
-        ? (window.trustWallet as any)
+        ? (window.ethereum as any)
         : (window.ethereum as any),
     );
   } else {

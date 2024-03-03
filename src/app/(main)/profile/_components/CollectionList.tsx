@@ -1,3 +1,4 @@
+'use client'
 import styled from '@emotion/styled';
 import { Button, Flex, Table } from '@totejs/uikit';
 import { usePagination } from '@/hooks/custom/usePagination'; 
@@ -9,14 +10,14 @@ import {
   divide10Exp,
   formatDateUTC,
   trimLongStr,
-} from ''
+} from '@/utils/web3'
 
-import { useCollectionList } from '../../hooks/useCollectionList';
-import { useModal } from '../../hooks/useModal';
-import { useSalesVolume } from '../../hooks/useSalesVolume';
-import { useListedStatus } from '../../hooks/useListedStatus';
+import { useCollectionList } from '@/hooks/custom/useCollectionList'; 
+import { useModal } from '@/hooks/custom/useModal'; 
+import { useSalesVolume } from '@/hooks/custom/useSalesVolume'; 
+import { useListedStatus } from '@/hooks/custom/useListedStatus'; 
 import { BN } from 'bn.js';
-import { useGlobal } from '../../hooks/useGlobal';
+import { useGlobal } from '@/hooks/custom/useGlobal'; 
 import CollNoData from './CollNoData';
 import { Dispatch, useMemo } from 'react';
 
