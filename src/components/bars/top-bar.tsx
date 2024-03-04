@@ -23,8 +23,8 @@ import { ModeToggle } from './components/theme-toggle';
 import { useUser } from '@clerk/nextjs';
 
 const Topbar = () => {
-  const { isSignedIn, user : user_address } = useUser();
-  const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet
+  const { isSignedIn, user: user_address } = useUser();
+  const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet;
   const { isFetching, data: user, error } = useUserClient();
 
   const router = useRouter();
@@ -47,14 +47,14 @@ const Topbar = () => {
     return (
       <div className='topbar'>
         <Loader />
-        <Button onClick={() => router.refresh()}>새로고침</Button>
+        <Button onClick={() => router.refresh()}>Refresh</Button>
       </div>
     );
   }
 
   if (error) {
     <div className='topbar'>
-      <Button onClick={() => router.refresh()}>새로고침</Button>
+      <Button onClick={() => router.refresh()}>Refresh</Button>
     </div>;
   }
 
@@ -81,7 +81,7 @@ const Topbar = () => {
         <div className='flex gap-4'>
           <ModeToggle />
 
-          { user && user[0]?.id ? (
+          {user && user[0]?.id ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Link href='/profile' className='flex-center gap-3'>
@@ -100,10 +100,10 @@ const Topbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className='bg-white dark:bg-black'>
                 <DropdownMenuItem onClick={() => router.push('/profile')}>
-                  마이페이지
+                  MyPage
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push('/explore')}>
-                  AI 대변인이란
+                  What is ABC?
                 </DropdownMenuItem>
 
                 <DropdownMenuSeparator />
@@ -111,7 +111,7 @@ const Topbar = () => {
                   onClick={() => handleLogoutWithOAuth()}
                   disabled={isPending}
                 >
-                  로그아웃
+                  Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -120,7 +120,7 @@ const Topbar = () => {
               variant='outline'
               onClick={() => router.push('/auth/sign-up')}
             >
-              로그인
+              Login
             </Button>
           )}
         </div>

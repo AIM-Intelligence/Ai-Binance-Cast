@@ -13,7 +13,7 @@ const MyOpinion = () => {
               alt='edit'
               className='dark:invert-white'
             />
-            <h2 className='h3-bold md:h2-bold text-left w-full'>제출된 안건</h2>
+            <h2 className='h3-bold md:h2-bold text-left w-full'>Vote Agenda</h2>
           </div>
 
           <ul className='flex flex-col flex-1 gap-9 w-full '>
@@ -26,7 +26,7 @@ const MyOpinion = () => {
 
       <div className='home-creators border-l-2'>
         <h3 className='h3-bold text-black dark:text-light-1'>
-          Top 투표된 안건들
+          Top Vote Agendas
         </h3>
         {/* {isUserLoading && !creators ? (
         <Loader />

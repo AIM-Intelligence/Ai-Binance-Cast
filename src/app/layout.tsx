@@ -5,15 +5,10 @@ import { ThemeProvider } from '@/lib/providers/theme-provider';
 import QueryProvider from '@/lib/providers/query-provider';
 import { ModalProvider } from '@/lib/providers/modal-provider';
 import siteMetadata from '@/utils/siteMetaData';
-import { ThirdwebProvider } from '@/lib/thirdweb/thirdweb';
-import { clientId } from '@/lib/thirdweb/client-side';
 import { ClerkProvider } from '@clerk/nextjs';
-import {
-  metamaskConfig,
-  coinbaseConfig,
-  walletConnectConfig,
-} from 'thirdweb/react';
+
 import WagmiProviderSet from '@/lib/providers/wagmi-provider';
+import ThirdwebProviderSet from '@/lib/providers/thirdweb-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -65,16 +60,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <WagmiProviderSet>
           <QueryProvider>
-            <ThirdwebProvider
-              clientId={clientId!}
-              activeChain="binance-testnet"
-              // dappMetadata={{
-              //   name: 'My App',
-              //   url: 'https://my-website.com',
-              //   description: 'Some description of my app',
-              //   logoUrl: 'https://path/to/logo.png',
-              // }}
-            >
+            <ThirdwebProviderSet>
               <ClerkProvider telemetry={false}>
                 <ThemeProvider
                   attribute='class'
@@ -86,7 +72,7 @@ export default function RootLayout({
                   {children}
                 </ThemeProvider>
               </ClerkProvider>
-            </ThirdwebProvider>
+            </ThirdwebProviderSet>
           </QueryProvider>
         </WagmiProviderSet>
       </body>

@@ -21,7 +21,7 @@ export default function Error({
     <main className='flex-col-center'>
       <h2>서버에서 에러가 발생되었습니다.</h2>
       <Button variant='outline' onClick={() => router.refresh()}>
-        새로고침
+        Refresh
       </Button>
     </main>
   );

@@ -90,23 +90,23 @@ const Profile = () => {
             <div className='flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20'>
               <StatBlock
                 value={user && user[0].age ? user.age : '-'}
-                label='나이'
+                label='age'
               />
               <StatBlock
                 value={user && user[0].gender ? user.gender : '-'}
-                label='성별'
+                label='gender'
               />
               <StatBlock
                 value={user && user[0].point ? user.point : '-'}
-                label='포인트'
+                label='point'
               />
               <StatBlock
                 value={user && user[0].token ? user.token : '-'}
-                label='토큰'
+                label='token'
               />
               <StatBlock
                 value={user && user[0].coupon ? user.coupon : '-'}
-                label='쿠폰'
+                label='coupon'
               />
             </div>
 
@@ -154,8 +154,6 @@ const Profile = () => {
           My Purchases
         </Link>
       </div>
-
-     
     </main>
   );
 };

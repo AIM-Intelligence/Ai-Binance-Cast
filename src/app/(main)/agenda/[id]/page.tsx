@@ -17,8 +17,7 @@ import shortenAddress from '@/utils/shortenAddress';
 import { useAccount } from 'wagmi';
 
 import SubmitChat from './_components/SubmintChat';
-import GeneralButton from './_components/generalButton';
-import { MessagesContext } from '@/context/messages';
+
 
 const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
@@ -29,10 +28,10 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const [disagreeClicked, setDisagreeClicked] = useState(false);
 
   const { execute } = useAction(updateAgendaViewsServer);
-  
 
   const { address, connector } = useAccount();
   console.log('connector', connector);
+  console.log('connector', address);
 
   useEffect(() => {
     execute({ agenda_id: params.id });
@@ -140,7 +139,6 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
           </div>
 
           <div className='w-full'>
-           
             <DetailAgendaStats agenda={agendaDetail} />
           </div>
         </div>

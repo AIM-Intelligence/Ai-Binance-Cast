@@ -67,7 +67,13 @@ const SubmitButton = ({ subject }: any) => {
         granter: '',
       });
 
+
+
+
       if (res.code === 0) {
+        
+        
+        
         alert('success');
       }
     } catch (err) {
@@ -83,7 +89,7 @@ const SubmitButton = ({ subject }: any) => {
 
   return (
     <Button
-      className='w-full border border-dark-1 mt-5 bg-[#F6D658] hover:opacity-70'
+      className='w-full mt-5 bg-[#F6D658] hover:opacity-70'
       onClick={SubmitSave}
     >
       Create Bucket Tx

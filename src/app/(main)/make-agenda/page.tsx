@@ -13,7 +13,7 @@ const MakeAgenda = () => {
           alt='assume'
           className='dark:invert-white'
         />
-        <h2 className='h3-bold  md:h2-bold text-left w-full'>안건 신청하기</h2>
+        <h2 className='h3-bold  md:h2-bold text-left w-full'>Enroll Agenda</h2>
       </div>
 
       <MakeAgendaForm />

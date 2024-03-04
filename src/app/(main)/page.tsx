@@ -19,9 +19,7 @@ export default function Home() {
               alt='edit'
               className='dark:invert-white'
             />
-            <h2 className='h3-bold md:h2-bold text-left w-full'>
-              상정된 안건
-            </h2>
+            <h2 className='h3-bold md:h2-bold text-left w-full'>Agenda</h2>
           </div>
 
           <Suspense fallback={<Loader />}>

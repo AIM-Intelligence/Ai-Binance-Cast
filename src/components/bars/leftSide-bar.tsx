@@ -130,7 +130,7 @@ const LeftSidebar = () => {
               width={30}
               height={30}
             />
-            <p className='small-medium lg:base-medium'>로그아웃</p>
+            <p className='small-medium lg:base-medium'>Logout</p>
           </Button>
         )}
 

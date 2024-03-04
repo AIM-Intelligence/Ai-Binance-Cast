@@ -31,7 +31,7 @@ const ChatInput = (
   const { messages } = useContext(MessagesContext);
   const inverseMessages = [...messages].reverse();
 
-  // TODO: inverseMessages 길이가 5가 넘어가면 포인트와 혜택을 받는 페이지로 이동하게 된다. => 좀 더 매끄럽게 ux ui를 짜보자
+  // TODO: inverseMessages 길이가 5가 넘어가면 point와 혜택을 받는 페이지로 이동하게 된다. => 좀 더 매끄럽게 ux ui를 짜보자
 
   return (
     <div {...props} className={cn('border-t border-zinc-300', className)}>

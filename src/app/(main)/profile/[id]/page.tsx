@@ -31,7 +31,11 @@ const Profile = ({ params }: { params: { id: string } }) => {
   const other_user: any = result.data;
 
   if (status === 'executing' || status === 'idle') {
-    return <Loader />;
+    return (
+      <div className='isfetching-flex'>
+        <Loader />
+      </div>
+    );
   }
 
   if (result.fetchError || result.serverError) {
@@ -66,23 +70,23 @@ const Profile = ({ params }: { params: { id: string } }) => {
             <div className='flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20'>
               <StatBlock
                 value={other_user.age ? other_user.age : '-'}
-                label='나이'
+                label='age'
               />
               <StatBlock
                 value={other_user.gender ? other_user.gender : '-'}
-                label='성별'
+                label='gender'
               />
               <StatBlock
                 value={other_user.point ? other_user.point : '-'}
-                label='포인트'
+                label='point'
               />
               <StatBlock
                 value={other_user.token ? other_user.token : '-'}
-                label='토큰'
+                label='token'
               />
               <StatBlock
                 value={other_user.coupon ? other_user.coupon : '-'}
-                label='쿠폰'
+                label='coupon'
               />
             </div>
 

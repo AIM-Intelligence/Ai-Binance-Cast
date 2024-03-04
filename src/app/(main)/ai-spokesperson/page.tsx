@@ -14,7 +14,9 @@ const People = () => {
               alt='edit'
               className='dark:invert-white'
             />
-            <h2 className='h3-bold md:h2-bold text-left w-full'>AI 대변인들</h2>
+            <h2 className='h3-bold md:h2-bold text-left w-full'>
+              AI Spokesperson
+            </h2>
           </div>
 
           <ul className='flex flex-col flex-1 gap-9 w-full '>
@@ -27,9 +29,8 @@ const People = () => {
 
       <div className='home-creators border-l-2'>
         <h3 className='h3-bold text-black dark:text-light-1'>
-          Top AI 대변인들
+          Top AI Spokesperson
         </h3>
-       
 
         {/* <MessagesProvider>
         <Chat />

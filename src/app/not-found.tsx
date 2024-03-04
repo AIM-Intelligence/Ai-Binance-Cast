@@ -10,7 +10,7 @@ export default function NotFound() {
       <h2>존재하지 않은 페이지 입니다.</h2>
 
       <Button variant='outline' onClick={() => router.refresh()}>
-        새로고침
+        Refresh
       </Button>
     </main>
   );
