@@ -6,7 +6,7 @@ import QueryProvider from '@/lib/providers/query-provider';
 import { ModalProvider } from '@/lib/providers/modal-provider';
 import siteMetadata from '@/utils/siteMetaData';
 import { ThirdwebProvider } from '@/lib/thirdweb/thirdweb';
-import { client } from '@/lib/thirdweb/client-side';
+import { clientId } from '@/lib/thirdweb/client-side';
 import { ClerkProvider } from '@clerk/nextjs';
 import {
   metamaskConfig,
@@ -66,13 +66,14 @@ export default function RootLayout({
         <WagmiProviderSet>
           <QueryProvider>
             <ThirdwebProvider
-              client={client}
-              dappMetadata={{
-                name: 'My App',
-                url: 'https://my-website.com',
-                description: 'Some description of my app',
-                logoUrl: 'https://path/to/logo.png',
-              }}
+              clientId={clientId!}
+              activeChain="binance-testnet"
+              // dappMetadata={{
+              //   name: 'My App',
+              //   url: 'https://my-website.com',
+              //   description: 'Some description of my app',
+              //   logoUrl: 'https://path/to/logo.png',
+              // }}
             >
               <ClerkProvider telemetry={false}>
                 <ThemeProvider

@@ -45,10 +45,8 @@ const SubmitChat = ({ agenda }: any) => {
               className={'button is-primary'}
               onClick={async () => {
                 if (!address) return;
-
                 const spInfo = await selectSp();
                 console.log('spInfo', spInfo);
-
                 const provider = await connector?.getProvider();
                 console.log(provider);
                 const offChainData = await getOffchainAuthKeys(
@@ -77,7 +75,7 @@ const SubmitChat = ({ agenda }: any) => {
                       domain: window.location.origin,
                       seed: offChainData.seedString,
                       address,
-                    }
+                    } 
                   );
 
                   const simulateInfo = await createBucketTx.simulate({

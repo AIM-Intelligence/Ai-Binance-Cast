@@ -8,7 +8,7 @@ import { notFound, useRouter } from 'next/navigation';
 import { AgendaAgreeAccordion } from '@/components/accordians/agenda-detail/agenda-detail-agree';
 import { AgendaDisagreeAccordion } from '@/components/accordians/agenda-detail/agenda-detail-disagree';
 import useDetailAgendasServer from '@/hooks/useAgendas/useDetailAgenda';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useAction } from 'next-safe-action/hooks';
 import { updateAgendaViewsServer } from '../../../../../server/actions/agenda-actions/update/views-agenda';
 import DetailAgendaStats from '../../../../components/cards/agenda-detail_stats';
@@ -17,6 +17,8 @@ import shortenAddress from '@/utils/shortenAddress';
 import { useAccount } from 'wagmi';
 
 import SubmitChat from './_components/SubmintChat';
+import GeneralButton from './_components/generalButton';
+import { MessagesContext } from '@/context/messages';
 
 const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
@@ -27,6 +29,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const [disagreeClicked, setDisagreeClicked] = useState(false);
 
   const { execute } = useAction(updateAgendaViewsServer);
+  
 
   const { address, connector } = useAccount();
   console.log('connector', connector);
@@ -137,6 +140,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
           </div>
 
           <div className='w-full'>
+           
             <DetailAgendaStats agenda={agendaDetail} />
           </div>
         </div>

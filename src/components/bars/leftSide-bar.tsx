@@ -19,7 +19,7 @@ import { NavLink } from '@/types';
 
 import { ModeToggle } from './components/theme-toggle';
 import { Loader } from '../shared';
-import { ConnectButton } from '@/lib/thirdweb/thirdweb';
+//import { ConnectButton } from '@/lib/thirdweb/thirdweb';
 
 import shortenAddress from '@/utils/shortenAddress';
 

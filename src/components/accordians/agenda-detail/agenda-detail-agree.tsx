@@ -16,6 +16,8 @@ import { z } from 'zod';
 import { nanoid } from 'nanoid';
 import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
 import { Button } from '@/components/ui';
+import SubmitButton from '@/app/(main)/agenda/[id]/_components/SubmitButton';
+import GeneralButton from '@/app/(main)/agenda/[id]/_components/generalButton';
 
 interface AgendaAgreeAccordionProps {
   setAgreeClicked: (value: boolean) => void;
@@ -30,16 +32,12 @@ export function AgendaAgreeAccordion({
 }: AgendaAgreeAccordionProps) {
   const [close, setClose] = useState(0);
 
-  const { removeAllMessages, messages } = useContext(MessagesContext);
+  const { removeAllMessages, messages, isGreenfield } =
+    useContext(MessagesContext);
 
   const firstTouch = true;
 
   const { mutate: sendMessage, isPending } = useAIChatServer(firstTouch);
-
-  function SubmitSave() {
-    // Your logic goes here
-    console.log('Button clicked!', messages);
-  }
 
   return (
     <Accordion type='single' collapsible className='w-full'>
@@ -83,12 +81,12 @@ export function AgendaAgreeAccordion({
                   comment={agendaDetail.agree_comment}
                   subject={agendaDetail.subject}
                 />
-                <Button
-                  className='w-full border border-dark-1 mt-5 bg-[#F6D658] hover:opacity-70'
-                  onClick={SubmitSave}
-                >
-                  Submit & Save
-                </Button>
+
+                {isGreenfield ? (
+                  <SubmitButton subject={agendaDetail.subject} />
+                ) : (
+                  <GeneralButton />
+                )}
               </div>
             </AccordionContent>
           </div>
