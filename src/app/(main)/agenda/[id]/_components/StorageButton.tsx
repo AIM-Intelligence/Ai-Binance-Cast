@@ -17,14 +17,14 @@ const StorageButton = ({ subject }: any) => {
   console.log('wefwef', address!.slice(-22).toLowerCase());
 
   const bucketName =
-    'abcd-' + String(subject) + address!.slice(-12).toLowerCase();
+    'abcai-' + String(subject) + address!.slice(-3).toLowerCase();
 
   const { messages } = useContext(MessagesContext);
 
   const [info, setInfo] = useState<{
     objectName: string;
   }>({
-    objectName: 'bitcoin price',
+    objectName: 'bitcoin price 4',
   });
 
   async function SubmitSave() {

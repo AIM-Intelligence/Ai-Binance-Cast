@@ -156,10 +156,6 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
         />
       </div>
 
-      <div>
-        <SubmitChat agenda={agendaDetail} />
-      </div>
-
       <div className='w-full max-w-5xl'>
         <hr className='border w-full border-dark-4/80' />
 

@@ -65,6 +65,8 @@ export default function ProfileLayout({
     );
   }
 
+  console.log(user[0]?.image_url)
+
   return (
     <main className='profile-container'>
       <div className='profile-inner_container'>
@@ -91,7 +93,7 @@ export default function ProfileLayout({
                   alt='abc token'
                 />
                 <p className='small-regular md:body-medium text-center xl:text-left text-primary-500'>
-                  ABC Token : 1000
+                  ABC Token : 40002
                 </p>
               </span>
             </div>

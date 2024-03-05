@@ -20,20 +20,21 @@ import shortenAddress from '@/utils/shortenAddress';
 const test_data = [
   {
     agenda: 'Bitcoin 2024 Price Prediction',
-    choosen: 'Bitcoin 2024 price will be $100,000',
-    ai_words: 674,
-    creator_words: 774,
-    creator_address: '0xf6A89edE38E4E32eac60E378D49a5054cb947029',
+    choosen: '🔴 Bitcoin 2024 price will be $30,000',
+    ai_words: 1098,
+    creator_words: 804,
+    creator_address: '0x61327612EC4aFD93e370eC0599f933bB08020A54',
     creator_image:
-      'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80',
+      'https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18yY2FLRVFyd2puOUs2ZXV1aEd1YVBhUnFQWjIiLCJyaWQiOiJ1c2VyXzJkNG9ocDlBRzZiVW9KRnFlUVZLcVJSeHZiSyJ9',
     bucket_url:
       'https://ai-binance-cast-market.vercel.app/#/resource?&bid=14330&address=0x61327612EC4aFD93e370eC0599f933bB08020A54&tab=dataList&from=%5B%7B%22path%22%3A%22%2F%22%2C%22name%22%3A%22Data%20MarketPlace%22%2C%22query%22%3A%22%22%7D%2C%7B%22path%22%3A%22%2Fprofile%22%2C%22name%22%3A%22My%20Collections%22%2C%22query%22%3A%22tab%3Dcollections%22%7D%5D&gid=1897',
     download_url: 'https://gnfd-testnet-sp3.bnbchain.org/download/bitcoina/ww',
-    preview_url: 'https://gnfd-testnet-sp3.bnbchain.org/view/bitcoina/ww',
+    preview_url:
+      'https://gnfd-testnet-sp2.bnbchain.org/view/abcai-bitcoina54/bitcoin price 4',
   },
   {
     agenda: 'Bitcoin 2024 Price Prediction',
-    choosen: 'Bitcoin 2024 price will be $100,000',
+    choosen: '🟢 Bitcoin 2024 price will be $100,000',
     ai_words: 937,
     creator_words: 575,
     creator_address: '0xfE079EeC384A93457233720C76961EAC523897A0',
@@ -66,7 +67,7 @@ const Purchases = () => {
           </CardHeader>
           <CardContent className='flex flex-col gap-4 items-center justify-center'>
             <span className='text-lg text-center'>{data.agenda}</span>
-            <span>🟢 {data.choosen}</span>
+            <span>{data.choosen}</span>
 
             <div className='grid grid-cols-2 gap-4 text-center'>
               <Card>

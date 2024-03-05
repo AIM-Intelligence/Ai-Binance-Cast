@@ -19,29 +19,20 @@ import { Badge } from '@/components/ui/badge';
 const test_data = [
   {
     agenda: 'Bitcoin 2024 Price Prediction',
-    choosen: 'Bitcoin 2024 price will be $100,000',
+    choosen: '🔴 Bitcoin 2024 price will be $30,000',
     ai_words: 1098,
     creator_words: 804,
-    list: false,
+    list: true,
     bucket_url:
-      'https://ai-binance-cast-market.vercel.app/#/resource?&bid=14330&address=0x61327612EC4aFD93e370eC0599f933bB08020A54&tab=dataList&from=%5B%7B%22path%22%3A%22%2F%22%2C%22name%22%3A%22Data%20MarketPlace%22%2C%22query%22%3A%22%22%7D%2C%7B%22path%22%3A%22%2Fprofile%22%2C%22name%22%3A%22My%20Collections%22%2C%22query%22%3A%22tab%3Dcollections%22%7D%5D&gid=1897',
-    download_url: 'https://gnfd-testnet-sp3.bnbchain.org/download/bitcoina/ww',
-    preview_url: 'https://gnfd-testnet-sp3.bnbchain.org/view/bitcoina/ww',
+      'https://ai-binance-cast-market.vercel.app/#/resource?&bid=14408&address=0x61327612EC4aFD93e370eC0599f933bB08020A54&tab=dataList&from=%5B%7B%22path%22%3A%22%2F%22%2C%22name%22%3A%22Data%20MarketPlace%22%2C%22query%22%3A%22%22%7D%2C%7B%22path%22%3A%22%2Fprofile%22%2C%22name%22%3A%22My%20Collections%22%2C%22query%22%3A%22tab%3Dcollections%22%7D%5D',
+    download_url:
+      'https://gnfd-testnet-sp1.nodereal.io/download/abcai-bitcoina54/bitcoin price 4',
+    preview_url:
+      'https://gnfd-testnet-sp1.nodereal.io/view/abcai-bitcoina54/bitcoin price 4',
   },
   {
     agenda: 'Bitcoin 2024 Price Prediction',
-    choosen: 'Bitcoin 2024 price will be $100,000',
-    ai_words: 1098,
-    creator_words: 804,
-    list: false,
-    bucket_url:
-      'https://ai-binance-cast-market.vercel.app/#/resource?&bid=14330&address=0x61327612EC4aFD93e370eC0599f933bB08020A54&tab=dataList&from=%5B%7B%22path%22%3A%22%2F%22%2C%22name%22%3A%22Data%20MarketPlace%22%2C%22query%22%3A%22%22%7D%2C%7B%22path%22%3A%22%2Fprofile%22%2C%22name%22%3A%22My%20Collections%22%2C%22query%22%3A%22tab%3Dcollections%22%7D%5D&gid=1897',
-    download_url: 'https://gnfd-testnet-sp3.bnbchain.org/download/bitcoina/ww',
-    preview_url: 'https://gnfd-testnet-sp3.bnbchain.org/view/bitcoina/ww',
-  },
-  {
-    agenda: 'Bitcoin 2024 Price Prediction',
-    choosen: 'Bitcoin 2024 price will be $100,000',
+    choosen: '🟢 Bitcoin 2024 price will be $100,000',
     ai_words: 1098,
     creator_words: 804,
     list: false,
@@ -61,7 +52,7 @@ export function DataCollection() {
             <CardTitle>{data.agenda}</CardTitle>
           </CardHeader>
           <CardContent className='flex flex-col gap-4 items-center justify-center'>
-            <span>🟢 {data.choosen}</span>
+            <span>{data.choosen}</span>
             <Badge
               className={cn(
                 data.list ? 'bg-primary-500' : ' border-#5ed550',
@@ -91,6 +82,7 @@ export function DataCollection() {
           <CardFooter className={cn('grid grid-cols-3 px-0 py-0 divide-x')}>
             <Link
               href={data.bucket_url}
+              target='_blank'
               className='flex flex-col items-center justify-center gap-2 hover:bg-primary-500/50 py-2 rounded-bl-md '
             >
               <Archive />
@@ -99,6 +91,7 @@ export function DataCollection() {
 
             <Link
               href={data.download_url}
+              target='_blank'
               className='flex flex-col items-center justify-center gap-2 hover:bg-primary-500/50 py-2 '
             >
               <Download />
@@ -107,6 +100,7 @@ export function DataCollection() {
 
             <Link
               href={data.preview_url}
+              target='_blank'
               className='flex flex-col items-center justify-center gap-2 hover:bg-primary-500/50 py-2 rounded-br-md '
             >
               <Presentation />

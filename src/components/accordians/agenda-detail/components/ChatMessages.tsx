@@ -13,7 +13,7 @@ const ChatMessages = ({ className, ...props }: ChatMessageProps) => {
     useContext(MessagesContext);
   const inverseMessages = [...messages].reverse();
 
-  console.log(isGreenfield);
+  console.log('inverseMessages', inverseMessages);
 
   return (
     <>

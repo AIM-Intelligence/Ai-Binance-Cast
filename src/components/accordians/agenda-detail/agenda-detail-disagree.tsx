@@ -15,6 +15,9 @@ import { MessagePayload } from '@/validation/message';
 import { z } from 'zod';
 import { nanoid } from 'nanoid';
 import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
+import StorageButton from '@/app/(main)/agenda/[id]/_components/StorageButton';
+import SubmitButton from '@/app/(main)/agenda/[id]/_components/SubmitButton';
+import GeneralButton from '@/app/(main)/agenda/[id]/_components/generalButton';
 
 interface AgendaDisagreeAccordionProps {
   setDisagreeClicked: (value: boolean) => void;
@@ -29,7 +32,8 @@ export function AgendaDisagreeAccordion({
 }: AgendaDisagreeAccordionProps) {
   const [close, setClose] = useState(0);
 
-  const { removeAllMessages } = useContext(MessagesContext);
+  const { removeAllMessages, isBucketed, isGreenfield } =
+    useContext(MessagesContext);
 
   const firstTouch = true;
 
@@ -77,6 +81,14 @@ export function AgendaDisagreeAccordion({
                   comment={agendaDetail.disagree_comment}
                   subject={agendaDetail.subject}
                 />
+
+                {isBucketed ? (
+                  <StorageButton subject={agendaDetail.subject} />
+                ) : isGreenfield ? (
+                  <SubmitButton subject={agendaDetail.subject} />
+                ) : (
+                  <GeneralButton />
+                )}
               </div>
             </AccordionContent>
           </div>

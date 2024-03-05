@@ -17,7 +17,7 @@ export const makeAgendaSchema = z.object({
       value: z
         .string()
         .min(2, { message: 'At least 2 characters' })
-        .max(20, { message: 'At least 20 characters' }),
+        .max(1000, { message: 'At least 20 characters' }),
     })
   ),
   content_detail: z.string().max(800, {

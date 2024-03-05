@@ -131,13 +131,13 @@
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
     --bg-opacity: 0.7;
-    background-color: rgb(235, 71, 62);
-    background-color: rgba(235, 71, 62, var(--bg-opacity));
+    background-color: #F6D658;
+    background-color: rgba(246, 214, 88, var(--bg-opacity));
     border-radius: 0.25rem;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgb(235, 71, 62);
+    background: #F6D658;
   }
 
   /* Home */

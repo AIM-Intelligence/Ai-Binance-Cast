@@ -6,10 +6,10 @@ const test_agenda = [
     creator: {
       id: 'weofkw',
       image_url: 'https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18yY2FLRVFyd2puOUs2ZXV1aEd1YVBhUnFQWjIiLCJyaWQiOiJ1c2VyXzJkNG9ocDlBRzZiVW9KRnFlUVZLcVJSeHZiSyJ9',
-      address: '0x65CAFeFA9cb3bA556Efd416fE4281F2Ee30BB36b'
+      address: '0x61327612EC4aFD93e370eC0599f933bB08020A54'
     },
     id: '1',
-    title: 'Test',
+    title: 'Will Binance Coin increase to 500 USD in the next three months?',
     image_url: 'https://fhifmdvolxqfufqlrprk.supabase.co/storage/v1/object/public/images/3f999b0c-de99-495d-b9bc-634eb7ef4c47.png',
   }
 ]

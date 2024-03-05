@@ -15,7 +15,6 @@ import {
 import { Button } from '../ui/button';
 
 import { sidebarLinks } from '@/constants/bar';
-import { NavLink } from '@/types';
 
 import { ModeToggle } from './components/theme-toggle';
 import { Loader } from '../shared';
@@ -75,7 +74,7 @@ const LeftSidebar = () => {
                   {shortenAddress(user?.primaryWeb3Wallet!.web3Wallet)}
                 </p>
                 <p className='small-regular text-center xl:text-left text-primary-500'>
-                  ABC Token : 1000
+                  ABC Token : 40004
                 </p>
               </span>
             </Button>
@@ -96,7 +95,7 @@ const LeftSidebar = () => {
         )}
 
         <ul className='flex flex-col gap-6'>
-          {sidebarLinks.map((link: NavLink) => {
+          {sidebarLinks.map((link: any) => {
             const isActive = pathname === link.route;
             return (
               <li
