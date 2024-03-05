@@ -22,6 +22,7 @@ import { Loader } from '../shared';
 //import { ConnectButton } from '@/lib/thirdweb/thirdweb';
 
 import shortenAddress from '@/utils/shortenAddress';
+import GradiButton from '../button/gradi-button';
 
 const LeftSidebar = () => {
   const { isLoaded, userId } = useAuth();
@@ -35,7 +36,7 @@ const LeftSidebar = () => {
   return (
     <nav className='leftsidebar'>
       <div className='flex flex-col gap-11'>
-        <Link href='/' className='flex gap-3 items-center'>
+        <Link href='/' className='flex gap-3 items-center justify-center'>
           <Image
             src='/abcLogo.png'
             alt='logo'
@@ -69,18 +70,27 @@ const LeftSidebar = () => {
                   },
                 }}
               />
-              <p>{shortenAddress(user?.primaryWeb3Wallet!.web3Wallet)}</p>
+              <span className=''>
+                <p className='text-lg'>
+                  {shortenAddress(user?.primaryWeb3Wallet!.web3Wallet)}
+                </p>
+                <p className='small-regular text-center xl:text-left text-primary-500'>
+                  ABC Token : 1000
+                </p>
+              </span>
             </Button>
           </SignedIn>
         ) : (
           <SignedOut>
             <SignInWithMetamaskButton>
-              <Button
-                variant='outline'
-                className='border border-black hover:bg-slate-500'
-              >
-                Sign in
-              </Button>
+              <button className='relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md'>
+                <span className='w-full h-full bg-gradient-to-br from-[#ff8a05] via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute'></span>
+                <span className='relative w-full py-3 text-center transition-all ease-out bg-gray-900 rounded-md group-hover:bg-opacity-0 duration-400'>
+                  <span className='relative text-white'>
+                    Sign with metamask
+                  </span>
+                </span>
+              </button>
             </SignInWithMetamaskButton>
           </SignedOut>
         )}

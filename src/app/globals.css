@@ -29,7 +29,7 @@
   }
 
   body {
-    @apply bg-light-1 dark:bg-dark-1 text-black dark:text-white h-lvh overflow-hidden font-inter;
+    @apply bg-light-1 dark:bg-dark-2 text-black dark:text-white h-lvh overflow-hidden font-inter;
   }
 }
 
@@ -206,7 +206,7 @@
 
   /* Left sidebar */
   .leftsidebar {
-    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] h-lvh bg-light-2 dark:bg-dark-2;
+    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] h-lvh bg-light-2 dark:bg-dark-4;
   }
 
   .leftsidebar-link {

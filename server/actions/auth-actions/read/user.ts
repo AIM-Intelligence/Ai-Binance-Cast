@@ -30,9 +30,7 @@ export const getUserServer = async () => {
     .select('*')
     .eq('address', new_address);
 
-
-
-  if (error) return { error: '문제가 발생했습니다. 다시 시도해주세요.' };
+  if (error) return { error: 'A problem has occurred. please try again.' };
 
   if (user_data?.length !== 0) {
     return user_data;
@@ -41,7 +39,7 @@ export const getUserServer = async () => {
       .from('profiles')
       .insert({ address: new_address })
       .select();
-    if (error) return { error: '문제가 발생했습니다. 다시 시도해주세요.' };
+    if (error) return { error: 'A problem has occurred. please try again.' };
     return user_data;
   }
 

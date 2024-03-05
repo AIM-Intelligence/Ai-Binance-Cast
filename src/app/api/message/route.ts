@@ -47,6 +47,8 @@ export async function POST(req: Request) {
     }
   );
 
+  //console.log(res.json());
+
   const stream = new ReadableStream({
     async start(controller) {
       // callback
@@ -61,10 +63,16 @@ export async function POST(req: Request) {
           }
           try {
             const json = JSON.parse(data);
-            
+            console.log({ json });
+
             const text = json.answer || '';
 
-           
+            const score = json.score || '';
+
+            if (score) {
+              console.log({ score });
+            }
+
             if (counter < 2 && (text.match(/\n/) || []).length) {
               // this is a prefix character (i.e., "\n\n"), do nothing
               return;

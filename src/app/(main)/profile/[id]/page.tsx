@@ -59,12 +59,20 @@ const Profile = ({ params }: { params: { id: string } }) => {
           />
           <div className='flex flex-col flex-1 justify-between md:mt-2'>
             <div className='flex flex-col w-full'>
-              {/* <h1 className='text-center xl:text-left h3-bold md:h1-semibold w-full'>
-                {other_user.address}
-              </h1> */}
-              <p className='small-regular md:body-medium text-light-3 text-center xl:text-left'>
+              <p className='small-regular md:text-2xl text-center xl:text-left'>
                 {other_user.address}
               </p>
+              <span className='flex gap-2 items-center'>
+                <Image
+                  src='/abcLogo.png'
+                  width={40}
+                  height={40}
+                  alt='abc token'
+                />
+                <p className='small-regular md:body-medium text-center xl:text-left text-primary-500'>
+                  ABC Token : 1000
+                </p>
+              </span>
             </div>
 
             <div className='flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20'>
@@ -106,11 +114,11 @@ const Profile = ({ params }: { params: { id: string } }) => {
       <div className='flex max-w-5xl w-full'>
         <Link href={`#`} className='profile-tab rounded-l-lg'>
           <Image src={'/icons/posts.svg'} alt='posts' width={20} height={20} />
-          Posts
+          Data Collections
         </Link>
         <Link href={`#`} className='profile-tab rounded-r-lg'>
           <Image src={'/icons/like.svg'} alt='like' width={20} height={20} />
-          Liked Posts
+          Purchases
         </Link>
       </div>
     </div>

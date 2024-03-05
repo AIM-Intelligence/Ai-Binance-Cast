@@ -16,7 +16,7 @@ export const updateAgendaViewsServer = action(schema, async ({ agenda_id }) => {
     agenda_id,
   });
 
-  if (error) return { error: '문제가 발생했습니다. 다시 시도해주세요.' };
+  if (error) return { error: 'A problem has occurred. please try again.' };
 
   return null;
 });
