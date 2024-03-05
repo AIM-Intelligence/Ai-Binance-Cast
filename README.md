@@ -1,10 +1,6 @@
 docs in https://sangyoonyu.gitbook.io/abc
 # Overview
-ABC (AI + Binance + Community podCaster)
-People want to know about what others think.
-Using AI we developed a new type of sharing ideas.
-Previously, we upload blog posts, twitter posts to share our idea.
-Let's use AI to aggregate the ideas and make an AI podcaster that can deeply discuss with people!
+We've developed ABC (AI + Binance + Community Podcaster), a new platform for those interested in understanding diverse perspectives. In the past, we shared our thoughts through blog posts and tweets. Now, we're leveraging AI to introduce a novel way of idea sharing. Our aim is to use AI to gather various opinions and create an AI podcaster that can engage in deep discussions with users!
 
 ![image](https://github.com/AIM-Intelligence/Ai-Binance-Cast/assets/57357447/7b100b4d-be11-4068-9f24-7c7dc9d17b0d)
 
