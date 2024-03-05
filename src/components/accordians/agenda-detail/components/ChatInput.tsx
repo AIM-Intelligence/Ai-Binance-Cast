@@ -39,7 +39,7 @@ const ChatInput = (
         <Textarea
           ref={textareaRef}
           disabled={isPending || isPendingParent}
-          rows={2}
+          rows={3}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault();
@@ -73,8 +73,8 @@ const ChatInput = (
           onChange={(e) => setInput(e.target.value)}
           placeholder={
             isPending || isPendingParent
-              ? '상대측 AI 대변인이 생각 후 말하는 시간입니다...'
-              : '이제 상대 AI 대변인의 주장을 논리적으로 반박해주세요.'
+              ? 'It is time for the opposing AI spokesperson to speak...'
+              : 'Now, please logically refute the opposing AI spokesperson’s claim. The score indicates how well the AI understood your content.(0~10)'
           }
           className='peer disabled:opacity-50 placeholder:text-gray-500 resize-none block w-full border-0 bg-zinc-100 py-1.5 text-gray-900 focus:ring-0 text-sm sm:leading-6'
         />

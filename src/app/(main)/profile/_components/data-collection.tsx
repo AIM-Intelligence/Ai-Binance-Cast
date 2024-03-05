@@ -13,6 +13,8 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import { cn } from '@/utils';
+import { Badge } from '@/components/ui/badge';
 
 const test_data = [
   {
@@ -20,6 +22,7 @@ const test_data = [
     choosen: 'Bitcoin 2024 price will be $100,000',
     ai_words: 1098,
     creator_words: 804,
+    list: false,
     bucket_url:
       'https://ai-binance-cast-market.vercel.app/#/resource?&bid=14330&address=0x61327612EC4aFD93e370eC0599f933bB08020A54&tab=dataList&from=%5B%7B%22path%22%3A%22%2F%22%2C%22name%22%3A%22Data%20MarketPlace%22%2C%22query%22%3A%22%22%7D%2C%7B%22path%22%3A%22%2Fprofile%22%2C%22name%22%3A%22My%20Collections%22%2C%22query%22%3A%22tab%3Dcollections%22%7D%5D&gid=1897',
     download_url: 'https://gnfd-testnet-sp3.bnbchain.org/download/bitcoina/ww',
@@ -30,6 +33,7 @@ const test_data = [
     choosen: 'Bitcoin 2024 price will be $100,000',
     ai_words: 1098,
     creator_words: 804,
+    list: false,
     bucket_url:
       'https://ai-binance-cast-market.vercel.app/#/resource?&bid=14330&address=0x61327612EC4aFD93e370eC0599f933bB08020A54&tab=dataList&from=%5B%7B%22path%22%3A%22%2F%22%2C%22name%22%3A%22Data%20MarketPlace%22%2C%22query%22%3A%22%22%7D%2C%7B%22path%22%3A%22%2Fprofile%22%2C%22name%22%3A%22My%20Collections%22%2C%22query%22%3A%22tab%3Dcollections%22%7D%5D&gid=1897',
     download_url: 'https://gnfd-testnet-sp3.bnbchain.org/download/bitcoina/ww',
@@ -40,6 +44,7 @@ const test_data = [
     choosen: 'Bitcoin 2024 price will be $100,000',
     ai_words: 1098,
     creator_words: 804,
+    list: false,
     bucket_url:
       'https://ai-binance-cast-market.vercel.app/#/resource?&bid=14330&address=0x61327612EC4aFD93e370eC0599f933bB08020A54&tab=dataList&from=%5B%7B%22path%22%3A%22%2F%22%2C%22name%22%3A%22Data%20MarketPlace%22%2C%22query%22%3A%22%22%7D%2C%7B%22path%22%3A%22%2Fprofile%22%2C%22name%22%3A%22My%20Collections%22%2C%22query%22%3A%22tab%3Dcollections%22%7D%5D&gid=1897',
     download_url: 'https://gnfd-testnet-sp3.bnbchain.org/download/bitcoina/ww',
@@ -57,6 +62,14 @@ export function DataCollection() {
           </CardHeader>
           <CardContent className='flex flex-col gap-4 items-center justify-center'>
             <span>🟢 {data.choosen}</span>
+            <Badge
+              className={cn(
+                data.list ? 'bg-primary-500' : ' border-#5ed550',
+                'bg-primary-500 text-dark-1'
+              )}
+            >
+              {data.list ? 'listed' : 'unlisted'}
+            </Badge>
 
             <div className='grid grid-cols-2 gap-4 text-center'>
               <Card>
@@ -75,18 +88,27 @@ export function DataCollection() {
             </div>
           </CardContent>
           <Separator className='bg-white' />
-          <CardFooter className='grid grid-cols-3 px-0 py-3'>
-            <Link href={data.bucket_url} className='flex flex-col items-center justify-center gap-2'>
+          <CardFooter className={cn('grid grid-cols-3 px-0 py-0 divide-x')}>
+            <Link
+              href={data.bucket_url}
+              className='flex flex-col items-center justify-center gap-2 hover:bg-primary-500/50 py-2 rounded-bl-md '
+            >
               <Archive />
               <p>Bucket</p>
             </Link>
 
-            <Link href={data.download_url} className='flex flex-col items-center justify-center gap-2'>
+            <Link
+              href={data.download_url}
+              className='flex flex-col items-center justify-center gap-2 hover:bg-primary-500/50 py-2 '
+            >
               <Download />
               <p>Download</p>
             </Link>
 
-            <Link href={data.preview_url} className='flex flex-col items-center justify-center gap-2'>
+            <Link
+              href={data.preview_url}
+              className='flex flex-col items-center justify-center gap-2 hover:bg-primary-500/50 py-2 rounded-br-md '
+            >
               <Presentation />
               <p>Preview</p>
             </Link>

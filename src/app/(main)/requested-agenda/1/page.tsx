@@ -5,61 +5,28 @@ import { cn, multiFormatDateString } from '@/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useRouter } from 'next/navigation';
-import { AgendaAgreeAccordion } from '@/components/accordians/agenda-detail/agenda-detail-agree';
-import { AgendaDisagreeAccordion } from '@/components/accordians/agenda-detail/agenda-detail-disagree';
-import useDetailAgendasServer from '@/hooks/useAgendas/useDetailAgenda';
-import { useContext, useEffect, useState } from 'react';
-import { useAction } from 'next-safe-action/hooks';
-import { updateAgendaViewsServer } from '../../../../../server/actions/agenda-actions/update/views-agenda';
-import DetailAgendaStats from '../../../../components/cards/agenda-detail_stats';
 import AgendaDetailCardMenu from '@/components/menu/agenda-detail-card-menu';
 import shortenAddress from '@/utils/shortenAddress';
-import { useAccount } from 'wagmi';
 
-import SubmitChat from './_components/SubmintChat';
-
+import { Progress } from '@/components/ui/progress';
+const agendaDetail = {
+  creator: {
+    id: 'weofkw',
+    image_url:
+      'https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18yY2FLRVFyd2puOUs2ZXV1aEd1YVBhUnFQWjIiLCJyaWQiOiJ1c2VyXzJkNG9ocDlBRzZiVW9KRnFlUVZLcVJSeHZiSyJ9',
+    address: '0x65CAFeFA9cb3bA556Efd416fE4281F2Ee30BB36b',
+  },
+  id: '1',
+  title: 'Test',
+  image_url:
+    'https://fhifmdvolxqfufqlrprk.supabase.co/storage/v1/object/public/images/3f999b0c-de99-495d-b9bc-634eb7ef4c47.png',
+  content_detail: 'wef',
+  content: ['test1', 'test2', 'test3'],
+};
 
 const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const router = useRouter();
-
-  // Agree와 Disagree Accordion의 상태를 추적하는 상태 변수 정의
-  const [agreeClicked, setAgreeClicked] = useState(false);
-  const [disagreeClicked, setDisagreeClicked] = useState(false);
-
-  const { execute } = useAction(updateAgendaViewsServer);
-
-  const { address, connector } = useAccount();
-  console.log('connector', connector);
-  console.log('connector', address);
-
-  useEffect(() => {
-    execute({ agenda_id: params.id });
-  }, []);
-
-  const {
-    isFetching,
-    data: agendaDetail,
-    error: agendaError,
-  } = useDetailAgendasServer(id);
-
-  if (isFetching) {
-    return (
-      <div className='isfetching-flex'>
-        <Loader />
-      </div>
-    );
-  }
-  // TODO: 배포 환경에서 코드가 잘 동작하는지 확인하기
-  if (agendaDetail.error === 1) {
-    return <div>안건을 불러올 수 없습니다.</div>;
-  } else if (agendaDetail.error === 2 || agendaError) {
-    return <div>안건을 불러오는 데 문제가 발생했습니다.</div>;
-  }
-
-  if (agendaDetail.id === null) {
-    return <div>안건의 내용이 없습니다.</div>;
-  }
 
   return (
     <div className='agenda_details-container'>
@@ -104,9 +71,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
                   {shortenAddress(agendaDetail.creator.address)}
                 </p>
                 <div className='flex-start gap-2 text-light-3'>
-                  <p className='subtle-semibold lg:small-regular '>
-                    {multiFormatDateString(agendaDetail.created_at)}
-                  </p>
+                  <p className='subtle-semibold lg:small-regular '>Just now</p>
                 </div>
               </div>
             </Link>
@@ -122,42 +87,26 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
 
           <div className='flex  flex-col flex-wrap  flex-1 w-full lg:base-regular'>
             <ul className='mt-2 my-6 ml-4 list-disc [&>li]:mt-2 flex flex-col justify-around flex-1'>
-              {agendaDetail.content.map((content: string, index: string) => (
+              {agendaDetail.content.map((content: any, index: any) => (
                 <li key={`${content}${index}`}>{content}</li>
               ))}
             </ul>
-            <ul className='flex flex-wrap gap-1 mt-2'>
-              {agendaDetail.tags.map((tag: string, index: string) => (
-                <li
-                  key={`${tag}${index}`}
-                  className='text-light-3 small-regular'
-                >
-                  #{tag}
-                </li>
-              ))}
-            </ul>
           </div>
-          <div className='w-full'>
-            <DetailAgendaStats agenda={agendaDetail} />
+          <div className='flex flex-col justify-between w-full'>
+            <span className='flex justify-between w-full'>
+              <p>33 token</p>
+              <p>Goal: 100 token</p>
+            </span>
+            <Progress value={33} className='' />
           </div>
+          <button
+            onClick={() => {}}
+            className='relative rounded px-5 py-2.5 overflow-hidden group bg-primary-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300 w-full'
+          >
+            <span className='absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-80 ease'></span>
+            <span className='relative text-dark-1 font-bold'>Vote</span>
+          </button>
         </div>
-      </div>
-
-      <div className='max-w-5xl grid grid-cols-1 sm:grid-cols-2 w-full gap-10 '>
-        <AgendaAgreeAccordion
-          disagreeClicked={disagreeClicked}
-          setAgreeClicked={setAgreeClicked}
-          agendaDetail={agendaDetail}
-        />
-        <AgendaDisagreeAccordion
-          setDisagreeClicked={setDisagreeClicked}
-          agreeClicked={agreeClicked}
-          agendaDetail={agendaDetail}
-        />
-      </div>
-
-      <div>
-        <SubmitChat agenda={agendaDetail} />
       </div>
 
       <div className='w-full max-w-5xl'>

@@ -17,13 +17,15 @@ const ChatMessages = ({ className, ...props }: ChatMessageProps) => {
 
   return (
     <>
-      <div className='flex gap-1.5 items-center justify-center py-2 border-b'>
-        <span className='relative flex h-3 w-3'>
-          <p className='animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75'></p>
-          <p className='relative inline-flex rounded-full h-3 w-3 bg-rose-500'></p>
-        </span>
-        <p className='font-medium'>AIM Secrity Filter Activating</p>
-        <div className='flex flex-col items-center justify-center  space-x-2 gap-2'>
+      <div className='flex gap-1.5 items-center justify-around py-2 border-b'>
+        <div className='flex gap-1.5 items-center'>
+          <span className='relative flex h-3 w-3'>
+            <p className='animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75'></p>
+            <p className='relative inline-flex rounded-full h-3 w-3 bg-rose-500'></p>
+          </span>
+          <p className='font-medium'>AIM Secrity Filter Activating</p>
+        </div>
+        <div className='flex items-center justify-center gap-2'>
           <Switch
             checked={isGreenfield}
             onClick={(e) => {

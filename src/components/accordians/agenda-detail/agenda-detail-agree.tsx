@@ -18,6 +18,7 @@ import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
 import { Button } from '@/components/ui';
 import SubmitButton from '@/app/(main)/agenda/[id]/_components/SubmitButton';
 import GeneralButton from '@/app/(main)/agenda/[id]/_components/generalButton';
+import StorageButton from '@/app/(main)/agenda/[id]/_components/StorageButton';
 
 interface AgendaAgreeAccordionProps {
   setAgreeClicked: (value: boolean) => void;
@@ -32,7 +33,7 @@ export function AgendaAgreeAccordion({
 }: AgendaAgreeAccordionProps) {
   const [close, setClose] = useState(0);
 
-  const { removeAllMessages, messages, isGreenfield } =
+  const { removeAllMessages, messages, isGreenfield, isBucketed } =
     useContext(MessagesContext);
 
   const firstTouch = true;
@@ -81,12 +82,18 @@ export function AgendaAgreeAccordion({
                   comment={agendaDetail.agree_comment}
                   subject={agendaDetail.subject}
                 />
-
-                {isGreenfield ? (
+                {isBucketed ? (
+                  <StorageButton subject={agendaDetail.subject}/>
+                ) : isGreenfield ? (
                   <SubmitButton subject={agendaDetail.subject} />
                 ) : (
                   <GeneralButton />
                 )}
+                {/* {isGreenfield ? (
+                  <SubmitButton subject={agendaDetail.subject} />
+                ) : (
+                  <GeneralButton />
+                )} */}
               </div>
             </AccordionContent>
           </div>

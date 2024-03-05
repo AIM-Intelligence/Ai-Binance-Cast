@@ -4,48 +4,35 @@ export const makeAgendaSchema = z.object({
   title: z
     .string()
     .min(2, {
-      message: '제목은 최소 2글자 입니다.',
+      message: 'At least 2 characters',
     })
     .max(200, {
-      message: '제목은 최대 200글자 입니다.',
+      message: 'At least 200 characters',
     }),
-  image_url: z.string().url().min(5, {
-    message: '이미지를 첨부해주세요.',
+  image_url: z.string().min(5, {
+    message: 'Please attach an image.',
   }),
   content: z.array(
     z.object({
       value: z
         .string()
-        .min(2, { message: '최소 2글자 입니다.' })
-        .max(20, { message: '최대 20글자 입니다.' }),
+        .min(2, { message: 'At least 2 characters' })
+        .max(20, { message: 'At least 20 characters' }),
     })
   ),
   content_detail: z.string().max(800, {
-    message: '최대 800글자 입니다.',
+    message: 'Up to 800 characters',
   }),
-  creator: z.string().min(2, {
-    message: '로그인 정보가 확인되지 않습니다.',
-  }),
-  tags: z
-    .array(
-      z.object({
-        value: z
-          .string()
-          .min(2, { message: '최소 2글자 입니다.' })
-          .max(20, { message: '최대 20글자 입니다.' }),
-      })
-    )
-    .max(5, { message: '최대 5개의 태그를 넣을 수 있습니다.' }),
   agree_comment: z
     .string()
     .max(100, {
-      message: '최대 100글자입니다.',
+      message: 'Up to 100 characters',
     })
     .optional(),
   disagree_comment: z
     .string()
     .max(100, {
-      message: '최대 100글자 입니다.',
+      message: 'Up to 100 characters',
     })
     .optional(),
 });

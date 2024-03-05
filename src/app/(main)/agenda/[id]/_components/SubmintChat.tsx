@@ -75,7 +75,7 @@ const SubmitChat = ({ agenda }: any) => {
                       domain: window.location.origin,
                       seed: offChainData.seedString,
                       address,
-                    } 
+                    }
                   );
 
                   const simulateInfo = await createBucketTx.simulate({

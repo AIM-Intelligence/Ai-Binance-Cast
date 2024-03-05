@@ -14,6 +14,10 @@ const nextConfig = {
         hostname: 'img.clerk.com',
         protocol: 'https',
       },
+      {
+        hostname: 'images.unsplash.com',
+        protocol: 'https',
+      },
     ],
   },
   webpack: (config) => {

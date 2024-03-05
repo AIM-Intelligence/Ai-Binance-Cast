@@ -38,7 +38,7 @@ export function AgendaDetailContentModal() {
       <Dialog open={isModalOpen} onOpenChange={onClose}>
         <DialogContent className='sm:max-w-[425px] bg-white dark:bg-black'>
           <DialogHeader>
-            <DialogTitle>자세한 내용</DialogTitle>
+            <DialogTitle>Details</DialogTitle>
             <DialogDescription>{detailContent}</DialogDescription>
           </DialogHeader>
           <ProfileForm />
@@ -51,7 +51,7 @@ export function AgendaDetailContentModal() {
     <Drawer open={isModalOpen}>
       <DrawerContent className='bg-white dark:bg-black'>
         <DrawerHeader className='text-left'>
-          <DrawerTitle>자세한 내용</DrawerTitle>
+          <DrawerTitle>Details</DrawerTitle>
           <DrawerDescription>{detailContent}</DrawerDescription>
         </DrawerHeader>
         <ProfileForm className='px-4' />

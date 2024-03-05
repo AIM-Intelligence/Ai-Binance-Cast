@@ -1,4 +1,5 @@
 import { client, selectSp } from '@/client';
+import { Loader } from '@/components/shared';
 import { Button } from '@/components/ui';
 import { MessagesContext } from '@/context/messages';
 import { getOffchainAuthKeys } from '@/utils/offchainAuth';
@@ -7,18 +8,15 @@ import { useAccount } from 'wagmi';
 
 const SubmitButton = ({ subject }: any) => {
   const { address, connector } = useAccount();
+  const [loading, setIsloading] = useState(false);
 
-  const bucketName = 'ABC-' + String(subject) + address?.slice(-22);
+  const bucketName =
+    'abcd-' + String(subject) + address!.slice(-12).toLowerCase();
 
-  const { messages } = useContext(MessagesContext);
-
-  const [info, setInfo] = useState<{
-    objectName: string;
-  }>({
-    objectName: '',
-  });
+  const { messages, setIsBucketed } = useContext(MessagesContext);
 
   async function SubmitSave() {
+    setIsloading(true);
     // Your logic goes here
     console.log('Button clicked!', messages);
 
@@ -67,14 +65,9 @@ const SubmitButton = ({ subject }: any) => {
         granter: '',
       });
 
-
-
-
       if (res.code === 0) {
-        
-        
-        
         alert('success');
+        setIsBucketed(true);
       }
     } catch (err) {
       console.log(typeof err);
@@ -84,15 +77,17 @@ const SubmitButton = ({ subject }: any) => {
       if (err && typeof err === 'object') {
         alert(JSON.stringify(err));
       }
+    } finally {
+      setIsloading(false);
     }
   }
 
   return (
     <Button
-      className='w-full mt-5 bg-[#F6D658] hover:opacity-70'
+      className='w-full h-[50px] mt-5 bg-[#F6D658] hover:opacity-70 text-lg'
       onClick={SubmitSave}
     >
-      Create Bucket Tx
+      {loading ? <Loader /> : 'Create Bucket Tx'}
     </Button>
   );
 };

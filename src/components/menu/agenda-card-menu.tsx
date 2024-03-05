@@ -22,9 +22,9 @@ const AgendaCardMenu = () => {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent className='bg-white dark:bg-black'>
-          <DropdownMenuItem>공유하기</DropdownMenuItem>
-          <DropdownMenuItem>유튜브 일정</DropdownMenuItem>
-          <DropdownMenuItem>신고하기</DropdownMenuItem>
+          <DropdownMenuItem>Share</DropdownMenuItem>
+          <DropdownMenuItem>Youtube</DropdownMenuItem>
+          <DropdownMenuItem>Report</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

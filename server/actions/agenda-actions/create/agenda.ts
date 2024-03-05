@@ -9,8 +9,8 @@ import { action } from '@/lib/safe-action';
 export const makeAgendaServer = action(
   makeAgendaSchema,
   async ({ content }) => {
-    if (!content) return { error: '서버에서 내용을 받지 못했습니다.' };
-    return { success: '서버에서 내용을 받지 못했습니다.' };
+    if (!content) return { error: 'Content was not received from the server.' };
+    return { success: 'Content was not received from the server.' };
 
     //revalidatePath('/');
 

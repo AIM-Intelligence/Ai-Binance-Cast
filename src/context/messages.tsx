@@ -15,6 +15,7 @@ export const MessagesContext = createContext<{
   messages: Message[];
   isMessageUpdating: boolean;
   isGreenfield: boolean;
+  isBucketed: boolean;
   addMessage: (message: Message) => void;
   removeMessage: (id: string) => void;
   removeAllMessages: () => void;
@@ -22,22 +23,26 @@ export const MessagesContext = createContext<{
 
   setIsMessageUpdating: (isUpdating: boolean) => void;
   setIsGreenfield: (isGreenfield: boolean) => void;
+  setIsBucketed: (isBucketed: boolean) => void;
 }>({
   messages: [],
   isMessageUpdating: false,
   isGreenfield: false,
+  isBucketed: false,
   addMessage: () => {},
   removeMessage: () => {},
   removeAllMessages: () => {},
   updateMessage: () => {},
   setIsMessageUpdating: () => {},
   setIsGreenfield: () => {},
+  setIsBucketed: () => {},
 });
 
 export function MessagesProvider({ children }: { children: React.ReactNode }) {
   const [messages, setMessages] = useState(defaultValue);
   const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false);
   const [isGreenfield, setIsGreenfield] = useState<boolean>(false);
+  const [isBucketed, setIsBucketed] = useState<boolean>(false);
 
   const addMessage = (message: Message) => {
     setMessages((prev) => [...prev, message]);
@@ -71,12 +76,14 @@ export function MessagesProvider({ children }: { children: React.ReactNode }) {
         messages,
         isMessageUpdating,
         isGreenfield,
+        isBucketed,
         addMessage,
         removeMessage,
         removeAllMessages,
         updateMessage,
         setIsMessageUpdating,
         setIsGreenfield,
+        setIsBucketed,
       }}
     >
       {children}

@@ -19,7 +19,7 @@ export default function Error({
 
   return (
     <main className='flex-col-center'>
-      <h2>서버에서 에러가 발생되었습니다.</h2>
+      <h2>An error occurred on the server.</h2>
       <Button variant='outline' onClick={() => router.refresh()}>
         Refresh
       </Button>

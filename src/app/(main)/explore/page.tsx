@@ -2,7 +2,7 @@ import { TypewriterEffectSmoothExplore } from './_components/TypewriterEffectSmo
 
 const page = () => {
   return (
-    <div>
+    <div className='w-full flex justify-center'>
       <TypewriterEffectSmoothExplore />
     </div>
   );

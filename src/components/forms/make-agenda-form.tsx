@@ -26,12 +26,18 @@ import useUserClient from '@/hooks/useUser/useUserServer';
 import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
 import { cn } from '@/utils';
 import { useUser } from '@clerk/nextjs';
+import { useDropzone } from 'react-dropzone';
+import { TagsInput } from 'react-tag-input-component';
+import { useState } from 'react';
+import { Loader } from '../shared';
 
 const MakeAgendaForm = () => {
   const router = useRouter();
   const { isSignedIn, user: user_address } = useUser();
   const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet;
   const { data: user, error: userError } = useUserClient();
+  const [selected, setSelected] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   if (userError) {
     router.replace(DEFAULT_LOGIN_PROBLEM_REDIRECT);
@@ -44,9 +50,7 @@ const MakeAgendaForm = () => {
       content: [{ value: '' }, { value: '' }, { value: '' }],
       content_detail: '',
       // TODO : 밑에 걸로 에러가 발생하고 있음 해결 필요
-      creator: '',
       image_url: '',
-      tags: [{ value: '' }, { value: '' }],
       agree_comment: '',
       disagree_comment: '',
     },
@@ -57,10 +61,10 @@ const MakeAgendaForm = () => {
     control: form.control,
   });
 
-  const { fields: tagsFields, append } = useFieldArray({
-    name: 'tags',
-    control: form.control,
-  });
+  // const { fields: tagsFields, append } = useFieldArray({
+  //   name: 'tags',
+  //   control: form.control,
+  // });
 
   const { execute, status, result } = useAction(makeAgendaServer, {
     onSuccess(data) {
@@ -71,9 +75,12 @@ const MakeAgendaForm = () => {
 
   function onSubmit(values: z.infer<typeof makeAgendaSchema>) {
     console.log(values);
-    // upload the image
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
 
-    //execute(values);
+      router.push('/requested-agenda');
+    }, 3000);
   }
 
   return (
@@ -84,20 +91,6 @@ const MakeAgendaForm = () => {
       >
         <FormField
           control={form.control}
-          name='title'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className='shad-form_label'>질문 (제목)</FormLabel>
-              <FormControl>
-                <Input className='shad-input' {...field} />
-              </FormControl>
-              <FormMessage className='shad-form_message' />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
           name='image_url'
           render={({ field }) => (
             <FormItem>
@@ -106,6 +99,22 @@ const MakeAgendaForm = () => {
                 <Input type='file' className='' {...field} accept='image/*' />
               </FormControl>
 
+              <FormMessage className='shad-form_message' />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name='title'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className='shad-form_label'>
+                Title (Question)
+              </FormLabel>
+              <FormControl>
+                <Input className='shad-input' {...field} />
+              </FormControl>
               <FormMessage className='shad-form_message' />
             </FormItem>
           )}
@@ -122,10 +131,11 @@ const MakeAgendaForm = () => {
                   <FormLabel
                     className={cn(index !== 0 && 'sr-only shad-form_label')}
                   >
-                    3줄 요약
+                    3-line summary
                   </FormLabel>
                   <FormDescription className={cn(index !== 0 && 'sr-only')}>
-                    질문에 대한 부가 설명을 3줄로 정리해주세요.
+                    Please provide 3 lines of additional explanation for your
+                    question.
                   </FormDescription>
                   <FormControl>
                     <Input className='shad-input' {...field} />
@@ -142,9 +152,7 @@ const MakeAgendaForm = () => {
           name='content_detail'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='shad-form_label'>
-                자세한 내용 (필수 아님)
-              </FormLabel>
+              <FormLabel className='shad-form_label'>More details</FormLabel>
               <FormControl>
                 <Textarea
                   className='shad-textarea custom-scrollbar'
@@ -163,7 +171,7 @@ const MakeAgendaForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className='shad-form_label'>
-                찬성측 주장 (기본: 찬성 *필수 아님)
+                Positive Opinion (default: agree)
               </FormLabel>
               <FormControl>
                 <Input className='shad-input' {...field} />
@@ -179,7 +187,7 @@ const MakeAgendaForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className='shad-form_label'>
-                반대측 주장 (기본: 반대 *필수 아님)
+                Negative Opinion (default: disagree)
               </FormLabel>
               <FormControl>
                 <Input className='shad-input' {...field} />
@@ -189,47 +197,35 @@ const MakeAgendaForm = () => {
           )}
         />
 
-        <div>
-          {tagsFields.map((field, index) => (
-            <FormField
-              control={form.control}
-              key={field.id}
-              name={`tags.${index}.value`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel
-                    className={cn(index !== 0 && 'sr-only shad-form_label')}
-                  >
-                    Tags
-                  </FormLabel>
-                  <FormDescription className={cn(index !== 0 && 'sr-only')}>
-                    당신을 알 수 있는 다양한 url을 입력해주세요.
-                  </FormDescription>
-                  <FormControl>
-                    <Input {...field} className='shad-input' />
-                  </FormControl>
-                  <FormMessage className='shad-form_message' />
-                </FormItem>
-              )}
-            />
-          ))}
-          <Button
-            type='button'
-            variant='outline'
-            size='sm'
-            className='mt-2'
-            onClick={() => append({ value: '' })}
-          >
-            tag 추가하기
-          </Button>
-        </div>
+        {/* <div>
+          <FormField
+            control={form.control}
+            name='tags'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tags</FormLabel>
+                <FormDescription>press enter to add new tag</FormDescription>
+                <FormControl>
+                  <TagsInput
+                    value={selected}
+                    onChange={setSelected}
+                    name='fruits'
+                    placeHolder='enter fruits'
+                  />
+                </FormControl>
+                <FormMessage className='shad-form_message' />
+              </FormItem>
+            )}
+          />
+        </div> */}
 
         <Button
           disabled={status === 'executing'}
           type='submit'
           variant='outline'
+          className='h-[50px] text-lg'
         >
-          Submit
+          {loading ? <Loader /> : 'Submit'}
         </Button>
       </form>
     </Form>
