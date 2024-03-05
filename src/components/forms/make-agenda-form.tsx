@@ -27,7 +27,6 @@ import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
 import { cn } from '@/utils';
 import { useUser } from '@clerk/nextjs';
 import { useDropzone } from 'react-dropzone';
-import { TagsInput } from 'react-tag-input-component';
 import { useState } from 'react';
 import { Loader } from '../shared';
 
@@ -220,7 +219,7 @@ const MakeAgendaForm = () => {
         </div> */}
 
         <Button
-          disabled={status === 'executing'}
+          disabled={true}
           type='submit'
           variant='outline'
           className='h-[50px] text-lg'

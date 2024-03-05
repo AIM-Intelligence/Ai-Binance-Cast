@@ -92,9 +92,9 @@ export default function ProfileLayout({
                   height={40}
                   alt='abc token'
                 />
-                <p className='small-regular md:body-medium text-center xl:text-left text-primary-500'>
+                {/* <p className='small-regular md:body-medium text-center xl:text-left text-primary-500'>
                   ABC Token : 40002
-                </p>
+                </p> */}
               </span>
             </div>
 

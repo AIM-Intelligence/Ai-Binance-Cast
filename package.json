@@ -46,7 +46,6 @@
     "react-hook-form": "^7.49.3",
     "react-icons": "^5.0.1",
     "react-intersection-observer": "^9.8.0",
-    "react-tag-input-component": "^2.0.2",
     "tailwind-merge": "^2.2.1",
     "thirdweb": "^1.0.0-beta-7b5e3fe7c668220214e65de79e0246f748952885-20240304223434",
     "usehooks-ts": "^2.14.0",

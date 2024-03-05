@@ -73,9 +73,9 @@ const LeftSidebar = () => {
                 <p className='text-lg'>
                   {shortenAddress(user?.primaryWeb3Wallet!.web3Wallet)}
                 </p>
-                <p className='small-regular text-center xl:text-left text-primary-500'>
-                  ABC Token : 40004
-                </p>
+                {/* <p className='small-regular text-center xl:text-left text-primary-500'>
+                  ABC Token : 0
+                </p> */}
               </span>
             </Button>
           </SignedIn>
