@@ -12,7 +12,7 @@ Let's use AI to aggregate the ideas and make an AI podcaster that can deeply dis
 # AI Podcaster
 ## Topic Submission
 People voluntarily consume tokens to submit new topics. 
-Reasons for submitting proposals When curious about societal, personal, or technical issues, people submit proposals to hear the opinions of the public. At the same time, when people want to see only rational and logical opinions related to the proposal while excluding irrelevant opinions. 
+When people are curious about social, personal, or technical issues, they submit proposals to hear from the public. Also, people want to see only rational and logical opinions related to the proposal while excluding irrelevant opinions. 
 When the proposal submitted receives a certain amount of tokens through voting, the submitter receives tokens as a reward. 
 
 ## Exercise of voting rights for proposals submitted by people 
