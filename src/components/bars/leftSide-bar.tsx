@@ -21,7 +21,7 @@ import { Loader } from '../shared';
 //import { ConnectButton } from '@/lib/thirdweb/thirdweb';
 
 import shortenAddress from '@/utils/shortenAddress';
-import GradiButton from '../button/gradi-button';
+import { useBalance } from 'wagmi';
 
 const LeftSidebar = () => {
   const { isLoaded, userId } = useAuth();
@@ -31,6 +31,17 @@ const LeftSidebar = () => {
 
   const pathname = usePathname();
   const router = useRouter();
+
+  // const { data, isError, isLoading } = useBalance({
+  //   address: '0x61327612EC4aFD93e370eC0599f933bB08020A54',
+  //   token: '0x3e38a6aC5F4990B76440Ec54189628ae123EEb7d',
+    
+  //   onError(error) {
+  //     console.log('Error', error)
+  //   },
+  // });
+
+  // console.log(data);
 
   return (
     <nav className='leftsidebar'>

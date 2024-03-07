@@ -9,7 +9,11 @@ import { useAccount } from 'wagmi';
 import { nanoid } from 'nanoid';
 
 const SubmitButton = ({ subject }: any) => {
-  const { address, connector } = useAccount();
+  const { address, connector } = useAccount({
+    onConnect({ address, connector, isReconnected }) {
+      console.log('Connected', { address, connector, isReconnected });
+    },
+  });
   const [loading, setIsloading] = useState(false);
 
   console.log('address', address);
