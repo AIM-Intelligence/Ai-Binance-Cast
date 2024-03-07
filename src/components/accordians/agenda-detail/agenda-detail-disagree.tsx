@@ -18,6 +18,7 @@ import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
 import StorageButton from '@/app/(main)/agenda/[id]/_components/StorageButton';
 import SubmitButton from '@/app/(main)/agenda/[id]/_components/SubmitButton';
 import GeneralButton from '@/app/(main)/agenda/[id]/_components/generalButton';
+import dynamic from 'next/dynamic';
 
 interface AgendaDisagreeAccordionProps {
   setDisagreeClicked: (value: boolean) => void;
@@ -30,6 +31,20 @@ export function AgendaDisagreeAccordion({
   agreeClicked,
   agendaDetail,
 }: AgendaDisagreeAccordionProps) {
+  const SubmitButton = dynamic(
+    () => import('@/app/(main)/agenda/[id]/_components/SubmitButton'),
+    {
+      ssr: false,
+    }
+  );
+
+  const StorageButton = dynamic(
+    () => import('@/app/(main)/agenda/[id]/_components/StorageButton'),
+    {
+      ssr: false,
+    }
+  );
+
   const [close, setClose] = useState(0);
 
   const { removeAllMessages, isBucketed, isGreenfield } =

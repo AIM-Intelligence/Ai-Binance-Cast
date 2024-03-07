@@ -16,10 +16,10 @@ import { z } from 'zod';
 import { nanoid } from 'nanoid';
 import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
 import { Button } from '@/components/ui';
-import SubmitButton from '@/app/(main)/agenda/[id]/_components/SubmitButton';
+
 import GeneralButton from '@/app/(main)/agenda/[id]/_components/generalButton';
-import StorageButton from '@/app/(main)/agenda/[id]/_components/StorageButton';
 import dynamic from 'next/dynamic';
+import { useAccount } from 'wagmi';
 
 interface AgendaAgreeAccordionProps {
   setAgreeClicked: (value: boolean) => void;
@@ -32,6 +32,10 @@ export function AgendaAgreeAccordion({
   disagreeClicked,
   agendaDetail,
 }: AgendaAgreeAccordionProps) {
+  const { address, connector } = useAccount();
+
+  console.log(address, connector);
+
   const SubmitButton = dynamic(
     () => import('@/app/(main)/agenda/[id]/_components/SubmitButton'),
     {
