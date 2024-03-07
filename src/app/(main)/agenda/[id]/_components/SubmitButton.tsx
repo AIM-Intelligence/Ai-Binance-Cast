@@ -11,7 +11,7 @@ const SubmitButton = ({ subject }: any) => {
   const [loading, setIsloading] = useState(false);
 
   const bucketName =
-    'abcai-' + String(subject) + address!.slice(-3).toLowerCase();
+    'abcai-' + String(subject) + address?.slice(-3).toLowerCase();
 
   const { messages, setIsBucketed } = useContext(MessagesContext);
 

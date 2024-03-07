@@ -14,10 +14,10 @@ const StorageButton = ({ subject }: any) => {
 
   const router = useRouter();
 
-  console.log('wefwef', address!.slice(-22).toLowerCase());
+  console.log('wefwef', address?.slice(-22).toLowerCase());
 
   const bucketName =
-    'abcai-' + String(subject) + address!.slice(-3).toLowerCase();
+    'abcai-' + String(subject) + address?.slice(-3).toLowerCase();
 
   const { messages } = useContext(MessagesContext);
 
