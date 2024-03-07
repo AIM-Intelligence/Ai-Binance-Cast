@@ -20,6 +20,8 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const router = useRouter();
 
+  
+
   // Agree와 Disagree Accordion의 상태를 추적하는 상태 변수 정의
   const [agreeClicked, setAgreeClicked] = useState(false);
   const [disagreeClicked, setDisagreeClicked] = useState(false);
@@ -27,6 +29,8 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const { execute } = useAction(updateAgendaViewsServer);
 
   const { address, connector } = useAccount();
+
+  console.log('wer', address, connector);
  
 
   useEffect(() => {
