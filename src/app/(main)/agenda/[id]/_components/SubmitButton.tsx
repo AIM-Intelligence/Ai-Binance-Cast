@@ -1,3 +1,4 @@
+'use client';
 import { client, selectSp } from '@/client';
 import { Loader } from '@/components/shared';
 import { Button } from '@/components/ui';
