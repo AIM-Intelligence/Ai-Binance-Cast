@@ -22,6 +22,9 @@ const SubmitButton = ({ subject }: any) => {
     console.log('Button clicked!', messages);
     setBucketName(bucketName);
 
+    console.log('address', address);
+    console.log('connector', connector);
+
     if (!address) return;
     const spInfo = await selectSp();
     console.log('spInfo', spInfo);
