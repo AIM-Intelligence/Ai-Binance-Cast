@@ -65,7 +65,7 @@ export default function ProfileLayout({
     );
   }
 
-  console.log(user[0]?.image_url)
+  
 
   return (
     <main className='profile-container'>

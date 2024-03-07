@@ -54,14 +54,14 @@ const ChatInput = (
                 chat_history:
                   inverseMessages.length === 3
                     ? [
-                        { role: 'user', message: inverseMessages[1].text },
-                        { role: 'ai', message: inverseMessages[0].text },
+                        { role: 'user', message: inverseMessages[1]?.text },
+                        { role: 'ai', message: inverseMessages[0]?.text },
                       ]
                     : [
-                        { role: 'user', message: inverseMessages[3].text },
-                        { role: 'ai', message: inverseMessages[2].text },
-                        { role: 'user', message: inverseMessages[1].text },
-                        { role: 'ai', message: inverseMessages[0].text },
+                        { role: 'user', message: inverseMessages[3]?.text },
+                        { role: 'ai', message: inverseMessages[2]?.text },
+                        { role: 'user', message: inverseMessages[1]?.text },
+                        { role: 'ai', message: inverseMessages[0]?.text },
                       ],
               };
 

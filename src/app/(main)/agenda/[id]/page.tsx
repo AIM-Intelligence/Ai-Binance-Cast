@@ -27,8 +27,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const { execute } = useAction(updateAgendaViewsServer);
 
   const { address, connector } = useAccount();
-  console.log('connector', connector);
-  console.log('connector', address);
+ 
 
   useEffect(() => {
     execute({ agenda_id: params.id });

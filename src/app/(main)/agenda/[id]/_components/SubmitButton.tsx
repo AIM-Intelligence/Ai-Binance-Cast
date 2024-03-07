@@ -11,14 +11,16 @@ const SubmitButton = ({ subject }: any) => {
   const { address, connector } = useAccount();
   const [loading, setIsloading] = useState(false);
 
-  const bucketName = 'abc-' + String(subject) + nanoid() + '-abc';
+  const bucketName = String(subject) + '-' + nanoid().toLowerCase() + '-abc';
 
-  const { messages, setIsBucketed } = useContext(MessagesContext);
+  const { messages, setIsBucketed, setBucketName } =
+    useContext(MessagesContext);
 
   async function SubmitSave() {
     setIsloading(true);
     // Your logic goes here
     console.log('Button clicked!', messages);
+    setBucketName(bucketName);
 
     if (!address) return;
     const spInfo = await selectSp();

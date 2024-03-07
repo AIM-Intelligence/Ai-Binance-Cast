@@ -6,7 +6,7 @@ export const sidebarLinks = [
   },
   {
     imgURL: '/icons/shop.svg',
-    route: '/ai-chat-market',
+    route: 'https://ai-binance-cast-market.vercel.app',
     label: 'Chat Market',
   },
   {

@@ -15,20 +15,19 @@ const StorageButton = ({ subject }: any) => {
 
   const router = useRouter();
 
-  console.log('wefwef', address?.slice(-22).toLowerCase());
+  //const bucketName = String(subject) + nanoid().toLowerCase() + '-abc';
 
-  const bucketName = String(subject) + nanoid() + '-abc';
-
-  const { messages } = useContext(MessagesContext);
+  const { messages, bucketName } = useContext(MessagesContext);
 
   const [info, setInfo] = useState<{
     objectName: string;
   }>({
-    objectName: 'bitcoin price 4',
+    objectName: 'bitcoin price',
   });
 
   async function SubmitSave() {
     setIsloading(true);
+
     {
       /* create file */
     }
@@ -119,6 +118,8 @@ const StorageButton = ({ subject }: any) => {
             address,
           }
         );
+
+        console.log('uploadRes', uploadRes);
 
         if (uploadRes.code === 0) {
           alert('upload success');

@@ -6,7 +6,7 @@ import { defineChain } from 'viem';
 import { configureChains } from '@wagmi/core';
 import { bscTestnet } from '@wagmi/core/chains';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
+import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc';
 // const gfChain1: Chain = {
 //   id: env.GF_CHAIN_ID,
 //   network: 'greenfield',
@@ -36,8 +36,12 @@ const gfChain = defineChain({
     symbol: 'tBNB',
   },
   rpcUrls: {
-    default: { http: ['https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org'] },
-    public: { http: ['https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org'] },
+    default: {
+      http: ['https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org'],
+    },
+    public: {
+      http: ['https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org'],
+    },
   },
   blockExplorers: {
     etherscan: { name: 'Greenfieldscan', url: 'https://greenfieldscan.com/' },
@@ -48,11 +52,14 @@ const gfChain = defineChain({
 
 const { chains, publicClient } = configureChains(
   [bscTestnet, gfChain],
-  [publicProvider(), jsonRpcProvider({
-    rpc: (chain) => ({
-      http: `https://${chain.id}.example.com`,
+  [
+    publicProvider(),
+    jsonRpcProvider({
+      rpc: (chain) => ({
+        http: `https://${chain.id}.example.com`,
+      }),
     }),
-  }),]
+  ]
 );
 
 export default function WagmiProviderSet({

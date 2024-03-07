@@ -106,6 +106,7 @@ const LeftSidebar = () => {
               >
                 <Link
                   href={link.route}
+                  target={link.label === 'Chat Market' ? '_blank' : '_self'}
                   className={`flex gap-4 items-center p-4 hover:text-white ${
                     isActive && 'text-white'
                   }`}

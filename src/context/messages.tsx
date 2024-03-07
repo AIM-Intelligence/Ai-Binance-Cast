@@ -16,6 +16,7 @@ export const MessagesContext = createContext<{
   isMessageUpdating: boolean;
   isGreenfield: boolean;
   isBucketed: boolean;
+  bucketName: string;
   addMessage: (message: Message) => void;
   removeMessage: (id: string) => void;
   removeAllMessages: () => void;
@@ -24,11 +25,13 @@ export const MessagesContext = createContext<{
   setIsMessageUpdating: (isUpdating: boolean) => void;
   setIsGreenfield: (isGreenfield: boolean) => void;
   setIsBucketed: (isBucketed: boolean) => void;
+  setBucketName: (bucketName: string) => void;
 }>({
   messages: [],
   isMessageUpdating: false,
   isGreenfield: false,
   isBucketed: false,
+  bucketName: '',
   addMessage: () => {},
   removeMessage: () => {},
   removeAllMessages: () => {},
@@ -36,6 +39,7 @@ export const MessagesContext = createContext<{
   setIsMessageUpdating: () => {},
   setIsGreenfield: () => {},
   setIsBucketed: () => {},
+  setBucketName: () => {},
 });
 
 export function MessagesProvider({ children }: { children: React.ReactNode }) {
@@ -43,6 +47,7 @@ export function MessagesProvider({ children }: { children: React.ReactNode }) {
   const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false);
   const [isGreenfield, setIsGreenfield] = useState<boolean>(false);
   const [isBucketed, setIsBucketed] = useState<boolean>(false);
+  const [bucketName, setBucketName] = useState<string>('');
 
   const addMessage = (message: Message) => {
     setMessages((prev) => [...prev, message]);
@@ -77,6 +82,7 @@ export function MessagesProvider({ children }: { children: React.ReactNode }) {
         isMessageUpdating,
         isGreenfield,
         isBucketed,
+        bucketName,
         addMessage,
         removeMessage,
         removeAllMessages,
@@ -84,6 +90,7 @@ export function MessagesProvider({ children }: { children: React.ReactNode }) {
         setIsMessageUpdating,
         setIsGreenfield,
         setIsBucketed,
+        setBucketName,
       }}
     >
       {children}
