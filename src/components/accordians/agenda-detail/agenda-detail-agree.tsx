@@ -19,6 +19,7 @@ import { Button } from '@/components/ui';
 import SubmitButton from '@/app/(main)/agenda/[id]/_components/SubmitButton';
 import GeneralButton from '@/app/(main)/agenda/[id]/_components/generalButton';
 import StorageButton from '@/app/(main)/agenda/[id]/_components/StorageButton';
+import dynamic from 'next/dynamic';
 
 interface AgendaAgreeAccordionProps {
   setAgreeClicked: (value: boolean) => void;
@@ -31,6 +32,20 @@ export function AgendaAgreeAccordion({
   disagreeClicked,
   agendaDetail,
 }: AgendaAgreeAccordionProps) {
+  const SubmitButton = dynamic(
+    () => import('@/app/(main)/agenda/[id]/_components/SubmitButton'),
+    {
+      ssr: false,
+    }
+  );
+
+  const StorageButton = dynamic(
+    () => import('@/app/(main)/agenda/[id]/_components/StorageButton'),
+    {
+      ssr: false,
+    }
+  );
+
   const [close, setClose] = useState(0);
 
   const { removeAllMessages, messages, isGreenfield, isBucketed } =
@@ -83,7 +98,7 @@ export function AgendaAgreeAccordion({
                   subject={agendaDetail.subject}
                 />
                 {isBucketed ? (
-                  <StorageButton subject={agendaDetail.subject}/>
+                  <StorageButton subject={agendaDetail.subject} />
                 ) : isGreenfield ? (
                   <SubmitButton subject={agendaDetail.subject} />
                 ) : (

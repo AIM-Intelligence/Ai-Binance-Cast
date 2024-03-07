@@ -52,14 +52,7 @@ const gfChain = defineChain({
 
 const { chains, publicClient } = configureChains(
   [bscTestnet, gfChain],
-  [
-    publicProvider(),
-    jsonRpcProvider({
-      rpc: (chain) => ({
-        http: `https://${chain.id}.example.com`,
-      }),
-    }),
-  ]
+  [publicProvider()]
 );
 
 export default function WagmiProviderSet({

@@ -12,6 +12,9 @@ const SubmitButton = ({ subject }: any) => {
   const { address, connector } = useAccount();
   const [loading, setIsloading] = useState(false);
 
+  console.log('address', address);
+  console.log('connector', connector);
+
   const bucketName = String(subject) + '-' + nanoid().toLowerCase() + '-abc';
 
   const { messages, setIsBucketed, setBucketName } =
