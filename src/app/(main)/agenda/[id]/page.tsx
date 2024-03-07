@@ -20,7 +20,11 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const router = useRouter();
 
-  
+  const { address, connector } = useAccount({
+    onConnect({ address, connector, isReconnected }) {
+      console.log('Connected', { address, connector, isReconnected });
+    },
+  });
 
   // Agree와 Disagree Accordion의 상태를 추적하는 상태 변수 정의
   const [agreeClicked, setAgreeClicked] = useState(false);
@@ -28,7 +32,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
 
   const { execute } = useAction(updateAgendaViewsServer);
 
-  const { address, connector } = useAccount();
+  //const { address, connector } = useAccount();
 
   console.log('wer', address, connector);
  
