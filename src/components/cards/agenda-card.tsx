@@ -12,7 +12,7 @@ const AgendaCard = ({ agenda }: any) => {
     <div className='agenda-card'>
       <div className='flex-between'>
         <Link
-          href={`/profile/${agenda.creator.id}`}
+          href={`/user/${agenda.creator.id}`}
           className='flex items-center gap-3'
         >
           <div>
@@ -34,7 +34,7 @@ const AgendaCard = ({ agenda }: any) => {
             </p>
           </div>
         </Link>
-       
+
         <AgendaCardMenu />
       </div>
 

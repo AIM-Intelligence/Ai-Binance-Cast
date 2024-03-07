@@ -18,7 +18,6 @@ import { useAccount } from 'wagmi';
 
 import SubmitChat from './_components/SubmintChat';
 
-
 const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const router = useRouter();
@@ -50,7 +49,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
       </div>
     );
   }
-  // TODO: 배포 환경에서 코드가 잘 동작하는지 확인하기
+
   if (agendaDetail.error === 1) {
     return <div>안건을 불러올 수 없습니다.</div>;
   } else if (agendaDetail.error === 2 || agendaError) {
@@ -86,7 +85,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
         <div className='agenda_details-info'>
           <div className='flex-between w-full'>
             <Link
-              href={`/profile/${agendaDetail.creator.id}`}
+              href={`/user/${agendaDetail.creator.id}`}
               className='flex items-center gap-3'
             >
               <Image
