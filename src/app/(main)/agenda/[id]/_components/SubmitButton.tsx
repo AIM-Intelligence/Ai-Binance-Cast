@@ -5,13 +5,13 @@ import { MessagesContext } from '@/context/messages';
 import { getOffchainAuthKeys } from '@/utils/offchainAuth';
 import { useContext, useState } from 'react';
 import { useAccount } from 'wagmi';
+import { nanoid } from 'nanoid';
 
 const SubmitButton = ({ subject }: any) => {
   const { address, connector } = useAccount();
   const [loading, setIsloading] = useState(false);
 
-  const bucketName =
-    'abcai-' + String(subject) + address?.slice(-3).toLowerCase();
+  const bucketName = 'abc-' + String(subject) + nanoid() + '-abc';
 
   const { messages, setIsBucketed } = useContext(MessagesContext);
 

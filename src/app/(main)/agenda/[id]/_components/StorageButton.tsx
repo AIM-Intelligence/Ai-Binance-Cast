@@ -4,6 +4,7 @@ import { Button } from '@/components/ui';
 import { MessagesContext } from '@/context/messages';
 import { getOffchainAuthKeys } from '@/utils/offchainAuth';
 import { ReedSolomon } from '@bnb-chain/reed-solomon';
+import { nanoid } from 'nanoid';
 import { useRouter } from 'next/navigation';
 import { useContext, useState } from 'react';
 import { useAccount } from 'wagmi';
@@ -16,8 +17,7 @@ const StorageButton = ({ subject }: any) => {
 
   console.log('wefwef', address?.slice(-22).toLowerCase());
 
-  const bucketName =
-    'abcai-' + String(subject) + address?.slice(-3).toLowerCase();
+  const bucketName = String(subject) + nanoid() + '-abc';
 
   const { messages } = useContext(MessagesContext);
 
