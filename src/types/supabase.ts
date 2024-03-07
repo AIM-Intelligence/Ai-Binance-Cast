@@ -11,63 +11,63 @@ export type Database = {
     Tables: {
       agenda: {
         Row: {
-          agree_comment: string
+          agree_comment: string | null
           agree_words: number
-          banner_url: string | null
-          content: string[]
+          bucket_address: string[] | null
+          content: string[] | null
           content_detail: string | null
           created_at: string
           creator: string | null
-          disagree_comment: string
+          disagree_comment: string | null
           disagree_words: number
           id: string
-          image_url: string
+          image_url: string | null
           likes: number
           participants: number
           participants_id: string[] | null
           subject: string | null
           tags: string[] | null
-          title: string
+          title: string | null
           views: number
         }
         Insert: {
-          agree_comment?: string
+          agree_comment?: string | null
           agree_words?: number
-          banner_url?: string | null
-          content: string[]
+          bucket_address?: string[] | null
+          content?: string[] | null
           content_detail?: string | null
           created_at?: string
           creator?: string | null
-          disagree_comment?: string
+          disagree_comment?: string | null
           disagree_words?: number
           id?: string
-          image_url: string
+          image_url?: string | null
           likes?: number
           participants?: number
           participants_id?: string[] | null
           subject?: string | null
           tags?: string[] | null
-          title: string
+          title?: string | null
           views?: number
         }
         Update: {
-          agree_comment?: string
+          agree_comment?: string | null
           agree_words?: number
-          banner_url?: string | null
-          content?: string[]
+          bucket_address?: string[] | null
+          content?: string[] | null
           content_detail?: string | null
           created_at?: string
           creator?: string | null
-          disagree_comment?: string
+          disagree_comment?: string | null
           disagree_words?: number
           id?: string
-          image_url?: string
+          image_url?: string | null
           likes?: number
           participants?: number
           participants_id?: string[] | null
           subject?: string | null
           tags?: string[] | null
-          title?: string
+          title?: string | null
           views?: number
         }
         Relationships: [
@@ -76,279 +76,201 @@ export type Database = {
             columns: ["creator"]
             isOneToOne: false
             referencedRelation: "profiles"
-            referencedColumns: ["id"]
+            referencedColumns: ["address"]
           }
         ]
       }
-      agenda_category: {
-        Row: {
-          banner_url: string | null
-          content: string | null
-          created_at: string
-          icon_id: string
-          id: number
-          logo: string | null
-          title: string
-        }
-        Insert: {
-          banner_url?: string | null
-          content?: string | null
-          created_at?: string
-          icon_id: string
-          id?: number
-          logo?: string | null
-          title: string
-        }
-        Update: {
-          banner_url?: string | null
-          content?: string | null
-          created_at?: string
-          icon_id?: string
-          id?: number
-          logo?: string | null
-          title?: string
-        }
-        Relationships: []
-      }
       agenda_requested: {
         Row: {
-          agree_comment: string | null
+          agree_comment: string
           content: string[]
           content_detail: string | null
           created_at: string
           creator: string
-          disagree_comment: string | null
-          id: number
+          disagree_comment: string
+          id: string
           image_url: string
           tags: string[] | null
           title: string
+          vote: number
         }
         Insert: {
-          agree_comment?: string | null
+          agree_comment: string
           content: string[]
           content_detail?: string | null
           created_at?: string
           creator: string
-          disagree_comment?: string | null
-          id?: number
+          disagree_comment: string
+          id?: string
           image_url: string
           tags?: string[] | null
           title: string
+          vote?: number
         }
         Update: {
-          agree_comment?: string | null
+          agree_comment?: string
           content?: string[]
           content_detail?: string | null
           created_at?: string
           creator?: string
-          disagree_comment?: string | null
-          id?: number
+          disagree_comment?: string
+          id?: string
           image_url?: string
           tags?: string[] | null
           title?: string
+          vote?: number
         }
         Relationships: [
           {
-            foreignKeyName: "agenda_requested_owner_fkey"
+            foreignKeyName: "public_agenda_requested_creator_fkey"
             columns: ["creator"]
             isOneToOne: false
             referencedRelation: "profiles"
-            referencedColumns: ["id"]
+            referencedColumns: ["address"]
           }
         ]
       }
-      documents: {
-        Row: {
-          content: string | null
-          embedding: string | null
-          id: string
-          metadata: Json | null
-        }
-        Insert: {
-          content?: string | null
-          embedding?: string | null
-          id: string
-          metadata?: Json | null
-        }
-        Update: {
-          content?: string | null
-          embedding?: string | null
-          id?: string
-          metadata?: Json | null
-        }
-        Relationships: []
-      }
       opinion_agree: {
         Row: {
-          agenda_id: string | null
-          ai: string | null
+          agenda_id: string
+          conversation: string[]
           created_at: string
           creator: string
-          id: string
-          user_1: string | null
-          user_2: string | null
+          id: number
         }
         Insert: {
-          agenda_id?: string | null
-          ai?: string | null
+          agenda_id: string
+          conversation: string[]
           created_at?: string
           creator: string
-          id?: string
-          user_1?: string | null
-          user_2?: string | null
+          id?: number
         }
         Update: {
-          agenda_id?: string | null
-          ai?: string | null
+          agenda_id?: string
+          conversation?: string[]
           created_at?: string
           creator?: string
-          id?: string
-          user_1?: string | null
-          user_2?: string | null
+          id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "opinion_agree_agenda_id_agenda_id_fk"
+            foreignKeyName: "public_opinion_agree_agenda_id_fkey"
             columns: ["agenda_id"]
             isOneToOne: false
             referencedRelation: "agenda"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "opinion_agree_owner_fkey"
+            foreignKeyName: "public_opinion_agree_creator_fkey"
             columns: ["creator"]
             isOneToOne: false
             referencedRelation: "profiles"
-            referencedColumns: ["id"]
+            referencedColumns: ["address"]
           }
         ]
       }
       opinion_disagree: {
         Row: {
-          agenda_id: string | null
-          ai: string | null
+          agenda_id: string
+          conversation: string[]
           created_at: string
           creator: string
-          id: string
-          user_1: string | null
-          user_2: string | null
+          id: number
         }
         Insert: {
-          agenda_id?: string | null
-          ai?: string | null
+          agenda_id: string
+          conversation: string[]
           created_at?: string
           creator: string
-          id?: string
-          user_1?: string | null
-          user_2?: string | null
+          id?: number
         }
         Update: {
-          agenda_id?: string | null
-          ai?: string | null
+          agenda_id?: string
+          conversation?: string[]
           created_at?: string
           creator?: string
-          id?: string
-          user_1?: string | null
-          user_2?: string | null
+          id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "opinion_disagree_agenda_id_agenda_id_fk"
+            foreignKeyName: "public_opinion_disagree_agenda_id_fkey"
             columns: ["agenda_id"]
             isOneToOne: false
             referencedRelation: "agenda"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "opinion_disagree_owner_fkey"
+            foreignKeyName: "public_opinion_disagree_creator_fkey"
             columns: ["creator"]
             isOneToOne: false
             referencedRelation: "profiles"
-            referencedColumns: ["id"]
+            referencedColumns: ["address"]
           }
         ]
       }
       profiles: {
         Row: {
-          age: number | null
-          bio: string | null
+          address: string
           coin: number | null
-          coupon: number | null
           created_at: string
           display_name: string | null
           email: string | null
-          gender: string | null
           id: string
-          image_url: string | null
+          image_url: string
           likes_list: string[] | null
-          nick_name: string | null
-          organization: string | null
-          phone_number: string | null
-          "sub-image_url": string | null
           token: number | null
         }
         Insert: {
-          age?: number | null
-          bio?: string | null
+          address: string
           coin?: number | null
-          coupon?: number | null
           created_at?: string
           display_name?: string | null
           email?: string | null
-          gender?: string | null
-          id: string
-          image_url?: string | null
+          id?: string
+          image_url?: string
           likes_list?: string[] | null
-          nick_name?: string | null
-          organization?: string | null
-          phone_number?: string | null
-          "sub-image_url"?: string | null
           token?: number | null
         }
         Update: {
-          age?: number | null
-          bio?: string | null
+          address?: string
           coin?: number | null
-          coupon?: number | null
           created_at?: string
           display_name?: string | null
           email?: string | null
-          gender?: string | null
           id?: string
-          image_url?: string | null
+          image_url?: string
           likes_list?: string[] | null
-          nick_name?: string | null
-          organization?: string | null
-          phone_number?: string | null
-          "sub-image_url"?: string | null
           token?: number | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "profiles_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      create_new_table: {
+      find_or_create_address: {
         Args: {
-          table_name: string
+          new_address: string
+        }
+        Returns: {
+          address: string
+        }[]
+      }
+      get_create_profile: {
+        Args: {
+          new_address: string
+        }
+        Returns: {
+          id: number
+          address: string
+        }[]
+      }
+      increment: {
+        Args: {
+          agenda_id: string
         }
         Returns: undefined
-      }
-      hnswhandler: {
-        Args: {
-          "": unknown
-        }
-        Returns: unknown
       }
       increment_views: {
         Args: {
@@ -356,35 +278,9 @@ export type Database = {
         }
         Returns: undefined
       }
-      ivfflathandler: {
-        Args: {
-          "": unknown
-        }
-        Returns: unknown
-      }
-      match_documents: {
-        Args: {
-          query_embedding: string
-          filter?: Json
-        }
-        Returns: {
-          id: string
-          content: string
-          metadata: Json
-          similarity: number
-        }[]
-      }
-      match_documents_chatbots: {
-        Args: {
-          query_embedding: string
-          filter?: Json
-        }
-        Returns: {
-          id: string
-          content: string
-          metadata: Json
-          similarity: number
-        }[]
+      requesting_user_id: {
+        Args: Record<PropertyKey, never>
+        Returns: string
       }
       update_likes: {
         Args: {
@@ -395,45 +291,9 @@ export type Database = {
         }
         Returns: undefined
       }
-      vector_avg: {
-        Args: {
-          "": number[]
-        }
-        Returns: string
-      }
-      vector_dims: {
-        Args: {
-          "": string
-        }
-        Returns: number
-      }
-      vector_norm: {
-        Args: {
-          "": string
-        }
-        Returns: number
-      }
-      vector_out: {
-        Args: {
-          "": string
-        }
-        Returns: unknown
-      }
-      vector_send: {
-        Args: {
-          "": string
-        }
-        Returns: string
-      }
-      vector_typmod_in: {
-        Args: {
-          "": unknown[]
-        }
-        Returns: number
-      }
     }
     Enums: {
-      "agenda-category": "정치" | "사회" | "블록체인" | "AI" | "주식"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never

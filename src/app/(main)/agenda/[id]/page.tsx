@@ -16,8 +16,6 @@ import AgendaDetailCardMenu from '@/components/menu/agenda-detail-card-menu';
 import shortenAddress from '@/utils/shortenAddress';
 import { useAccount } from 'wagmi';
 
-import SubmitChat from './_components/SubmintChat';
-
 const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const router = useRouter();
