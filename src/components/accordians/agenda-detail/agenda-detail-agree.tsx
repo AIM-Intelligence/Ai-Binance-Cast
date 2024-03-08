@@ -32,7 +32,6 @@ export function AgendaAgreeAccordion({
   disagreeClicked,
   agendaDetail,
 }: AgendaAgreeAccordionProps) {
-
   const [close, setClose] = useState(0);
 
   const { removeAllMessages, isGreenfield, isBucketed } =
@@ -42,14 +41,14 @@ export function AgendaAgreeAccordion({
 
   const { mutate: sendMessage, isPending } = useAIChatServer(firstTouch);
 
-
   return (
     <Accordion type='single' collapsible className='w-full'>
       <AccordionItem value='item-1'>
-        <div className='bg-white border border-gray-200 rounded-md overflow-hidden'>
+        <div className='bg-white border border-gray-200 rounded-md overflow-hidden '>
           <div className='flex flex-col '>
             <AccordionTrigger
-              disabled={disagreeClicked || isPending}
+              //disabled={disagreeClicked || isPending}
+              disabled
               onClick={() => {
                 if (close) {
                   removeAllMessages();
@@ -71,7 +70,7 @@ export function AgendaAgreeAccordion({
                   setClose(1);
                 }
               }}
-              className='px-6 border-b border-zinc-300'
+              className='px-6 border-b border-zinc-300 cursor-no-drop'
             >
               <ChatHeader comment={agendaDetail.agree_comment} />
             </AccordionTrigger>
