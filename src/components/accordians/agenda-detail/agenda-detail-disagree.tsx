@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import {
   Accordion,
@@ -31,19 +31,11 @@ export function AgendaDisagreeAccordion({
   agreeClicked,
   agendaDetail,
 }: AgendaDisagreeAccordionProps) {
-  const SubmitButton = dynamic(
-    () => import('@/app/(main)/agenda/[id]/_components/SubmitButton'),
-    {
-      ssr: false,
-    }
-  );
+  const [isMounted, setIsMounted] = useState(false);
 
-  const StorageButton = dynamic(
-    () => import('@/app/(main)/agenda/[id]/_components/StorageButton'),
-    {
-      ssr: false,
-    }
-  );
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const [close, setClose] = useState(0);
 
@@ -53,6 +45,10 @@ export function AgendaDisagreeAccordion({
   const firstTouch = true;
 
   const { mutate: sendMessage, isPending } = useAIChatServer(firstTouch);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Accordion type='single' collapsible className='w-full'>

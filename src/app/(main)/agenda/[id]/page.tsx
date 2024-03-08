@@ -14,28 +14,19 @@ import { updateAgendaViewsServer } from '../../../../../server/actions/agenda-ac
 import DetailAgendaStats from '../../../../components/cards/agenda-detail_stats';
 import AgendaDetailCardMenu from '@/components/menu/agenda-detail-card-menu';
 import shortenAddress from '@/utils/shortenAddress';
-import { useAccount } from 'wagmi';
+import { useUser } from '@clerk/nextjs';
 
 const AgendaChoose = ({ params }: { params: { id: string } }) => {
+  const { isSignedIn } = useUser();
+
   const id = params.id;
   const router = useRouter();
-
-  const { address, connector } = useAccount({
-    onConnect({ address, connector, isReconnected }) {
-      console.log('Connected', { address, connector, isReconnected });
-    },
-  });
 
   // Agree와 Disagree Accordion의 상태를 추적하는 상태 변수 정의
   const [agreeClicked, setAgreeClicked] = useState(false);
   const [disagreeClicked, setDisagreeClicked] = useState(false);
 
   const { execute } = useAction(updateAgendaViewsServer);
-
-  //const { address, connector } = useAccount();
-
-  console.log('wer', address, connector);
- 
 
   useEffect(() => {
     execute({ agenda_id: params.id });
@@ -53,6 +44,10 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
         <Loader />
       </div>
     );
+  }
+
+  if (!isSignedIn) {
+    alert('Please sign in');
   }
 
   if (agendaDetail.error === 1) {

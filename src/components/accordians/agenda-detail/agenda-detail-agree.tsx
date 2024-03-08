@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import {
   Accordion,
@@ -18,8 +18,8 @@ import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
 import { Button } from '@/components/ui';
 
 import GeneralButton from '@/app/(main)/agenda/[id]/_components/generalButton';
-import dynamic from 'next/dynamic';
-import { useAccount } from 'wagmi';
+import StorageButton from '@/app/(main)/agenda/[id]/_components/StorageButton';
+import SubmitButton from '@/app/(main)/agenda/[id]/_components/SubmitButton';
 
 interface AgendaAgreeAccordionProps {
   setAgreeClicked: (value: boolean) => void;
@@ -32,32 +32,16 @@ export function AgendaAgreeAccordion({
   disagreeClicked,
   agendaDetail,
 }: AgendaAgreeAccordionProps) {
-  const { address, connector } = useAccount();
-
-  console.log(address, connector);
-
-  const SubmitButton = dynamic(
-    () => import('@/app/(main)/agenda/[id]/_components/SubmitButton'),
-    {
-      ssr: false,
-    }
-  );
-
-  const StorageButton = dynamic(
-    () => import('@/app/(main)/agenda/[id]/_components/StorageButton'),
-    {
-      ssr: false,
-    }
-  );
 
   const [close, setClose] = useState(0);
 
-  const { removeAllMessages, messages, isGreenfield, isBucketed } =
+  const { removeAllMessages, isGreenfield, isBucketed } =
     useContext(MessagesContext);
 
   const firstTouch = true;
 
   const { mutate: sendMessage, isPending } = useAIChatServer(firstTouch);
+
 
   return (
     <Accordion type='single' collapsible className='w-full'>

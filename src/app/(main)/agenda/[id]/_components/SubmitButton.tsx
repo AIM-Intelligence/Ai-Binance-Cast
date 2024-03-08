@@ -1,23 +1,17 @@
-'use client';
 import { client, selectSp } from '@/client';
 import { Loader } from '@/components/shared';
 import { Button } from '@/components/ui';
 import { MessagesContext } from '@/context/messages';
 import { getOffchainAuthKeys } from '@/utils/offchainAuth';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import { nanoid } from 'nanoid';
 
 const SubmitButton = ({ subject }: any) => {
-  const { address, connector } = useAccount({
-    onConnect({ address, connector, isReconnected }) {
-      console.log('Connected', { address, connector, isReconnected });
-    },
-  });
+  const { address, connector } = useAccount();
   const [loading, setIsloading] = useState(false);
 
-  console.log('address', address);
-  console.log('connector', connector);
+  console.log(address, connector);
 
   const bucketName = String(subject) + '-' + nanoid().toLowerCase() + '-abc';
 
@@ -29,9 +23,6 @@ const SubmitButton = ({ subject }: any) => {
     // Your logic goes here
     console.log('Button clicked!', messages);
     setBucketName(bucketName);
-
-    console.log('address', address);
-    console.log('connector', connector);
 
     if (!address) return;
     const spInfo = await selectSp();

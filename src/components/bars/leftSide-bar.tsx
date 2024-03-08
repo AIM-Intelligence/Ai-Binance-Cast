@@ -21,27 +21,30 @@ import { Loader } from '../shared';
 //import { ConnectButton } from '@/lib/thirdweb/thirdweb';
 
 import shortenAddress from '@/utils/shortenAddress';
-import { useBalance } from 'wagmi';
+import { useAccount, useBalance, useConnect, useDisconnect } from 'wagmi';
 
 const LeftSidebar = () => {
   const { isLoaded, userId } = useAuth();
   const { signOut } = useClerk();
 
   const { isSignedIn, user } = useUser();
+  const { address } = useAccount();
+  const { connectors, connect } = useConnect();
 
+  const { disconnect } = useDisconnect();
+  const connector = connectors[0];
   const pathname = usePathname();
   const router = useRouter();
 
-  // const { data, isError, isLoading } = useBalance({
-  //   address: '0x61327612EC4aFD93e370eC0599f933bB08020A54',
-  //   token: '0x3e38a6aC5F4990B76440Ec54189628ae123EEb7d',
-    
-  //   onError(error) {
-  //     console.log('Error', error)
-  //   },
-  // });
+  const { data, isError, isLoading } = useBalance({
+    address: address,
+    // token: '0x3e38a6aC5F4990B76440Ec54189628ae123EEb7d',
+    onError(error) {
+      console.log('Error', error);
+    },
+  });
 
-  // console.log(data);
+  console.log(data);
 
   return (
     <nav className='leftsidebar'>
@@ -73,27 +76,30 @@ const LeftSidebar = () => {
               onClick={() => router.push('/profile')}
               className='flex items-center justify-start gap-2 '
             >
-              <UserButton
-                appearance={{
-                  elements: {
-                    avatarBox: 'h-[48px] w-[48px]',
-                  },
-                }}
+              <Image
+                src='https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18yY2FLRVFyd2puOUs2ZXV1aEd1YVBhUnFQWjIiLCJyaWQiOiJ1c2VyXzJjYVNIakVtUXdINlJ1bzlJQkxJYnM3RzA3TSJ9'
+                width={48}
+                height={48}
+                alt='profile image'
+                className='rounded-full'
               />
               <span className=''>
                 <p className='text-lg'>
                   {shortenAddress(user?.primaryWeb3Wallet!.web3Wallet)}
                 </p>
-                {/* <p className='small-regular text-center xl:text-left text-primary-500'>
-                  ABC Token : 0
-                </p> */}
+                <p className='small-regular text-primary-500'>
+                  {data?.symbol} : {data?.formatted.slice(0, 5)}
+                </p>
               </span>
             </Button>
           </SignedIn>
         ) : (
           <SignedOut>
             <SignInWithMetamaskButton>
-              <button className='relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md'>
+              <button
+                className='relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md'
+                onClick={() => connect({ connector })}
+              >
                 <span className='w-full h-full bg-gradient-to-br from-[#ff8a05] via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute'></span>
                 <span className='relative w-full py-3 text-center transition-all ease-out bg-gray-900 rounded-md group-hover:bg-opacity-0 duration-400'>
                   <span className='relative text-white'>
@@ -143,7 +149,10 @@ const LeftSidebar = () => {
           <Button
             variant='ghost'
             className='shad-button_ghost hover:opacity-70'
-            onClick={() => signOut(() => router.push('/'))}
+            onClick={() => {
+              disconnect();
+              signOut(() => router.push('/'));
+            }}
           >
             <Image
               src='/icons/sign-out-alt.svg'

@@ -4,9 +4,12 @@ import Link from 'next/link';
 import AgendaStats from './agenda-card-stats';
 import AgendaCardMenu from '../menu/agenda-card-menu';
 import shortenAddress from '@/utils/shortenAddress';
+import { useConnect } from 'wagmi';
 
 const AgendaCard = ({ agenda }: any) => {
   if (!agenda) return null;
+
+  const { connectors, connect } = useConnect();
 
   return (
     <div className='agenda-card'>
@@ -38,7 +41,7 @@ const AgendaCard = ({ agenda }: any) => {
         <AgendaCardMenu />
       </div>
 
-      <Link href={`/agenda/${agenda.id}`}>
+      <Link href={`/agenda/${agenda.id}`} onClick={() => {}}>
         <div className='small-medium lg:base-medium py-5'>
           <p className='text-2xl '>{agenda.title}</p>
           <ul className='flex gap-1 mt-2'>

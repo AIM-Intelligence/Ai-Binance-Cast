@@ -8,6 +8,8 @@ import Loader from '@/components/shared/Loader';
 
 import useUserClient from '@/hooks/useUser/useUserServer';
 import { BarNav } from './_components/bar-nav';
+import { useAccount, useBalance } from 'wagmi';
+import { useEffect, useState } from 'react';
 
 const barNavItems = [
   {
@@ -51,11 +53,23 @@ export default function ProfileLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { isFetching, data: user, error } = useUserClient();
 
-  const searchParams = useSearchParams();
+  const { address } = useAccount();
 
-  const search = searchParams.get('/');
+  const { data, isError, isLoading } = useBalance({
+    address: address,
+    // token: '0x3e38a6aC5F4990B76440Ec54189628ae123EEb7d',
+    onError(error) {
+      console.log('Error', error);
+    },
+  });
 
   if (isFetching) {
     return (
@@ -65,8 +79,13 @@ export default function ProfileLayout({
     );
   }
 
-  
-
+  if (!isMounted) {
+    return (
+      <div className='isfetching-flex'>
+        <Loader />
+      </div>
+    );
+  }
   return (
     <main className='profile-container'>
       <div className='profile-inner_container'>
@@ -85,16 +104,19 @@ export default function ProfileLayout({
               <p className='small-regular md:text-2xl text-center xl:text-left'>
                 {user && user[0]?.address}
               </p>
-              <span className='flex gap-2 items-center'>
+              <span
+                suppressHydrationWarning
+                className='flex gap-2 items-center'
+              >
                 <Image
                   src='/abcLogo.png'
                   width={40}
                   height={40}
                   alt='abc token'
                 />
-                {/* <p className='small-regular md:body-medium text-center xl:text-left text-primary-500'>
-                  ABC Token : 40002
-                </p> */}
+                <p className='small-regular md:body-medium text-center xl:text-left text-primary-500'>
+                  {data?.symbol} : {data?.formatted.slice(0, 5)}
+                </p>
               </span>
             </div>
 

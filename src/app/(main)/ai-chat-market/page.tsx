@@ -1,12 +1,8 @@
 'use client';
-import { createClientBrowser } from '@/lib/supabase/browser';
-import { useAuth } from '@clerk/nextjs';
-import Image from 'next/image';
-import { supabaseClient } from '@/lib/supabase/browser';
-const People = () => {
-  const { getToken } = useAuth();
 
- 
+import Image from 'next/image';
+
+const People = () => {
 
   return (
     <main className='flex flex-1'>
