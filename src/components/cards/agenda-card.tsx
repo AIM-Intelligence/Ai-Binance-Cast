@@ -4,12 +4,11 @@ import Link from 'next/link';
 import AgendaStats from './agenda-card-stats';
 import AgendaCardMenu from '../menu/agenda-card-menu';
 import shortenAddress from '@/utils/shortenAddress';
-import { useConnect } from 'wagmi';
 
 const AgendaCard = ({ agenda }: any) => {
   if (!agenda) return null;
 
-  const { connectors, connect } = useConnect();
+
 
   return (
     <div className='agenda-card'>
