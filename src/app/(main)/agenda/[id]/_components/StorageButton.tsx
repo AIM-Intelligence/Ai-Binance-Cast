@@ -10,8 +10,6 @@ import { useContext, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 const StorageButton = ({ subject }: any) => {
-
-
   const { address, connector } = useAccount();
   const [loading, setIsloading] = useState(false);
 
@@ -125,7 +123,7 @@ const StorageButton = ({ subject }: any) => {
 
         if (uploadRes.code === 0) {
           alert('upload success');
-          router.push('/profile');
+          router.push('https://ai-binance-cast-market.vercel.app');
         }
       }
     } catch (err) {

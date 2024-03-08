@@ -48,6 +48,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
 
   if (!isSignedIn) {
     alert('Please sign in');
+    router.push('/');
   }
 
   if (agendaDetail.error === 1) {

@@ -102,7 +102,7 @@ export default function ProfileLayout({
           <div className='flex flex-col flex-1 justify-between md:mt-2'>
             <div className='flex flex-col w-full gap-2'>
               <p className='small-regular md:text-2xl text-center xl:text-left'>
-                {user && user[0]?.address}
+                {address}
               </p>
               <span
                 suppressHydrationWarning
