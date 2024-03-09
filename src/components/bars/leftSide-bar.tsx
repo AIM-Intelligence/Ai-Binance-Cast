@@ -21,11 +21,19 @@ import { Loader } from '../shared';
 //import { ConnectButton } from '@/lib/thirdweb/thirdweb';
 
 import shortenAddress from '@/utils/shortenAddress';
-import { useAccount, useBalance, useConnect, useDisconnect } from 'wagmi';
+import {
+  useAccount,
+  useBalance,
+  useConnect,
+  useDisconnect,
+  useNetwork,
+} from 'wagmi';
+import { BSC_CHAIN_ID } from '@/config/env';
 
 const LeftSidebar = () => {
   const { isLoaded, userId } = useAuth();
   const { signOut } = useClerk();
+  const { chain } = useNetwork();
 
   const { isSignedIn, user } = useUser();
   const { address } = useAccount();
@@ -36,15 +44,26 @@ const LeftSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const { data, isError, isLoading } = useBalance({
+  const {
+    data: token,
+    isError: tokenError,
+    isLoading,
+  } = useBalance({
     address: address,
-    // token: '0x3e38a6aC5F4990B76440Ec54189628ae123EEb7d',
-    onError(error) {
-      console.log('Error', error);
-    },
+    token: '0x3e38a6aC5F4990B76440Ec54189628ae123EEb7d',
+    // onError(error) {
+    //   console.log('Error', error);
+    // },
   });
 
-  console.log(data);
+  const { data: coin, isError: coinError } = useBalance({
+    address: address,
+    // onError(error) {
+    //   console.log('Error', error);
+    // },
+  });
+
+  //console.log(isError);
 
   return (
     <nav className='leftsidebar'>
@@ -87,9 +106,18 @@ const LeftSidebar = () => {
                 <p className='text-lg'>
                   {shortenAddress(user?.primaryWeb3Wallet!.web3Wallet)}
                 </p>
-                <p className='small-regular text-primary-500'>
-                  {data?.symbol} : {data?.formatted.slice(0, 5)}
-                </p>
+
+                {chain && chain.id !== BSC_CHAIN_ID ? (
+                  <p className='small-regular text-primary-400'>
+                    GF {coin?.symbol} :{' '}
+                    {coinError ? 'error' : coin?.formatted.slice(0, 5)}
+                  </p>
+                ) : (
+                  <p className='small-regular text-primary-500'>
+                    {token?.symbol} Token :{' '}
+                    {tokenError ? 'error' : token?.formatted.slice(0, 5)}
+                  </p>
+                )}
               </span>
             </Button>
           </SignedIn>

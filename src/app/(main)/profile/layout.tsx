@@ -65,7 +65,7 @@ export default function ProfileLayout({
 
   const { data, isError, isLoading } = useBalance({
     address: address,
-    // token: '0x3e38a6aC5F4990B76440Ec54189628ae123EEb7d',
+    token: '0x3e38a6aC5F4990B76440Ec54189628ae123EEb7d',
     onError(error) {
       console.log('Error', error);
     },
@@ -115,7 +115,7 @@ export default function ProfileLayout({
                   alt='abc token'
                 />
                 <p className='small-regular md:body-medium text-center xl:text-left text-primary-500'>
-                  {data?.symbol} : {data?.formatted.slice(0, 5)}
+                  {data?.symbol} Token : {data?.formatted.slice(0, 5)}
                 </p>
               </span>
             </div>

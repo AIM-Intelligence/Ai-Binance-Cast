@@ -17,9 +17,9 @@ import { nanoid } from 'nanoid';
 import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
 import { Button } from '@/components/ui';
 
-import GeneralButton from '@/app/(main)/agenda/[id]/_components/generalButton';
-import StorageButton from '@/app/(main)/agenda/[id]/_components/StorageButton';
-import SubmitButton from '@/app/(main)/agenda/[id]/_components/SubmitButton';
+import GeneralButton from '@/components/button/agenda-detail/generalStorageButton';
+import StorageButton from '@/components/button/agenda-detail/storageGreenfieldButton';
+import SubmitButton from '@/components/button/agenda-detail/submitGreenfieldButton';
 
 interface AgendaAgreeAccordionProps {
   setAgreeClicked: (value: boolean) => void;

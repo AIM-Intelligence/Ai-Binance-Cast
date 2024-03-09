@@ -3,7 +3,7 @@ import { Loader } from '@/components/shared';
 import { Button } from '@/components/ui';
 import { MessagesContext } from '@/context/messages';
 import { getOffchainAuthKeys } from '@/utils/offchainAuth';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useAccount } from 'wagmi';
 import { nanoid } from 'nanoid';
 
@@ -21,14 +21,14 @@ const SubmitButton = ({ subject }: any) => {
   async function SubmitSave() {
     setIsloading(true);
     // Your logic goes here
-    console.log('Button clicked!', messages);
     setBucketName(bucketName);
+    console.log('Button clicked!', bucketName);
 
-    if (!address) return;
+    if (!address) return alert('Please login first');
     const spInfo = await selectSp();
-    console.log('spInfo', spInfo);
+    //console.log('spInfo', spInfo);
     const provider = await connector?.getProvider();
-    console.log(provider);
+    //console.log(provider);
     const offChainData = await getOffchainAuthKeys(address, provider);
     if (!offChainData) {
       alert('No offchain, please create offchain pairs first');
@@ -79,6 +79,7 @@ const SubmitButton = ({ subject }: any) => {
         alert(err.message);
       }
       if (err && typeof err === 'object') {
+        // ! 이 부분에서 에러가 발생
         alert(JSON.stringify(err));
       }
     } finally {

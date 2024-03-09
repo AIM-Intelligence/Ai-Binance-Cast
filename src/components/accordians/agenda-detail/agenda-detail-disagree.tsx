@@ -12,13 +12,15 @@ import ChatInput from './components/ChatInput';
 import ChatMessages from './components/ChatMessages';
 import { MessagesContext } from '@/context/messages';
 import { MessagePayload } from '@/validation/message';
-import { z } from 'zod';
 import { nanoid } from 'nanoid';
 import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
-import StorageButton from '@/app/(main)/agenda/[id]/_components/StorageButton';
-import SubmitButton from '@/app/(main)/agenda/[id]/_components/SubmitButton';
-import GeneralButton from '@/app/(main)/agenda/[id]/_components/generalButton';
-import dynamic from 'next/dynamic';
+import StorageButton from '@/components/button/agenda-detail/storageGreenfieldButton';
+import SubmitButton from '@/components/button/agenda-detail/submitGreenfieldButton';
+import GeneralButton from '@/components/button/agenda-detail/generalStorageButton';
+import { Button } from '@/components/ui';
+import { GREEN_CHAIN_ID } from '@/config/env';
+import { useNetwork } from 'wagmi';
+import SwitchGreenfieldButton from '@/components/button/switch-network/switchGreenfieldButton';
 
 interface AgendaDisagreeAccordionProps {
   setDisagreeClicked: (value: boolean) => void;
@@ -31,11 +33,7 @@ export function AgendaDisagreeAccordion({
   agreeClicked,
   agendaDetail,
 }: AgendaDisagreeAccordionProps) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const { chain } = useNetwork();
 
   const [close, setClose] = useState(0);
 
@@ -45,10 +43,6 @@ export function AgendaDisagreeAccordion({
   const firstTouch = true;
 
   const { mutate: sendMessage, isPending } = useAIChatServer(firstTouch);
-
-  if (!isMounted) {
-    return null;
-  }
 
   return (
     <Accordion type='single' collapsible className='w-full'>
@@ -96,7 +90,11 @@ export function AgendaDisagreeAccordion({
                 {isBucketed ? (
                   <StorageButton subject={agendaDetail.subject} />
                 ) : isGreenfield ? (
-                  <SubmitButton subject={agendaDetail.subject} />
+                  chain && chain.id !== GREEN_CHAIN_ID ? (
+                    <SwitchGreenfieldButton />
+                  ) : (
+                    <SubmitButton subject={agendaDetail.subject} />
+                  )
                 ) : (
                   <GeneralButton />
                 )}
