@@ -8,7 +8,6 @@ import siteMetadata from '@/utils/siteMetaData';
 import { ClerkProvider } from '@clerk/nextjs';
 
 import WagmiProviderSet from '@/lib/providers/wagmi-provider';
-import ThirdwebProviderSet from '@/lib/providers/thirdweb-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -60,19 +59,17 @@ export default function RootLayout({
       <body className={inter.className}>
         <WagmiProviderSet>
           <QueryProvider>
-            <ThirdwebProviderSet>
-              <ClerkProvider telemetry={false}>
-                <ThemeProvider
-                  attribute='class'
-                  defaultTheme='system'
-                  enableSystem
-                  disableTransitionOnChange
-                >
-                  <ModalProvider />
-                  {children}
-                </ThemeProvider>
-              </ClerkProvider>
-            </ThirdwebProviderSet>
+            <ClerkProvider telemetry={false}>
+              <ThemeProvider
+                attribute='class'
+                defaultTheme='system'
+                enableSystem
+                disableTransitionOnChange
+              >
+                <ModalProvider />
+                {children}
+              </ThemeProvider>
+            </ClerkProvider>
           </QueryProvider>
         </WagmiProviderSet>
       </body>

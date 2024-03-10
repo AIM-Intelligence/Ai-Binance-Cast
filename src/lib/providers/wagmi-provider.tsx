@@ -50,7 +50,7 @@ const gfChain = defineChain({
   testnet: true,
 });
 
-const { chains, publicClient } = configureChains(
+const { chains, publicClient, webSocketPublicClient } = configureChains(
   [bscTestnet, gfChain],
   [publicProvider()]
 );
@@ -64,6 +64,7 @@ export default function WagmiProviderSet({
     autoConnect: true,
     connectors: [new MetaMaskConnector({ chains })],
     publicClient,
+    webSocketPublicClient,
     logger: {
       warn: (message: string) => console.log(message),
     },
