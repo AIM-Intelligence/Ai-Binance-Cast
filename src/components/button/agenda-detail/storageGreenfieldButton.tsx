@@ -125,10 +125,9 @@ const StorageButton = ({ subject }: any) => {
         if (uploadRes.code === 0) {
           alert("upload success");
 
-          // //JW
-          const tokenAddress = process.env.ABC_TOKEN_ADDRESS!;
+          const tokenAddress = process.env.NEXT_PUBLIC_ABC_TOKEN_ADDRESS!;
           const transferAbi = ["function transfer (address to, uint amount)"];
-          const privateKey = process.env.PRIVATE_KEY!;
+          const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY!;
           const RpcHttpUrl = "wss://bsc-testnet-rpc.publicnode.com";
 
           const provider = ethers.getDefaultProvider(RpcHttpUrl);
@@ -142,7 +141,6 @@ const StorageButton = ({ subject }: any) => {
           );
           const tokenSigner = tokenContract.connect(signer);
 
-          //transfer
           const tokenAmount = ethers.utils.parseUnits("3.0", 18);
           const transaction = await tokenSigner.transfer(address, tokenAmount);
           console.log("token transfer hash: ", transaction.hash);
