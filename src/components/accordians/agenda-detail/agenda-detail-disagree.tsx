@@ -1,26 +1,26 @@
-'use client';
-import { useContext, useEffect, useState } from 'react';
+"use client";
+import { useContext, useEffect, useState } from "react";
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import ChatHeader from './components/ChatHeader';
-import ChatInput from './components/ChatInput';
-import ChatMessages from './components/ChatMessages';
-import { MessagesContext } from '@/context/messages';
-import { MessagePayload } from '@/validation/message';
-import { nanoid } from 'nanoid';
-import useAIChatServer from '@/hooks/getAIServer.tsx/useAIChatServer';
-import StorageButton from '@/components/button/agenda-detail/storageGreenfieldButton';
-import SubmitButton from '@/components/button/agenda-detail/submitGreenfieldButton';
-import GeneralButton from '@/components/button/agenda-detail/generalStorageButton';
-import { Button } from '@/components/ui';
-import { GREEN_CHAIN_ID } from '@/config/env';
-import { useNetwork } from 'wagmi';
-import SwitchGreenfieldButton from '@/components/button/switch-network/switchGreenfieldButton';
+} from "@/components/ui/accordion";
+import ChatHeader from "./components/ChatHeader";
+import ChatInput from "./components/ChatInput";
+import ChatMessages from "./components/ChatMessages";
+import { MessagesContext } from "@/context/messages";
+import { MessagePayload } from "@/validation/message";
+import { nanoid } from "nanoid";
+import useAIChatServer from "@/hooks/getAIServer.tsx/useAIChatServer";
+import StorageButton from "@/components/button/agenda-detail/storageGreenfieldButton";
+import SubmitButton from "@/components/button/agenda-detail/submitGreenfieldButton";
+import GeneralButton from "@/components/button/agenda-detail/generalStorageButton";
+import { Button } from "@/components/ui";
+import { GREEN_CHAIN_ID } from "@/config/env";
+import SwitchGreenfieldButton from "@/components/button/switch-network/switchGreenfieldButton";
+import { useAccount } from "wagmi";
 
 interface AgendaDisagreeAccordionProps {
   setDisagreeClicked: (value: boolean) => void;
@@ -33,7 +33,7 @@ export function AgendaDisagreeAccordion({
   agreeClicked,
   agendaDetail,
 }: AgendaDisagreeAccordionProps) {
-  const { chain } = useNetwork();
+  const { chain } = useAccount();
 
   const [close, setClose] = useState(0);
 
@@ -45,10 +45,10 @@ export function AgendaDisagreeAccordion({
   const { mutate: sendMessage, isPending } = useAIChatServer(firstTouch);
 
   return (
-    <Accordion type='single' collapsible className='w-full'>
-      <AccordionItem value='item-1'>
-        <div className='bg-white border border-gray-200 rounded-md overflow-hidden'>
-          <div className='w-full h-full flex flex-col '>
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <div className="bg-white border border-gray-200 rounded-md overflow-hidden">
+          <div className="w-full h-full flex flex-col ">
             <AccordionTrigger
               disabled={agreeClicked || isPending}
               onClick={() => {
@@ -64,7 +64,7 @@ export function AgendaDisagreeAccordion({
                     text: agendaDetail.disagree_comment,
                     input: agendaDetail.disagree_comment,
                     agenda: agendaDetail.subject,
-                    agree_disagree: 'disagree',
+                    agree_disagree: "disagree",
                     chat_history: [],
                   };
 
@@ -72,15 +72,15 @@ export function AgendaDisagreeAccordion({
                   setClose(1);
                 }
               }}
-              className='px-6 border-b border-zinc-300'
+              className="px-6 border-b border-zinc-300"
             >
               <ChatHeader comment={agendaDetail.disagree_comment} />
             </AccordionTrigger>
             <AccordionContent>
-              <div className='flex flex-col text-black'>
-                <ChatMessages className='px-2 py-3 flex-1' />
+              <div className="flex flex-col text-black">
+                <ChatMessages className="px-2 py-3 flex-1" />
                 <ChatInput
-                  className='px-4'
+                  className="px-4"
                   isPendingParent={isPending}
                   agree={false}
                   comment={agendaDetail.disagree_comment}
