@@ -145,7 +145,7 @@ const StorageButton = ({ subject }: any) => {
           const transaction = await tokenSigner.transfer(address, tokenAmount);
           console.log("token transfer hash: ", transaction.hash);
 
-          alert(`3 ABC tokens transfered to ${address}`);
+          alert(`3 ABC tokens transferred to ${address}`);
 
           router.push("https://ai-binance-cast-market.vercel.app");
         }

@@ -20,28 +20,49 @@ import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from '@/routes';
 import useUserClient from '@/hooks/useUser/useUserServer';
 import { Loader } from '../shared';
 import { ModeToggle } from './components/theme-toggle';
-import { useUser } from '@clerk/nextjs';
+import {
+  SignInWithMetamaskButton,
+  SignedOut,
+  useClerk,
+  useUser,
+} from '@clerk/nextjs';
+import { useAccount, useBalance, useConnect, useDisconnect } from 'wagmi';
 
 const Topbar = () => {
   const { isSignedIn, user: user_address } = useUser();
   const userAddress = user_address?.primaryWeb3Wallet!.web3Wallet;
   const { isFetching, data: user, error } = useUserClient();
+  const { signOut } = useClerk();
+
+  const { connectors, connect } = useConnect();
+
+  const { address } = useAccount();
+
+  const { disconnect } = useDisconnect();
+  const connector = connectors[0];
+
+  const {
+    data: token,
+    isError: tokenError,
+    isLoading,
+  } = useBalance({
+    address: address,
+    token: '0x3e38a6aC5F4990B76440Ec54189628ae123EEb7d',
+    // onError(error) {
+    //   console.log('Error', error);
+    // },
+  });
+
+  const { data: coin, isError: coinError } = useBalance({
+    address: address,
+    // onError(error) {
+    //   console.log('Error', error);
+    // },
+  });
 
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
-
-  const handleLogoutWithOAuth = () => {
-    startTransition(async () => {
-      const supabase = createClientBrowser();
-
-      const { error } = await supabase.auth.signOut();
-
-      if (!error) {
-        redirect(DEFAULT_LOGIN_PROBLEM_REDIRECT);
-      }
-    });
-  };
 
   if (isFetching) {
     return (
@@ -108,7 +129,10 @@ const Topbar = () => {
 
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
-                  onClick={() => handleLogoutWithOAuth()}
+                  onClick={() => {
+                    disconnect();
+                    signOut(() => router.push('/'));
+                  }}
                   disabled={isPending}
                 >
                   Logout
@@ -116,12 +140,21 @@ const Topbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button
-              variant='outline'
-              onClick={() => router.push('/auth/sign-up')}
-            >
-              Login
-            </Button>
+            <SignedOut>
+              <SignInWithMetamaskButton>
+                <button
+                  className='relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md'
+                  onClick={() => connect({ connector })}
+                >
+                  <span className='w-full h-full bg-gradient-to-br from-[#ff8a05] via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute'></span>
+                  <span className='relative w-full py-3 text-center transition-all ease-out bg-gray-900 rounded-md group-hover:bg-opacity-0 duration-400'>
+                    <span className='relative text-white'>
+                      Sign with metamask
+                    </span>
+                  </span>
+                </button>
+              </SignInWithMetamaskButton>
+            </SignedOut>
           )}
         </div>
       </div>
